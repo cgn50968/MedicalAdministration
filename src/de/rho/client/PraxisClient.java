@@ -29,7 +29,7 @@ public class PraxisClient {
 			//InPhysicianService PhysicianService = (InPhysicianService) Naming.lookup("rmi://localhost:1099/PhysicianService");
 			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
 			
-			System.out.println(" ");
+			System.out.println("-----------------");
 			System.out.println("-----------------");
 			System.out.println("Client is running");
 			System.out.println("-----------------");
