@@ -6,7 +6,7 @@ import de.rho.server.patient.entity.Patient;
 
 
 /**
- * @author Andreas Röwert, Heiko Herder, Roger Ordon
+ * @author Heiko, Roger
  * @version 1.1
  * 
  * Interface als interne Schnittstelle (2CSV)
