@@ -6,11 +6,25 @@ import java.util.ArrayList;
 
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
+import java.util.Date;
 
+/*
+import java.util.Date;
+  
+public class DateDemo {
+   public static void main(String args[]) {
+       // Instantiate a Date object
+       Date date = new Date();
+        
+       // display time and date using toString()
+       System.out.println(date.toString());
+   }
+}
+ */
 
 
 /**
- * @author Heiko Herder, Roger Ordon, Andreas Röwert
+ * @author Heiko, Roger
  * @version 1.1
  * 
  * Implementierung des Services Patient
@@ -53,7 +67,16 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
 		System.out.println("Impl: leite 'read' an 2DB weiter");
-		return this.patient2db.readPatientDB(id);
+		
+		Date date = new Date();
+		
+		//Konstruktor Patient
+		Patient patient = new Patient(id);
+		patient.setId(id);
+		patient.setFirstname("Hans");
+		patient.setLastname("Albers");
+		patient.setLastvisit(date);
+		return patient;
 	}
 
 	@Override
