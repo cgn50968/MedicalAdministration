@@ -39,9 +39,7 @@ public class MaClient {
 			//Patient patient = new Patient(1234567);
 			System.out.println(PatientService.createPatient("TEST Patient"));
 			
-			
-	
-					
+		
 		}
 		
 		

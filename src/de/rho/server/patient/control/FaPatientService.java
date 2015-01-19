@@ -22,7 +22,7 @@ public class FaPatientService {
 	}
 	
 	//Interface Zuweisung - CSV
-	public static InPatientToCSV getPatientToCSV() throws RemoteException {
+	public static InPatientToCSV getPatientToCSV() {
 		return new PatientToCSV();
 	}
 	
