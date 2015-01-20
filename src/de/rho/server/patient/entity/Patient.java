@@ -20,7 +20,7 @@ public class Patient implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String gender;
-	private Integer addressid;
+	private int addressid;
 	private Date lastvisit;
 	
 	//Konstruktor ist noch fast leer....
