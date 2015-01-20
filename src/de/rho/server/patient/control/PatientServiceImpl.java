@@ -36,11 +36,9 @@ public class DateDemo {
 
 public class PatientServiceImpl extends UnicastRemoteObject implements InPatientService {
 	
-	/**** ??? Benoetigen wir das ??? ****/
-	// Hier muss die Funktion grundsätzlich umgeschrieben werden.
-	// Die Erklärung folgt in der Klassenbeschreibung
 	
-	// interface variable = factory.methode...
+	//Alternative:
+	//interface variable = factory.methode...
 	
 	private PatientToCSV patient2csv; 	 				//Deklaration fuer CSV
 	private PatientToDB patient2db;				 		//Deklaration fuer DB
