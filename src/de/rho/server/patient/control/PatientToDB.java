@@ -22,10 +22,10 @@ public class PatientToDB {
 	public String createPatientDB(Patient patient) {
 		
 		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
-		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), "; 
-		sqlstatement = sqlstatement + patient.getFirstname() + ", ";
-		sqlstatement = sqlstatement + patient.getLastname() + ", ";
-		sqlstatement = sqlstatement + patient.getGender() + ", ";
+		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
+		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
+		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
+		sqlstatement = sqlstatement + patient.getGender() + "\', ";
 		sqlstatement = sqlstatement + patient.getAddressid() + ", \'1976-12-29\')";		// Weiterschreiben...
 
 		return sqlstatement;
