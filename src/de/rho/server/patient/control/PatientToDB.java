@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.dao.persistence.DaoToH2DB;
-import de.rho.server.patient.boundary.InPatientToDB;
 import de.rho.server.patient.entity.Patient;
 
 
 /**
- * @author Heiko Herder, Roger Ordon, Andreas Röwert
+ * @author Heiko, Roger
  * @version 1.1
  * 
  * konkrete Klasse zum Regeln der Datenbankzugriffe
@@ -17,13 +16,38 @@ import de.rho.server.patient.entity.Patient;
  */
 
 
-public class PatientToDB implements InPatientToDB{
+public class PatientToDB {
 
-	private DaoToH2DB h2db;										//Deklaration fuer DaoToH2DB
+	
+	public void createPatientDB(Patient patient) {
+		
+		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
+		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), "; 
+		sqlstatement = sqlstatement + patient.getFirstname() + ", ";
+		sqlstatement = sqlstatement + patient.getLastname() + ", ";
+		sqlstatement = sqlstatement + patient.getGender() + ", 0, \'1976-12-29\')";		// Weiterschreiben...
+		System.out.println(sqlstatement);
+		
+	}
+
+	public void readPatientDB(int id) {
+		
+	}
+	
+	public void updatePatientDB(Patient patient) {
+		
+	}
+	
+	public void deletePatientDB(int id) {
+		
+	}
+	
+/* - Auskommentiert - Roger - 20.01.2015
+ * 
+	private DaoToH2DB h2db;									//Deklaration fuer DaoToH2DB
 	private DaoToFile mysqldb; 								//Deklaration fuer DaoToFile
 	
 	
-	@Override
 	public void createPatientDB(Patient patient) {
 		System.out.println("ServicetoDB: Methode createPatientDB");
 		
@@ -36,8 +60,6 @@ public class PatientToDB implements InPatientToDB{
 		h2db.executeQuery(sql);
 	}
 	
-	
-	@Override
 	public Patient readPatientDB(int id) {
 		System.out.println("ServicetoDB: Methode readPatientDB");
 		
@@ -51,32 +73,24 @@ public class PatientToDB implements InPatientToDB{
 		
 		return null;
 	}
-
-	@Override
+		
 	public void updatePatientDB(Patient patient) {
 		System.out.println("ServicetoDB: Methode updatePatientDB: Processing SQL: Done.");
 	}
 
-	@Override
 	public void deletePatientDB(int id) {
 		System.out.println("ServicetoDB: Methode deletePatientDB: Processing SQL: Done.");
 	}
 	
-	@Override
 	public ArrayList<Patient> readPatientListDB(String searchString) {
 		System.out.println("ServicetoDB: Methode readPatientListDB: Processing SQL: Erstelle Liste.");
 		return null;
 	}
 	
-	@Override
 	public ArrayList<Patient> searchPatientListDB(String searchString) {
 		System.out.println("ServicetoDB: Methode searchPatientList: Processing SQL: Suche nach Kriterien und erstelle Liste.");
 		return null;
-		
 	}
-
-		 
-	
-	
+*/
 	
 }

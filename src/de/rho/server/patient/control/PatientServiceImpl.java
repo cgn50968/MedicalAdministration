@@ -63,24 +63,29 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("Impl: leite 'create' an 2DB weiter");
+		
+		// call createPatientDB
 		this.patient2db.createPatientDB(patient);
 	}
 
+	
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
 		System.out.println("Impl: leite 'read' an 2DB weiter");
+		//return this.patient2db.readPatientDB(id);
 		
 		Date date = new Date();
 		
 		//Konstruktor Patient
 		Patient patient = new Patient(id);
-		patient.setId(id);
 		patient.setFirstname("Hans");
 		patient.setLastname("Albers");
 		patient.setLastvisit(date);
 		return patient;
 	}
 
+	
+	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
 		System.out.println("Impl: leite 'update' an 2DB weiter");

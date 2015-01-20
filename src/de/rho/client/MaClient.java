@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Date;
 
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
@@ -39,8 +40,24 @@ public class MaClient {
 			//Patient patient = new Patient(1234567);
 			System.out.println(PatientService.createPatient("TEST Patient"));
 			
+			
+			/**** createPatient ****/
+			
+			Date date = new Date();
+			
+			//Konstruktor Patient
+			Patient patient = new Patient(1);
+			patient.setId(1);
+			patient.setFirstname("Hans");
+			patient.setLastname("Albers");
+			patient.setGender("m");
+			patient.setLastvisit(date);
+			
+			PatientService.createPatientInDB(patient);
 		
 		}
+		
+		
 		
 		
 		catch (MalformedURLException e) {

@@ -19,7 +19,7 @@ public class Patient implements Serializable {
 	private int id;
 	private String firstname;
 	private String lastname;
-	private Boolean gender;
+	private String gender;
 	private Integer addressid;
 	private Date lastvisit;
 	
@@ -54,11 +54,11 @@ public class Patient implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public Boolean getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Boolean gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

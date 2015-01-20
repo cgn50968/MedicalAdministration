@@ -2,7 +2,6 @@ package de.rho.server.patient.control;
 
 import java.util.ArrayList;
 
-import de.rho.server.patient.boundary.InPatientToCSV;
 import de.rho.server.patient.entity.Patient;
 
 
@@ -15,15 +14,15 @@ import de.rho.server.patient.entity.Patient;
  *
  */
 
-public class PatientToCSV implements InPatientToCSV{
+public class PatientToCSV {
 
-	@Override
+	
 	public ArrayList<Patient> readPatientFromCSV(String list) {
 		System.out.println("reading from CSV..."); //CSV als Dateiformat angedacht
 		return null;
 	}
 
-	@Override
+	
 	public void writePatientToCSV(ArrayList<Patient> list) {
 		System.out.println("writing to CSV..."); //CSV als Dateiformat angedacht
 		
