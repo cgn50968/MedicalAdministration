@@ -42,11 +42,11 @@ public class DaoToH2DB implements InDaoToDB {
 		
 		
 	    public void executeQuery(Connection con, String sql) {
-	    	System.out.println("Hallo");
+	    	System.out.println("Schreibe SQL Query");
 			
 			try {
 				PreparedStatement pStat = con.prepareStatement(sql);
-				pStat.executeQuery();
+				pStat.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

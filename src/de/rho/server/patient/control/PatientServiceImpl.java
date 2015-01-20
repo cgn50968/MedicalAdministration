@@ -69,7 +69,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		// call createPatientDB - create sqlstatement
 		String sqlstatement = this.patient2db.createPatientDB(patient);
-		//System.out.println(sqlstatement);
+		System.out.println(sqlstatement);
 		
 		// Objekt erstellen
 		InDaoToDB dbservice = FaDaoService.getDaoToDBService();
@@ -79,7 +79,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = dbservice.connect();
 		
 		//SQL Query ausführen
-		//dbservice.executeQuery(con, sqlstatement);
+		dbservice.executeQuery(con, sqlstatement);
 		
 	}
 
