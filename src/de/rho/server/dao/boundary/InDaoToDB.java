@@ -1,6 +1,10 @@
 package de.rho.server.dao.boundary;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
+
+
 
 /**
  * @author Heiko, Roger
@@ -13,7 +17,7 @@ import java.sql.Connection;
 
 public interface InDaoToDB {
 	
-	public Connection connect();
+	public Connection connect() throws FileNotFoundException, IOException;
 	
     public void executeQuery(Connection con, String sql);
 

@@ -49,11 +49,11 @@ public class MaClient {
 				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 				String date = DATE_FORMAT.format(today);
 				
-				// Konstruktor Patient
+				// Objekt Patient - nicht Konstruktor; der ist nur der Teil rechts von "new", guck mal in die Entity, dort verlangt er einen int-Wert. da war ich mir nicht sicher, brauchen wir den Eingabeparameter ueberhaupt im Konstruktor?
 				Patient patient = new Patient(1);
-				patient.setId(1);
-				patient.setFirstname("Hans");
-				patient.setLastname("Albers");
+				patient.setId(1); //hier wird der eigentliche Attributwert fuer ID gesetzt
+				patient.setFirstname("Theo");
+				patient.setLastname("Lingen");
 				patient.setGender("m");
 				patient.setAddressid(0);
 				patient.setLastvisit(date);
@@ -64,7 +64,7 @@ public class MaClient {
 			/**** read Patient ****/
 		
 				// Funktionsaufruf: Benutzer mit id=5 ausgeben 
-				PatientService.readPatientInDB(5);
+				// PatientService.readPatientInDB(5);
 				
 				
 				

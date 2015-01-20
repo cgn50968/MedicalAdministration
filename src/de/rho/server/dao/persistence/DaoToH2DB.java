@@ -4,23 +4,83 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 
 import de.rho.server.dao.boundary.InDaoToDB;
 
 public class DaoToH2DB implements InDaoToDB {
 	
-	// Datenbank Verbindung
-
+			
+	/**
+	 * @return java.sql.Connection
+	 *   
+	 */
 		
-		/**
-		 * 
-		 * @return java.sql.Connection
-		 */
-		public Connection connect() {
+	public Connection connect() throws IOException, FileNotFoundException  {
+        
+		Properties properties = new Properties();
+        FileInputStream fis = null;
+        Connection con = null;
+        
+        try {
+            fis = new FileInputStream("database.properties");
+            properties.load(fis);
+ 
+            Class.forName(properties.getProperty("DB_DRIVER"));
+ 
+            // Connection aus Dateiquelle erstellen
+            con = DriverManager.getConnection(properties.getProperty("DB_URL"),
+            								  properties.getProperty("DB_USER"),
+            								  properties.getProperty("DB_PASSWORD"));
+        
+            /*
+			driver = "org.h2.Driver";
+			url = "jdbc:h2:tcp://localhost/~/test";
+			user = "sa";
+			password = "";
+			*/   
+        } 
+        
+        catch (IOException | ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return con;
+    }
+		
+		
+	public void executeQuery(Connection con, String sql) {
+	
+		System.out.println("Fuehre SQL-Query aus . . .");
 			
-			System.out.println("DaoToH2DB.connect");
+		try {
+			PreparedStatement pStat = con.prepareStatement(sql);
+			pStat.execute();
+		}
+		
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
+	    
+	    
+	    
+	
+/*
+	
+	public Connection connect() {			// Datenbankverbindung
 			
-			Connection con = null;				//Connection zurücksetzen
+		System.out.println("DaoToH2DB.connect");
+			
+		Connection con = null;				//Connection deklarieren
 			
 			/*
 			String driver = "org.h2.Driver";
@@ -28,44 +88,18 @@ public class DaoToH2DB implements InDaoToDB {
 			String user = "sa";
 			String password = "";
 			*/
-			
-			try {
-				// Datenbankverbindung
-				Class.forName("org.h2.Driver");
-				con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
-
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
-			return con;
+			/*
+		try {
+			Class.forName("org.h2.Driver");
+			con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
 		}
 		
-		
-	    public void executeQuery(Connection con, String sql) {
-	    	System.out.println("Schreibe SQL Query");
-			
-			try {
-				PreparedStatement pStat = con.prepareStatement(sql);
-				pStat.execute();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+		catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
-			}
-	    }
-	
-	
+		}
 
+		return con;
 	}
-	    
-	    
-	    
-	
-/*
-	
-	public void connect() {
-        System.out.println("H2: Connecting to H2 database ....");
-        System.out.println("H2: Connected");
-    }
 
     public void executeQuery(String sql) {
         System.out.println("H2 Executing Query: ");

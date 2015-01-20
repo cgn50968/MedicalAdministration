@@ -1,5 +1,7 @@
 package de.rho.server.patient.control;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
@@ -73,7 +75,16 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		InDaoToDB dbservice = FaDaoService.getDaoToDBService();
 		
 		// Connection zur H2 Datenbank 
-		Connection con = dbservice.connect();
+		Connection con = null;					//try catch mußte ich einbauen, sonst ließ sich die connect() nicht mehr aufrufen
+		try {
+			con = dbservice.connect();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//SQL Query ausführen
 		dbservice.executeQuery(con, sqlstatement);
@@ -93,7 +104,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		//Hier müssen noch weitere Methoden rein!!!!!!
 		//Kommt am 21.01.15
 		
-		return patient;
+		//return patient;
+		return null;	//hab ich erst mal null gesetzt, damit der Compiler Ruhe gibt
 	}
 
 	

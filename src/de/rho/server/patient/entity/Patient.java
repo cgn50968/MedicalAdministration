@@ -23,7 +23,7 @@ public class Patient implements Serializable {
 	private int addressid;
 	private String lastvisit;
 	
-	//Konstruktor ist noch fast leer....
+	//Konstruktor ist noch fast leer.... ich weiss nicht genau, was wir mitgeben müssen??
 	public Patient(int id)  {
 		
 	}
