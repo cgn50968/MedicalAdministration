@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.control.FaDaoService;
@@ -63,39 +62,39 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 	/**** CRUD ****/
 	
+	
+	// create Patient
 	@Override
 	public void createPatientInDB(Patient patient) throws RemoteException {
-		System.out.println("Impl: leite 'create' an 2DB weiter");
+		System.out.println("PatientServiceImpl.createPatientInDB");
 		
-		// call createPatientDB - create sqlstatement
-		String sqlstatement = this.patient2db.createPatientDB(patient);
-		System.out.println(sqlstatement);
+		// SQL Statement erstellen
+		String sqlstatement = this.patient2db.createPatientSqlStatement(patient);
 		
-		// Objekt erstellen
+		// Datenbank Serivce erstellen
 		InDaoToDB dbservice = FaDaoService.getDaoToDBService();
-		System.out.println("erstelle dbservice");
 		
-		// Connection zu H2 DB erstellen
+		// Connection zur H2 Datenbank 
 		Connection con = dbservice.connect();
 		
 		//SQL Query ausführen
 		dbservice.executeQuery(con, sqlstatement);
-		
 	}
 
 	
+	// read Patient
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
-		System.out.println("Impl: leite 'read' an 2DB weiter");
+		System.out.println("PatientServiceImpl.readPatientInDB");
+		
+		// SQL Statement erstellen
+		String sqlstatement = this.patient2db.readPatientSqlStatement(id);
+		
 		//return this.patient2db.readPatientDB(id);
 		
-		Date date = new Date();
+		//Hier müssen noch weitere Methoden rein!!!!!!
+		//Kommt am 21.01.15
 		
-		//Konstruktor Patient
-		Patient patient = new Patient(id);
-		patient.setFirstname("Hans");
-		patient.setLastname("Albers");
-
 		return patient;
 	}
 

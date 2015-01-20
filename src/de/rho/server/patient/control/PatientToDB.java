@@ -19,21 +19,26 @@ import de.rho.server.patient.entity.Patient;
 public class PatientToDB {
 
 	
-	public String createPatientDB(Patient patient) {
+	public String createPatientSqlStatement(Patient patient) {
+		System.out.println("PatientToDB.createPatientSqlStatement");
 		
+		// create Patient sql statement
 		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
 		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', ";
 		sqlstatement = sqlstatement + patient.getAddressid() + ", \'"; //1976-12-29\')";		// Weiterschreiben...
-		sqlstatement = sqlstatement + patient.getLastvisit() + "\')";
-				
+		sqlstatement = sqlstatement + patient.getLastvisit() + "\')";		
 		return sqlstatement;
 	}
 
-	public void readPatientDB(int id) {
+	public String readPatientSqlStatement(int id) {
+		System.out.println("PatientToDB.readPatientSqlStatement");
 		
+		// read Patient sql statement
+		String sqlstatement = "SELECT * FROM PATIENT WHERE id=" + id;
+		return sqlstatement;
 	}
 	
 	public void updatePatientDB(Patient patient) {

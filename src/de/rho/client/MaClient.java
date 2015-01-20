@@ -42,29 +42,35 @@ public class MaClient {
 			System.out.println(PatientService.createPatient("TEST Patient"));
 			
 			
-			/**** createPatient ****/
+			/**** create Patient ****/
 			
-			//Aktuelles Datum
-			Date today = new Date();
-			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-			String date = DATE_FORMAT.format(today);
+				// Aktuelles Datum
+				Date today = new Date();
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+				String date = DATE_FORMAT.format(today);
+				
+				// Konstruktor Patient
+				Patient patient = new Patient(1);
+				patient.setId(1);
+				patient.setFirstname("Hans");
+				patient.setLastname("Albers");
+				patient.setGender("m");
+				patient.setAddressid(0);
+				patient.setLastvisit(date);
+				
+				// Funktionsaufruf: Benutzer erstellen
+				PatientService.createPatientInDB(patient);
 			
-			//Konstruktor Patient
-			Patient patient = new Patient(1);
-			patient.setId(1);
-			patient.setFirstname("Hans");
-			patient.setLastname("Albers");
-			patient.setGender("m");
-			patient.setAddressid(0);
-			patient.setLastvisit(date);
-			
-			PatientService.createPatientInDB(patient);
+			/**** read Patient ****/
 		
+				// Funktionsaufruf: Benutzer mit id=5 ausgeben 
+				PatientService.readPatientInDB(5);
+				
+				
+				
+				
 		}
-		
-		
-		
-		
+				
 		catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
