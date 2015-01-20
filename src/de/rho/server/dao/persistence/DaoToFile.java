@@ -1,20 +1,10 @@
 package de.rho.server.dao.persistence;
 
-import de.rho.server.dao.boundary.InDaoToDB;
+import de.rho.server.dao.boundary.InDaoToFile;
 
-public class DaoToFile implements InDaoToDB{
+public class DaoToFile implements InDaoToFile{
 
-	@Override
-	public void connect() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void executeQuery(String sql) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 

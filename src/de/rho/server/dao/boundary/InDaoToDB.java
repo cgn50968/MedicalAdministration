@@ -1,17 +1,20 @@
 package de.rho.server.dao.boundary;
 
+import java.sql.Connection;
+
 /**
- * @author Heiko
- * @version 1.0
+ * @author Heiko, Roger
+ * @version 1.1
  * 
  * Interface als interne Schnittstelle (DB-Verbindung)
- * Methodenvorlage für Datenbankverbindung
+ * Methodenvorlage fuer Datenbankverbindung
  *
  */
 
 public interface InDaoToDB {
 	
-	public void connect();
-    public void executeQuery(String sql);
+	public Connection connect();
+	
+    public void executeQuery(Connection con, String sql);
 
 }

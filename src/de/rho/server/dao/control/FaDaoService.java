@@ -1,12 +1,16 @@
 package de.rho.server.dao.control;
 
+import java.rmi.RemoteException;
+
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.dao.persistence.DaoToH2DB;
+import de.rho.server.patient.boundary.InPatientService;
+import de.rho.server.patient.control.PatientServiceImpl;
 
 /**
- * @author Heiko
- * @version 1.0
+ * @author Heiko, Roger
+ * @version 1.1
  * 
  * Factory zum Erstellen von DB-Verbindungsobjekten
  * 
@@ -14,8 +18,11 @@ import de.rho.server.dao.persistence.DaoToH2DB;
 
 public class FaDaoService {
 	
-	private InDaoToDB databaseDAO;
+	public static InDaoToDB getDaoToDBService() throws RemoteException {
+		return new DaoToH2DB();
+	}
 
+/*
     // Die Fabrik-Methode mit if
     public InDaoToDB createDatabase()
     {
@@ -33,5 +40,6 @@ public class FaDaoService {
     {
         return "H2";
     }
-
+*/
+	
 }

@@ -2,11 +2,14 @@ package de.rho.server.patient.control;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 
+import de.rho.server.dao.boundary.InDaoToDB;
+import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
-import java.util.Date;
 
 /*
 import java.util.Date;
@@ -32,7 +35,7 @@ public class DateDemo {
  *
  */
 
-public class PatientServiceImpl extends UnicastRemoteObject implements InPatientService{
+public class PatientServiceImpl extends UnicastRemoteObject implements InPatientService {
 	
 	/**** ??? Benoetigen wir das ??? ****/
 	// Hier muss die Funktion grundsätzlich umgeschrieben werden.
@@ -64,8 +67,20 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("Impl: leite 'create' an 2DB weiter");
 		
-		// call createPatientDB
-		this.patient2db.createPatientDB(patient);
+		// call createPatientDB - create sqlstatement
+		String sqlstatement = this.patient2db.createPatientDB(patient);
+		//System.out.println(sqlstatement);
+		
+		// Objekt erstellen
+		InDaoToDB dbservice = FaDaoService.getDaoToDBService();
+		System.out.println("erstelle dbservice");
+		
+		// Connection zu H2 DB erstellen
+		Connection con = dbservice.connect();
+		
+		//SQL Query ausführen
+		//dbservice.executeQuery(con, sqlstatement);
+		
 	}
 
 	

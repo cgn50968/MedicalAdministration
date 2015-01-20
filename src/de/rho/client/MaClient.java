@@ -11,7 +11,7 @@ import de.rho.server.patient.entity.Patient;
 
 
 /**
- * @author Andreas Röwert, Heiko Herder, Roger Ordon
+ * @author Heiko, Roger
  * @version 1.1
  * 
  * Client zum Aufrufen der entfernten Methoden einer Praxisverwaltung
@@ -51,6 +51,7 @@ public class MaClient {
 			patient.setFirstname("Hans");
 			patient.setLastname("Albers");
 			patient.setGender("m");
+			patient.setAddressid(0);
 			patient.setLastvisit(date);
 			
 			PatientService.createPatientInDB(patient);
