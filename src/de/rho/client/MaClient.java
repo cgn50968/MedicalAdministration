@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.rho.server.patient.boundary.InPatientService;
@@ -43,7 +44,10 @@ public class MaClient {
 			
 			/**** createPatient ****/
 			
-			Date date = new Date();
+			//Aktuelles Datum
+			Date today = new Date();
+			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+			String date = DATE_FORMAT.format(today);
 			
 			//Konstruktor Patient
 			Patient patient = new Patient(1);

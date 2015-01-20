@@ -21,7 +21,7 @@ public class Patient implements Serializable {
 	private String lastname;
 	private String gender;
 	private int addressid;
-	private Date lastvisit;
+	private String lastvisit;
 	
 	//Konstruktor ist noch fast leer....
 	public Patient(int id)  {
@@ -70,11 +70,11 @@ public class Patient implements Serializable {
 		this.addressid = addressid;
 	}
 
-	public Date getLastvisit() {
+	public String getLastvisit() {
 		return lastvisit;
 	}
 
-	public void setLastvisit(Date lastvisit) {
+	public void setLastvisit(String lastvisit) {
 		this.lastvisit = lastvisit;
 	}
 

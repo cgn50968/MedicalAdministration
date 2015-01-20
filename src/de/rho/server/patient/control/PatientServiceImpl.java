@@ -95,7 +95,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Patient patient = new Patient(id);
 		patient.setFirstname("Hans");
 		patient.setLastname("Albers");
-		patient.setLastvisit(date);
+
 		return patient;
 	}
 

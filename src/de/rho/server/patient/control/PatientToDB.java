@@ -26,8 +26,9 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', ";
-		sqlstatement = sqlstatement + patient.getAddressid() + ", \'1976-12-29\')";		// Weiterschreiben...
-
+		sqlstatement = sqlstatement + patient.getAddressid() + ", \'"; //1976-12-29\')";		// Weiterschreiben...
+		sqlstatement = sqlstatement + patient.getLastvisit() + "\')";
+				
 		return sqlstatement;
 	}
 
