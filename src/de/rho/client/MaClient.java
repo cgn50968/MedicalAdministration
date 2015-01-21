@@ -39,14 +39,14 @@ public class MaClient {
 			
 		
 			//Patient patient = new Patient(1234567);
-			System.out.println(PatientService.createPatient("TEST Patient"));
+			//System.out.println(PatientService.createPatient("TEST Patient"));
 			
 			// ************************			
 			// **** create Patient ****
 			// ************************
 			System.out.println("#02 - Create new Patient");
 
-				// Objekt Patient - nicht Konstruktor; der ist nur der Teil rechts von "new", guck mal in die Entity, dort verlangt er einen int-Wert. da war ich mir nicht sicher, brauchen wir den Eingabeparameter ueberhaupt im Konstruktor?
+				// Objekt Patient
 				Patient patient = new Patient();
 				patient.setId(1); //hier wird der eigentliche Attributwert fuer ID gesetzt
 				patient.setFirstname("Theo");
