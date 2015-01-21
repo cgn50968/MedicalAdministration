@@ -6,6 +6,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import de.rho.server.dao.boundary.InDaoToDB;
+import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.control.FaPatientService;
 
@@ -20,7 +22,6 @@ import de.rho.server.patient.control.FaPatientService;
 
 public class MaServer {
 
-	
 	public static void main(String[] args) {
 		
 		try {
@@ -28,8 +29,7 @@ public class MaServer {
             InPatientService PatientService = FaPatientService.getPatientService();
             //InPhysicianService PhysicianService = FaPhysicianService.createPhysicianService();
             //InMTService MTService = FaMTService.createMTService();
-            
-            
+                        
             Naming.bind("rmi://localhost:1099/PatientService", PatientService);
             //Naming.bind("rmi://localhost:1099/PhysicianService", PhysicianService);
             //Naming.bind("rmi://localhost:1099/MTService", MTService);
@@ -49,7 +49,6 @@ public class MaServer {
             e.printStackTrace();
         }
 		
-
 	}
 
 }

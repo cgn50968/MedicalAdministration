@@ -1,0 +1,89 @@
+CREATE TABLE Patient
+(
+ID int auto_increment,
+FirstName varchar(20),
+LastName varchar(20),
+Gender char,
+LastVisit date,
+AddressID int,
+PRIMARY KEY (ID)
+
+);
+
+CREATE TABLE Physician
+(
+ID int auto_increment,
+FirstName varchar(20),
+LastName varchar(20),
+Gender char,
+AddressID int,
+PRIMARY KEY (ID)
+
+);
+
+
+CREATE TABLE MT
+(
+ID int auto_increment,
+PatientID int,
+PhysicianID int,
+Date date,
+Treatment varchar(160),
+PRIMARY KEY (ID)
+
+);
+
+
+CREATE TABLE Address
+(
+ID int auto_increment,
+Street varchar(20),
+HouseNumber varchar(20),
+PostalCode varchar(5),
+City varchar(20),
+PRIMARY KEY (ID)
+
+);
+
+
+ALTER TABLE Patient
+ADD FOREIGN KEY (AddressID)
+REFERENCES Address(ID);
+
+ALTER TABLE Physician
+ADD FOREIGN KEY (AddressID)
+REFERENCES Address(ID);
+
+ALTER TABLE MT
+ADD FOREIGN KEY (PhysicianID)
+REFERENCES Physician(ID);
+
+ALTER TABLE MT
+ADD FOREIGN KEY (PatientID)
+REFERENCES Patient(ID);
+
+
+
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Heisenbergstrasse', '5', '50170', 'Kerpen');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Strombergallee', '44', '50129', 'Bergheim');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Spielstrasse', '12', '50129', 'Bergheim');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Horst-Schlemmer-Weg', '99', '50667', 'Köln');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('AppDev-Weg', '101', '50667', 'Köln');
+
+INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Bernd', 'Stromberg', 'm', '1960-04-25', '1');
+INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Walter', 'White', 'm', '1955-06-15', '2');
+INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Harald Schmidt', 'White', 'm', '1951-12-01', '3');
+INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Biene', 'Maja', 'w', '1980-12-01', '4');
+INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Berthold', 'Heisterkamp', 'm', '1975-10-30', '5');
+
+INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Stefan', 'Frank', 'm', '1');
+INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Pille', 'McCoy', 'm', '2');
+INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Hannibal', 'Lecter', 'm', '3');
+INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Indiana', 'Jones', 'm', '4');
+INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Gordon', 'Freeman', 'm', '5');
+
+INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('1', '1', '2015-01-01', 'AV Block');
+INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('2', '2', '2015-01-02', 'Patellaluxation');
+INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('3', '3', '2015-01-03', 'C2 Intox');
+INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('4', '4', '2015-01-02', 'Hyperemesis gravidarum');
+INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('4', '4', '2015-01-02', 'Diarrhö');

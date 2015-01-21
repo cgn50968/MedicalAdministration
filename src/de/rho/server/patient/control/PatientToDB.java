@@ -18,33 +18,36 @@ import de.rho.server.patient.entity.Patient;
 
 public class PatientToDB {
 
-	
+	/**** create Patient ****/
 	public String createPatientSqlStatement(Patient patient) {
-		System.out.println("PatientToDB.createPatientSqlStatement");
+		System.out.println("PatientToDB.createPatientSqlStatement"); //debug
 		
-		// create Patient sql statement
+		// create *Create Patient* sql statement
 		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
 		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', ";
-		sqlstatement = sqlstatement + patient.getAddressid() + ", \'"; //1976-12-29\')";		// Weiterschreiben...
+		sqlstatement = sqlstatement + patient.getAddressid() + ", \'";
 		sqlstatement = sqlstatement + patient.getLastvisit() + "\')";		
 		return sqlstatement;
 	}
 
+	/**** read Patient ****/
 	public String readPatientSqlStatement(int id) {
-		System.out.println("PatientToDB.readPatientSqlStatement");
+		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 		
-		// read Patient sql statement
+		// create *Read Patient* sql statement
 		String sqlstatement = "SELECT * FROM PATIENT WHERE id=" + id;
 		return sqlstatement;
 	}
 	
+	/**** update Patient ****/
 	public void updatePatientDB(Patient patient) {
 		
 	}
 	
+	/**** delete Patient ****/
 	public void deletePatientDB(int id) {
 		
 	}

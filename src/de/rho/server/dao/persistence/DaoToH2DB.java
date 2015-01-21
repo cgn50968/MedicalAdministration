@@ -1,14 +1,20 @@
 package de.rho.server.dao.persistence;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+//import java.awt.List;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
-
+import java.util.List;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 
@@ -21,9 +27,18 @@ public class DaoToH2DB implements InDaoToDB {
 	 * @return java.sql.Connection
 	 *   
 	 */
-		
+
+	/** Objects **/
+	private ResultSet resultSet;
+	private PreparedStatement preStat;
+	
+	
+	
+	/**** open Connection to DB ****/
 	public Connection connect() throws IOException, FileNotFoundException  {
+		System.out.println("open DB Connection..."); //debug
         
+		/** reset **/
 		Properties properties = new Properties();
         FileInputStream fis = null;
         Connection con = null;
@@ -32,40 +47,120 @@ public class DaoToH2DB implements InDaoToDB {
             fis = new FileInputStream("database.properties");
             properties.load(fis);
  
+            // DB Treiber zuweisen
             Class.forName(properties.getProperty("DB_DRIVER"));
  
             // Connection aus Dateiquelle erstellen
             con = DriverManager.getConnection(properties.getProperty("DB_URL"),
             								  properties.getProperty("DB_USER"),
-            								  properties.getProperty("DB_PASSWORD"));
-   
-            
+            								  properties.getProperty("DB_PASSWORD"));  
         } 
-        
         catch (IOException | ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
         return con;
     }
 		
-		
+	/**** execute SQL Query ****/
 	public void executeQuery(Connection con, String sql) {
-	
-		System.out.println("Fuehre SQL-Query aus . . .");
+		System.out.println("execute SQL-Query..."); //debug
+		
+		/** reset **/
+		preStat = null;
 			
 		try {
-			PreparedStatement pStat = con.prepareStatement(sql);
-			pStat.execute();
+			preStat = con.prepareStatement(sql);
+			preStat.execute();
 		}
-		
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	
+	/**** execute SQL Query with ResultSet expected ****/
+	
+	//public List<Map<String, Object>> executeQueryResultSet(Connection con, String sql) {
+	public ResultSet executeQueryResultSet(Connection con, String sql) {
+		System.out.println("execute SQL-Query..."); //debug
+			
+		/** reset **/
+		resultSet = null;
+		preStat = null;
+		
+		try {
+			preStat = con.prepareStatement(sql);
+			resultSet = preStat.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		return resultSet; 
+	}
+
+	/**** TEST ****/
+	public ResultSet executeQueryTEST(Connection con, String sql, Boolean ret) {
+		System.out.println("execute SQL-Query..."); //debug
+			
+		/** reset **/
+		resultSet = null;
+		preStat = null;
+		
+		try {
+			preStat = con.prepareStatement(sql);
+			if (ret == false) {
+				preStat.execute();
+			}
+			else if (ret == true) {
+				resultSet = preStat.executeQuery();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return resultSet;
+	}
+	
+	
+	    /* test - Speichern eines ResultSet in einem List Objekt
+	    resultList = new ArrayList<Map<String, Object>>();
+	    Map<String, Object> row = null;
+
+	    ResultSetMetaData metaData = resultSet.getMetaData();
+	    // Anzahl der Spalten
+	    Integer columnCount = metaData.getColumnCount();
+	    
+
+	    while (resultSet.next()) {
+	        row = new HashMap<String, Object>();
+	        for (int i = 1; i <= columnCount; i++) {
+	            row.put(metaData.getColumnName(i), resultSet.getObject(i));
+	        }
+	        resultList.add(row);   
+	    }
+	/** end test **/
+	
+			
+	/**** close Connection ****/
+	public void disconnect(Connection con, ResultSet res) throws SQLException {
+		System.out.println("close DB Connection..."); //debug
+		
+        try {
+			if (res != null) {
+			    res.close();
+			}
+
+			if (con != null) {
+			    con.close();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
 	    
 	    

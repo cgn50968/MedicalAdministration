@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import de.rho.server.patient.*;
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
@@ -42,14 +45,27 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	//Alternative:
 	//interface variable = factory.methode...
 	
+	
+/** Objects **/
+	
 	private PatientToCSV patient2csv; 	 				//Deklaration fuer CSV
 	private PatientToDB patient2db;				 		//Deklaration fuer DB
+	private ResultSet resultSet;
+	private String sql_statement;
+
+	
+	
+/** Factoies **/
+	
+	/** Datenbank Serivce erstellen **/
+	private InDaoToDB db_service = FaDaoService.getDaoToDBService();
 	
 	
 	protected PatientServiceImpl() throws RemoteException {
 		super();
 		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV
-		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB		
+		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB
+
 	}
 
 	
@@ -68,16 +84,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("PatientServiceImpl.createPatientInDB");
 		
-		// SQL Statement erstellen
-		String sqlstatement = this.patient2db.createPatientSqlStatement(patient);
+		/** SQL Statement erstellen **/
+		sql_statement = this.patient2db.createPatientSqlStatement(patient);
 		
-		// Datenbank Serivce erstellen
-		InDaoToDB dbservice = FaDaoService.getDaoToDBService();
-		
-		// Connection zur H2 Datenbank 
+		/** Connection zur H2 Datenbank oeffnen **/  
 		Connection con = null;					//try catch mußte ich einbauen, sonst ließ sich die connect() nicht mehr aufrufen
 		try {
-			con = dbservice.connect();
+			con = db_service.connect();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,8 +99,16 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
-		//SQL Query ausführen
-		dbservice.executeQuery(con, sqlstatement);
+		/** SQL Query ausfuehren **/
+		db_service.executeQueryTEST(con, sql_statement, false);
+		
+		/** Connection zur H2 Datenbank schliessen **/
+		try {
+			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -96,16 +117,44 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public Patient readPatientInDB(int id) throws RemoteException {
 		System.out.println("PatientServiceImpl.readPatientInDB");
 		
-		// SQL Statement erstellen
-		String sqlstatement = this.patient2db.readPatientSqlStatement(id);
+		Patient patient = new Patient();
 		
-		//return this.patient2db.readPatientDB(id);
+		/** SQL Statement erstellen **/
+		sql_statement = this.patient2db.readPatientSqlStatement(id);
+				
+		/** Connection zur H2 Datenbank oeffnen **/  
+		Connection con = null;					
+		try {
+			con = db_service.connect();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//Hier müssen noch weitere Methoden rein!!!!!!
-		//Kommt am 21.01.15
+		/** SQL Query ausfuehren **/
+		resultSet = db_service.executeQueryTEST(con, sql_statement, true);
 		
-		//return patient;
-		return null;	//hab ich erst mal null gesetzt, damit der Compiler Ruhe gibt
+		/** ResultSet in Patient Objekt speichern **/
+		try {
+			while(resultSet.next()) {
+				patient.setId(Integer.parseInt(resultSet.getString("ID")));
+				patient.setFirstname(resultSet.getString("FIRSTNAME"));
+				patient.setLastname(resultSet.getString("LASTNAME"));	
+				patient.setGender(resultSet.getString("GENDER"));
+				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
+				patient.setLastvisit(resultSet.getString("LASTVISIT"));
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return patient;
 	}
 
 	

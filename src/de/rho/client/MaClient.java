@@ -61,11 +61,16 @@ public class MaClient {
 				
 				// Funktionsaufruf: Benutzer erstellen
 				PatientService.createPatientInDB(patient);
+				patient = null; //reset
+				
 			
+				
 			/**** read Patient ****/
-		
+			System.out.println("#02 - Get Patient with id=5");
 				// Funktionsaufruf: Benutzer mit id=5 ausgeben 
-				// PatientService.readPatientInDB(5);
+				patient = PatientService.readPatientInDB(5);
+				System.out.println(patient.getFirstname() + " " + patient.getLastname());
+				patient = null;
 				
 				
 				
