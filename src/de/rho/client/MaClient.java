@@ -54,7 +54,7 @@ public class MaClient {
 				patient.setGender("m");
 				patient.setAddressid(0);
 				
-				// Funktionsaufruf: Benutzer erstellen
+				// Funktionsaufruf: create Patient
 				PatientService.createPatientInDB(patient);
 				patient = null; //reset
 				
@@ -63,13 +63,20 @@ public class MaClient {
 			// **** read Patient ****
 			// **********************
 			System.out.println("#02 - Get Patient with id=5");
-				// **** Funktionsaufruf: Benutzer mit id=5 ausgeben 
+				
+				// **** Funktionsaufruf: Get Patient with id=5 
 				patient = PatientService.readPatientInDB(5);
 				System.out.println(patient.getFirstname() + " " + patient.getLastname());
 				patient = null;
+			
 				
-				
-				
+			// ************************
+			// **** delete Patient ****
+			// ************************				
+			System.out.println("#03 - Delete Patient with id=24");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+			
+				// **** Funktionsaufruf: delete Patient ****
+				PatientService.deletePatientInDB(24);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 				
 		}
 				

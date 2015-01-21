@@ -58,14 +58,22 @@ public class PatientToDB {
 	// ************************	
 	// **** update Patient ****
 	// ************************
-	public void updatePatientDB(Patient patient) {
-		
+	public String updatePatientSqlStatement(Patient patient) {
+		return null;
+	}
+
+	
+	// ************************	
+	// **** delete Patient ****
+	// ************************
+	public String deletePatientSqlStatement(int id) {
+
+		// **** create *Read Patient* sql statement ****
+		String sqlstatement = "DELETE FROM patient WHERE id=" + id;
+		return sqlstatement;		
 	}
 	
-	/**** delete Patient ****/
-	public void deletePatientDB(int id) {
-		
-	}
+	
 	
 /* - Auskommentiert - Roger - 20.01.2015
  * 

@@ -163,6 +163,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
+		
 		// **** Connection zur H2 Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
@@ -173,21 +174,59 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return patient;
 	}
 
-	// **** Connection zur H2 Datenbank schliessen ****
 
-	
+	// ************************
+	// **** Update Patient ****
+	// ************************	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
 		System.out.println("Impl: leite 'update' an 2DB weiter");
-		this.patient2db.updatePatientDB(patient);
+
+		// **** SQL Statement erstellen ****
+		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
+
+		// !!! noch nicht fertig... !!!
 	}
 
+	
+	// ************************
+	// **** Delete Patient ****
+	// ************************
 	@Override
 	public void deletePatientInDB(int id) throws RemoteException {
-		System.out.println("Impl: leite 'delete' an 2DB weiter");
-		this.patient2db.deletePatientDB(id);
+		System.out.println("PatientServiceImpl.deletePatientInDB");
+		
+		// **** SQL Statement erstellen ****
+		sql_statement = this.patient2db.deletePatientSqlStatement(id);
+		
+		
+		// **** Connection zur H2 Datenbank oeffnen ****  
+		Connection con = null;
+		try {
+			con = db_service.connect();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// **** SQL Query ausfuehren ****
+		db_service.executeQuery(con, sql_statement, false);
+		
+		
+		// **** Connection zur H2 Datenbank schliessen ****
+		try {
+			db_service.disconnect(con, null);		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	
 	
 	/**** Search ****/
 	
