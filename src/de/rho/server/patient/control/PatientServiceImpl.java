@@ -128,7 +128,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.readPatientSqlStatement(id);
 				
-		// **** Connection zur H2 Datenbank oeffnen ****  
+		// **** Connection zur Datenbank oeffnen ****  
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -200,7 +200,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		sql_statement = this.patient2db.deletePatientSqlStatement(id);
 		
 		
-		// **** Connection zur H2 Datenbank oeffnen ****  
+		// **** Connection zur Datenbank oeffnen ****  
 		Connection con = null;
 		try {
 			con = db_service.connect();
@@ -217,7 +217,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		db_service.executeQuery(con, sql_statement, false);
 		
 		
-		// **** Connection zur H2 Datenbank schliessen ****
+		// **** Connection zur Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, null);		
 		} catch (SQLException e) {
@@ -253,9 +253,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 	@Override
-	public void writePatientListToCSV(ArrayList<Patient> list) throws RemoteException {
+	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
 		System.out.println("Impl: leite 'writeList' an 2CSV weiter");
-		this.patient2csv.writePatientToCSV(list);
+		this.patient2csv.generateCsvFile(patientList);					//an dieser Stelle nur Weiterleitung, normale Uebergabe, da Verarbeitung eine Ebene tiefer
 	}
 	
 

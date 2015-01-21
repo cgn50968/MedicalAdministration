@@ -1,15 +1,16 @@
 package de.rho.server.dao.boundary;
 
+import de.rho.server.patient.entity.Patient;
+
 
 public interface InDaoToFile {
 	
-	/**** open connection to file ****/
-	public void openFile();
+	/**** path to file ****/
+	public String locateFile();
 		
-	/**** read/write File ****/
-	public void handleFile();
+	/**** handle File ****/
+	public void generateFile();
 	    
-	/**** close connection to file ****/
-	public void disconnect();
+	
 
 }

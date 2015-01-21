@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import de.rho.server.dao.persistence.DaoToFile;
+
 import de.rho.server.dao.persistence.DaoToDB;
 import de.rho.server.patient.entity.Patient;
 
@@ -13,7 +13,7 @@ import de.rho.server.patient.entity.Patient;
  * @author Heiko, Roger
  * @version 1.1
  * 
- * konkrete Klasse zum Regeln der Datenbankzugriffe
+ * konkrete Klasse zum Definieren der SQL-Statements
  *
  */
 

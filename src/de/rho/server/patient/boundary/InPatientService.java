@@ -55,7 +55,7 @@ public interface InPatientService extends Remote {
 	public ArrayList<Patient> readPatientListFromCSV(String list) throws RemoteException;
 
 	//For PatientServiceImpl.writePatientListToCSV
-	public void writePatientListToCSV(ArrayList<Patient> list) throws RemoteException;
+	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException;
 
 	
 	/**** Status ****/

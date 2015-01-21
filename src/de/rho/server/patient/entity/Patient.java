@@ -23,10 +23,17 @@ public class Patient implements Serializable {
 	private int addressid;
 	private String lastvisit;
 	
-	//Konstruktor ist noch fast leer.... ich weiss nicht genau, was wir mitgeben müssen??
+	//Der Default-Konstruktor
 	public Patient()  {
 		
 	}
+	
+	
+	//ein zweiter Konstruktor zum Testen der ArrayList
+	public Patient(int id, String firstname, String lastname, String gender, int adressid)  {
+		
+	}
+	
 	
 	/**** Getter and Setter ****/
 	
