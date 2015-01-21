@@ -75,19 +75,23 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return test;
 	}
 	
-	
+	/**************/
 	/**** CRUD ****/
+	/**************/
 	
-	
-	// create Patient
+	// ************************
+	// **** create Patient ****
+	// ************************
 	@Override
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("PatientServiceImpl.createPatientInDB");
 		
-		/** SQL Statement erstellen **/
+		
+		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.createPatientSqlStatement(patient);
 		
-		/** Connection zur H2 Datenbank oeffnen **/  
+		
+		// **** Connection zur H2 Datenbank oeffnen ****  
 		Connection con = null;					//try catch muﬂte ich einbauen, sonst lieﬂ sich die connect() nicht mehr aufrufen
 		try {
 			con = db_service.connect();
@@ -99,10 +103,12 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
-		/** SQL Query ausfuehren **/
-		db_service.executeQueryTEST(con, sql_statement, false);
 		
-		/** Connection zur H2 Datenbank schliessen **/
+		// **** SQL Query ausfuehren ****
+		db_service.executeQuery(con, sql_statement, false);
+		
+		
+		// **** Connection zur H2 Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
 		} catch (SQLException e) {
@@ -112,17 +118,19 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 	
-	// read Patient
+	// **********************
+	// **** Read Patient ****
+	// **********************
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
 		System.out.println("PatientServiceImpl.readPatientInDB");
 		
 		Patient patient = new Patient();
 		
-		/** SQL Statement erstellen **/
+		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.readPatientSqlStatement(id);
 				
-		/** Connection zur H2 Datenbank oeffnen **/  
+		// **** Connection zur H2 Datenbank oeffnen ****  
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -134,10 +142,12 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
-		/** SQL Query ausfuehren **/
-		resultSet = db_service.executeQueryTEST(con, sql_statement, true);
 		
-		/** ResultSet in Patient Objekt speichern **/
+		// **** SQL Query ausfuehren, ResultSet erwartet ****
+		resultSet = db_service.executeQuery(con, sql_statement, true);
+		
+		
+		//**** ResultSet in Patient Objekt speichern ****
 		try {
 			while(resultSet.next()) {
 				patient.setId(Integer.parseInt(resultSet.getString("ID")));

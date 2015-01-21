@@ -23,15 +23,9 @@ public interface InDaoToDB {
 	public Connection connect() throws FileNotFoundException, IOException;
 	
 	/**** execute SQL Query ****/
-    public void executeQuery(Connection con, String sql);
-    
-    /**** execute SQL Query with ResultSet expected ****/
-    public ResultSet executeQueryResultSet(Connection con, String sql);
+    public ResultSet executeQuery(Connection con, String sql, Boolean ret);
     
     /**** close Connection ****/
     public void disconnect(Connection con, ResultSet res) throws SQLException;
     
-    /**** TEST ****/
-    public ResultSet executeQueryTEST(Connection con, String sql, Boolean ret);
-
 }

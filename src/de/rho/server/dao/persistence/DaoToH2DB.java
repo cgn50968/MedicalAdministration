@@ -31,8 +31,7 @@ public class DaoToH2DB implements InDaoToDB {
 	/** Objects **/
 	private ResultSet resultSet;
 	private PreparedStatement preStat;
-	
-	
+		
 	
 	/**** open Connection to DB ****/
 	public Connection connect() throws IOException, FileNotFoundException  {
@@ -62,46 +61,9 @@ public class DaoToH2DB implements InDaoToDB {
         return con;
     }
 		
+
 	/**** execute SQL Query ****/
-	public void executeQuery(Connection con, String sql) {
-		System.out.println("execute SQL-Query..."); //debug
-		
-		/** reset **/
-		preStat = null;
-			
-		try {
-			preStat = con.prepareStatement(sql);
-			preStat.execute();
-		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	
-	/**** execute SQL Query with ResultSet expected ****/
-	
-	//public List<Map<String, Object>> executeQueryResultSet(Connection con, String sql) {
-	public ResultSet executeQueryResultSet(Connection con, String sql) {
-		System.out.println("execute SQL-Query..."); //debug
-			
-		/** reset **/
-		resultSet = null;
-		preStat = null;
-		
-		try {
-			preStat = con.prepareStatement(sql);
-			resultSet = preStat.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}				
-		return resultSet; 
-	}
-
-	/**** TEST ****/
-	public ResultSet executeQueryTEST(Connection con, String sql, Boolean ret) {
+	public ResultSet executeQuery(Connection con, String sql, Boolean ret) {
 		System.out.println("execute SQL-Query..."); //debug
 			
 		/** reset **/
@@ -122,31 +84,11 @@ public class DaoToH2DB implements InDaoToDB {
 		}	
 		return resultSet;
 	}
-	
-	
-	    /* test - Speichern eines ResultSet in einem List Objekt
-	    resultList = new ArrayList<Map<String, Object>>();
-	    Map<String, Object> row = null;
 
-	    ResultSetMetaData metaData = resultSet.getMetaData();
-	    // Anzahl der Spalten
-	    Integer columnCount = metaData.getColumnCount();
-	    
-
-	    while (resultSet.next()) {
-	        row = new HashMap<String, Object>();
-	        for (int i = 1; i <= columnCount; i++) {
-	            row.put(metaData.getColumnName(i), resultSet.getObject(i));
-	        }
-	        resultList.add(row);   
-	    }
-	/** end test **/
 	
-			
 	/**** close Connection ****/
 	public void disconnect(Connection con, ResultSet res) throws SQLException {
 		System.out.println("close DB Connection..."); //debug
-		
         try {
 			if (res != null) {
 			    res.close();
