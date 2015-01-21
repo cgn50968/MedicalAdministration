@@ -16,6 +16,8 @@ public class DaoToH2DB implements InDaoToDB {
 	
 			
 	/**
+	 * @author Heiko, Roger
+	 * @version 1.21
 	 * @return java.sql.Connection
 	 *   
 	 */
@@ -36,13 +38,8 @@ public class DaoToH2DB implements InDaoToDB {
             con = DriverManager.getConnection(properties.getProperty("DB_URL"),
             								  properties.getProperty("DB_USER"),
             								  properties.getProperty("DB_PASSWORD"));
-        
-            /*
-			driver = "org.h2.Driver";
-			url = "jdbc:h2:tcp://localhost/~/test";
-			user = "sa";
-			password = "";
-			*/   
+   
+            
         } 
         
         catch (IOException | ClassNotFoundException | SQLException e) {

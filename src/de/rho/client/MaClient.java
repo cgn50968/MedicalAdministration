@@ -25,13 +25,14 @@ public class MaClient {
 	public static void main(String[] args) {
 		
 		try {
+			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
 			//InPhysicianService PhysicianService = (InPhysicianService) Naming.lookup("rmi://localhost:1099/PhysicianService");
 			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
-			
-			System.out.println("---------------------");
-			System.out.println("Client up and running");
-			System.out.println("---------------------");
+			System.out.println("#01 - Start MaClient");
+			System.out.println("-----------------------");
+			System.out.println("MaClient up and running");
+			System.out.println("-----------------------\n");
 			
 			//------------------------------------------------------
 			//Testaufruf einer Methode eines Services auf dem Server
@@ -43,14 +44,14 @@ public class MaClient {
 			
 			
 			/**** create Patient ****/
-			
+			System.out.println("#02 - Create new Patient");
 				// Aktuelles Datum
 				Date today = new Date();
 				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 				String date = DATE_FORMAT.format(today);
 				
 				// Objekt Patient - nicht Konstruktor; der ist nur der Teil rechts von "new", guck mal in die Entity, dort verlangt er einen int-Wert. da war ich mir nicht sicher, brauchen wir den Eingabeparameter ueberhaupt im Konstruktor?
-				Patient patient = new Patient(1);
+				Patient patient = new Patient();
 				patient.setId(1); //hier wird der eigentliche Attributwert fuer ID gesetzt
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
