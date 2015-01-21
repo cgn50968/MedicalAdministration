@@ -1,6 +1,8 @@
 package de.rho.server.patient.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.dao.persistence.DaoToH2DB;
@@ -18,31 +20,44 @@ import de.rho.server.patient.entity.Patient;
 
 public class PatientToDB {
 
-	/**** create Patient ****/
+	// ************************
+	// **** create Patient ****
+	// ************************
 	public String createPatientSqlStatement(Patient patient) {
 		System.out.println("PatientToDB.createPatientSqlStatement"); //debug
 		
-		// create *Create Patient* sql statement
+		// **** create Date ****
+		Date today = new Date();
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String date = DATE_FORMAT.format(today);
+		
+		// **** create *Create Patient* sql statement ****
 		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
 		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', ";
 		sqlstatement = sqlstatement + patient.getAddressid() + ", \'";
-		sqlstatement = sqlstatement + patient.getLastvisit() + "\')";		
+		sqlstatement = sqlstatement + date + "\')";		
 		return sqlstatement;
 	}
-
-	/**** read Patient ****/
+	
+	
+	// **********************
+	// **** read Patient ****
+	// **********************
 	public String readPatientSqlStatement(int id) {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 		
-		// create *Read Patient* sql statement
+		// **** create *Read Patient* sql statement ****
 		String sqlstatement = "SELECT * FROM PATIENT WHERE id=" + id;
 		return sqlstatement;
 	}
 	
-	/**** update Patient ****/
+	
+	// ************************	
+	// **** update Patient ****
+	// ************************
 	public void updatePatientDB(Patient patient) {
 		
 	}
