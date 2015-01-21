@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import de.rho.server.dao.persistence.DaoToFile;
-import de.rho.server.dao.persistence.DaoToH2DB;
+import de.rho.server.dao.persistence.DaoToDB;
 import de.rho.server.patient.entity.Patient;
 
 
@@ -69,7 +69,7 @@ public class PatientToDB {
 	
 /* - Auskommentiert - Roger - 20.01.2015
  * 
-	private DaoToH2DB h2db;									//Deklaration fuer DaoToH2DB
+	private DaoToDB h2db;									//Deklaration fuer DaoToDB
 	private DaoToFile mysqldb; 								//Deklaration fuer DaoToFile
 	
 	
@@ -77,9 +77,9 @@ public class PatientToDB {
 		System.out.println("ServicetoDB: Methode createPatientDB");
 		
 		String sql = "SELECT alles von allem";
-		this.h2db = new DaoToH2DB();								//Instanziierung DaoToH2DB (Default-Konstruktor)
+		this.h2db = new DaoToDB();								//Instanziierung DaoToDB (Default-Konstruktor)
 		
-		System.out.println("ServicetoDB: Trying to locate DaoToH2DB");
+		System.out.println("ServicetoDB: Trying to locate DaoToDB");
 		
 		h2db.connect();
 		h2db.executeQuery(sql);
@@ -89,9 +89,9 @@ public class PatientToDB {
 		System.out.println("ServicetoDB: Methode readPatientDB");
 		
 		String sql = "SELECT alles von allem";
-		this.h2db = new DaoToH2DB();								//Instanziierung DaoToH2DB (Default-Konstruktor)
+		this.h2db = new DaoToDB();								//Instanziierung DaoToDB (Default-Konstruktor)
 		
-		System.out.println("ServicetoDB: Trying to locate DaoToH2DB");
+		System.out.println("ServicetoDB: Trying to locate DaoToDB");
 		
 		h2db.connect();
 		h2db.executeQuery(sql);

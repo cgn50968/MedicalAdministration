@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.persistence.DaoToFile;
-import de.rho.server.dao.persistence.DaoToH2DB;
+import de.rho.server.dao.persistence.DaoToDB;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.control.PatientServiceImpl;
 
@@ -19,7 +19,7 @@ import de.rho.server.patient.control.PatientServiceImpl;
 public class FaDaoService {
 	
 	public static InDaoToDB getDaoToDBService() throws RemoteException {
-		return new DaoToH2DB();
+		return new DaoToDB();
 	}
 
 /*
@@ -27,7 +27,7 @@ public class FaDaoService {
     public InDaoToDB createDatabase()
     {
         if( getDatabaseType().equalsIgnoreCase("H2") )
-        	databaseDAO = new DaoToH2DB();
+        	databaseDAO = new DaoToDB();
         if( getDatabaseType().equalsIgnoreCase("mysql") )
             databaseDAO = new DaoToFile();
 

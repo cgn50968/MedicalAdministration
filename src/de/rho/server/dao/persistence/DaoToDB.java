@@ -18,7 +18,7 @@ import java.util.List;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 
-public class DaoToH2DB implements InDaoToDB {
+public class DaoToDB implements InDaoToDB {
 	
 			
 	/**
@@ -112,7 +112,7 @@ public class DaoToH2DB implements InDaoToDB {
 	
 	public Connection connect() {			// Datenbankverbindung
 			
-		System.out.println("DaoToH2DB.connect");
+		System.out.println("DaoToDB.connect");
 			
 		Connection con = null;				//Connection deklarieren
 			
