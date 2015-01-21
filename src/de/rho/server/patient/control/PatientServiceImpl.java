@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import de.rho.server.patient.*;
 import de.rho.server.dao.boundary.InDaoToDB;
+import de.rho.server.dao.boundary.InDaoToFile;
 import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
@@ -45,26 +45,24 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	//Alternative:
 	//interface variable = factory.methode...
 	
+	//Trennung von Methoden-Service (File, DB) und Connection-Service (File, DB)
 	
-/** Objects **/
-	
+
+	/** Methoden-Services **/
 	private PatientToCSV patient2csv; 	 				//Deklaration fuer CSV
 	private PatientToDB patient2db;				 		//Deklaration fuer DB
+	
+	
+	/** Connection-Services **/
+	private InDaoToDB db_service = FaDaoService.getDaoToDBService();
+	private InDaoToFile file_service = FaDaoService.getDaoToFileService(); //to do: benutze file_service-connection
 	private ResultSet resultSet;
 	private String sql_statement;
-
-	
-	
-/** Factoies **/
-	
-	/** Datenbank Serivce erstellen **/
-	private InDaoToDB db_service = FaDaoService.getDaoToDBService();
-	
 	
 	protected PatientServiceImpl() throws RemoteException {
 		super();
-		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV
-		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB
+		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV (Defaultkonstruktor)
+		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB (Defaultkonstruktor)
 
 	}
 
@@ -92,7 +90,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		
 		// **** Connection zur H2 Datenbank oeffnen ****  
-		Connection con = null;					//try catch muﬂte ich einbauen, sonst lieﬂ sich die connect() nicht mehr aufrufen
+		Connection con = null;
 		try {
 			con = db_service.connect();
 		} catch (FileNotFoundException e) {

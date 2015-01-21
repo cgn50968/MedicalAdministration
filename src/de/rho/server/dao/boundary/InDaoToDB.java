@@ -6,8 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-
 /**
  * @author Heiko, Roger
  * @version 1.1

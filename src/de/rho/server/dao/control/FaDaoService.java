@@ -3,16 +3,15 @@ package de.rho.server.dao.control;
 import java.rmi.RemoteException;
 
 import de.rho.server.dao.boundary.InDaoToDB;
+import de.rho.server.dao.boundary.InDaoToFile;
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.dao.persistence.DaoToDB;
-import de.rho.server.patient.boundary.InPatientService;
-import de.rho.server.patient.control.PatientServiceImpl;
 
 /**
- * @author Heiko, Roger
- * @version 1.1
+ * @author Heiko
+ * @version 1.2
  * 
- * Factory zum Erstellen von DB-Verbindungsobjekten
+ * Factory zum Erstellen von Verbindungsobjekten (Connection-Services)
  * 
  */
 
@@ -20,6 +19,10 @@ public class FaDaoService {
 	
 	public static InDaoToDB getDaoToDBService() throws RemoteException {
 		return new DaoToDB();
+	}
+	
+	public static InDaoToFile getDaoToFileService() throws RemoteException {
+		return new DaoToFile();
 	}
 
 /*
