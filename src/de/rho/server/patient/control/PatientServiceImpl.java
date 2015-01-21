@@ -164,10 +164,19 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// **** Connection zur H2 Datenbank schliessen ****
+		try {
+			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return patient;
 	}
 
-	
+	// **** Connection zur H2 Datenbank schliessen ****
+
 	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
