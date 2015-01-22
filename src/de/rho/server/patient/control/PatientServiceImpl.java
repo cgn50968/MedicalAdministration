@@ -174,6 +174,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		// **** Rückgabe des Patientenobjekts **** 
 		return patient;
 	}
 
@@ -228,6 +231,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 	}
+	
+	
 /**************/
 /**** List ****/
 /**************/
@@ -281,6 +286,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// **** Connection zur Datenbank schliessen ****
+		try {
+			db_service.disconnect(con, null);		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
