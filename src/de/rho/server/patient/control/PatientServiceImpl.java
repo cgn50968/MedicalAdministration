@@ -84,7 +84,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ************************
 	@Override
 	public void createPatientInDB(Patient patient) throws RemoteException {
-		System.out.println("PatientServiceImpl.createPatientInDB");
+		System.out.println("PatientServiceImpl.createPatientInDB()");
 		
 		
 		// **** SQL Statement erstellen ****
@@ -123,7 +123,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **********************
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
-		System.out.println("PatientServiceImpl.readPatientInDB");
+		System.out.println("PatientServiceImpl.readPatientInDB()");
 		
 		Patient patient = new Patient();
 		
@@ -186,12 +186,35 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ************************	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
-		System.out.println("Impl: leite 'update' an 2DB weiter");
+		System.out.println("PatientServiceImpl.updatePatientInDB()");
 
 		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
 
-		// !!! noch nicht fertig... !!!
+		// **** Connection zur H2 Datenbank oeffnen ****  
+		Connection con = null;
+		try {
+			con = db_service.connect();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// **** SQL Query ausfuehren ****
+		db_service.executeQuery(con, sql_statement, false);
+		
+		
+		// **** Connection zur H2 Datenbank schliessen ****
+		try {
+			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -200,7 +223,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ************************
 	@Override
 	public void deletePatientInDB(int id) throws RemoteException {
-		System.out.println("PatientServiceImpl.deletePatientInDB");
+		System.out.println("PatientServiceImpl.deletePatientInDB()");
 		
 		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.deletePatientSqlStatement(id);
@@ -241,7 +264,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **** Get Patient List ****
 // **************************
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException {
-		System.out.println("PatientServiceImpl.getPatientListFromDB");
+		System.out.println("PatientServiceImpl.getPatientListFromDB()");
 	
 
 		// **** SQL Statement erstellen ****
@@ -338,7 +361,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ***********************************
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
-		System.out.println("PatientServiceImpl.writePatientListToCSV");
+		System.out.println("PatientServiceImpl.writePatientListToCSV()");
 		this.patient2csv.generateCsvFile(patientList);					//an dieser Stelle nur Weiterleitung, normale Uebergabe, da Verarbeitung eine Ebene tiefer
 	}
 	

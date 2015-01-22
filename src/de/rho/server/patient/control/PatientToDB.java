@@ -60,7 +60,22 @@ public class PatientToDB {
 	// **** update Patient ****
 	// ************************
 	public String updatePatientSqlStatement(Patient patient) {
-		return null;
+		
+		// **** create Date ****
+		Date today = new Date();
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String date = DATE_FORMAT.format(today);
+		
+		// **** create *Update Patient* sql statement ****
+		String sqlstatement = "UPDATE patient SET ";
+		sqlstatement = sqlstatement + "firstname=\'" + patient.getFirstname() + "\', ";
+		sqlstatement = sqlstatement + "lastname=\'" + patient.getLastname() + "\', ";
+		sqlstatement = sqlstatement + "gender=\'" + patient.getGender() + "\', ";
+		sqlstatement = sqlstatement + "dayofbirth=\'" + patient.getDayofbirth() + "\', ";
+		sqlstatement = sqlstatement + "addressid=" + patient.getAddressid() + ", ";
+		sqlstatement = sqlstatement + "lastvisit=\'" + date + "\' ";
+		sqlstatement = sqlstatement + "WHERE id=" + patient.getId();
+		return sqlstatement;	
 	}
 
 	

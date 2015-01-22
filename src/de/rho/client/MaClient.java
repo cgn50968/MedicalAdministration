@@ -33,6 +33,9 @@ public class MaClient {
 			System.out.println("#01 - Start MaClient");
 			System.out.println("MaClient up and running\n");
 			
+			// **** Variablen und Objekte ****
+			Patient patient = new Patient();
+			
 			
 			//------------------------------------------------------
 			//Testaufruf einer Methode eines Services auf dem Server
@@ -47,9 +50,8 @@ public class MaClient {
 			// ************************
 			/*
 			System.out.println("#02 - Create new Patient");
-
-				// Objekt Patient
-				Patient patient = new Patient();
+			
+				// Patienten Objekt 
 				patient.setId(1);
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
@@ -65,14 +67,31 @@ public class MaClient {
 			// **********************
 			// **** read Patient ****
 			// **********************
-			/*System.out.println("#02 - Get Patient with id=5");
+			/*System.out.println("#03 - Get Patient with id=5");
 				
 				// **** Funktionsaufruf: Get Patient with id=5 
 				patient = PatientService.readPatientInDB(5);
 				System.out.println(patient.getFirstname() + " " + patient.getLastname());
 				patient = null;
 				*/
+
+			// ************************
+			// **** update Patient ****
+			// ************************		
+			System.out.println("#04 - Update Patient with id=1");
+			
+				//Patienten Objekt
+				patient.setId(1);
+				patient.setFirstname("Maria");
+				patient.setLastname("Schmitz");
+				patient.setGender("w");
+				patient.setDayofbirth("1967-10-03");
+				patient.setAddressid(1);
 				
+				// **** Funktionsaufruf: update Patient ****
+				PatientService.updatePatientInDB(patient);
+								
+			
 			// ************************
 			// **** delete Patient ****
 			// ************************				
