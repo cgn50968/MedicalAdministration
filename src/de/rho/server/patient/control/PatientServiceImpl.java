@@ -95,10 +95,12 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = null;
 		try {
 			con = db_service.connect();
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -111,7 +113,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Connection zur H2 Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -134,11 +137,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = null;					
 		try {
 			con = db_service.connect();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -158,11 +161,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setLastvisit(resultSet.getString("LASTVISIT"));
 			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (NumberFormatException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -170,8 +173,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Connection zur H2 Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -195,11 +198,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = null;
 		try {
 			con = db_service.connect();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -211,8 +214,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Connection zur H2 Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -233,11 +236,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = null;
 		try {
 			con = db_service.connect();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -249,8 +252,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Connection zur Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, null);		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -275,11 +278,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		Connection con = null;					
 		try {
 			con = db_service.connect();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -306,11 +309,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				// **** Uebergabe des Patienten Objekts an die PatientenListe
 				patientList.add(patient);
 			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (NumberFormatException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -318,8 +321,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Connection zur Datenbank schliessen ****
 		try {
 			db_service.disconnect(con, resultSet);		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		

@@ -69,9 +69,14 @@ public class PatientToCSV {
             bw.close();
         }
 		
-		catch (UnsupportedEncodingException e) {}
-        catch (FileNotFoundException e){}
-        catch (IOException e){}
+		catch (UnsupportedEncodingException e) {
+		}
+        
+		catch (FileNotFoundException e){
+		}
+        
+		catch (IOException e){
+		}
 				
 		
 		

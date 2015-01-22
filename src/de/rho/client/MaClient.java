@@ -95,7 +95,7 @@ public class MaClient {
 			// ************************
 			// **** delete Patient ****
 			// ************************				
-			/*System.out.println("#03 - Delete Patient with id=24");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+			/*System.out.println("#05 - Delete Patient with id=24");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 			
 				// **** Funktionsaufruf: delete Patient ****
 				PatientService.deletePatientInDB(24);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
@@ -104,7 +104,7 @@ public class MaClient {
 			// ******************************
 			// **** write Patient to CSV ****
 			// ******************************				
-			System.out.println("#0x - Write CSV with sample data");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+			System.out.println("#0x - Write CSV with sample data");		
 				
 			
 			// **** Patientenliste aus DB auslesen ****
