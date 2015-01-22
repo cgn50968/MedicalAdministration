@@ -294,7 +294,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		// **** Connection zur Datenbank schliessen ****
 		try {
-			db_service.disconnect(con, null);		
+			db_service.disconnect(con, resultSet);		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
