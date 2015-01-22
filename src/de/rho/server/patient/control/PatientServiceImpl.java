@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -73,13 +75,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return test;
 	}
 	
-	/**************/
-	/**** CRUD ****/
-	/**************/
+/**************/
+/**** CRUD ****/
+/**************/
 	
-	// ************************
-	// **** create Patient ****
-	// ************************
+// ************************
+// **** create Patient ****
+// ************************
 	@Override
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("PatientServiceImpl.createPatientInDB");
@@ -116,9 +118,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 	
-	// **********************
-	// **** Read Patient ****
-	// **********************
+// **********************
+// **** Read Patient ****
+// **********************
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
 		System.out.println("PatientServiceImpl.readPatientInDB");
@@ -152,6 +154,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setFirstname(resultSet.getString("FIRSTNAME"));
 				patient.setLastname(resultSet.getString("LASTNAME"));	
 				patient.setGender(resultSet.getString("GENDER"));
+				patient.setGender(resultSet.getString("DAYOFBIRTH"));
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setLastvisit(resultSet.getString("LASTVISIT"));
 			}
@@ -175,9 +178,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 
-	// ************************
-	// **** Update Patient ****
-	// ************************	
+// ************************
+// **** Update Patient ****
+// ************************	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
 		System.out.println("Impl: leite 'update' an 2DB weiter");
@@ -189,9 +192,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 	
-	// ************************
-	// **** Delete Patient ****
-	// ************************
+// ************************
+// **** Delete Patient ****
+// ************************
 	@Override
 	public void deletePatientInDB(int id) throws RemoteException {
 		System.out.println("PatientServiceImpl.deletePatientInDB");
@@ -225,10 +228,73 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 	}
+/**************/
+/**** List ****/
+/**************/
+	
+// **************************
+// **** Get Patient List ****
+// **************************
+	public ArrayList<Patient> getPatientListFromDB() throws RemoteException {
+		System.out.println("PatientServiceImpl.getPatientListFromDB");
+	
 
+		// **** SQL Statement erstellen ****
+		sql_statement = this.patient2db.getPatientListSqlStatement();
+		
+		
+		// **** Connection zur Datenbank oeffnen ****  
+		Connection con = null;					
+		try {
+			con = db_service.connect();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// **** SQL Query ausfuehren, ResultSet erwartet ****
+		resultSet = db_service.executeQuery(con, sql_statement, true);
+		
+				
+		// **** Patient List erstellen ****
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try {
+			while(resultSet.next()) {				// Pro Datensatz
+				
+				Patient patient = new Patient();
+				patient.setId(Integer.parseInt(resultSet.getString("ID")));
+				patient.setFirstname(resultSet.getString("FIRSTNAME"));
+				patient.setLastname(resultSet.getString("LASTNAME"));	
+				patient.setGender(resultSet.getString("GENDER"));
+				patient.setDayofbirth(resultSet.getString("DAYOFBIRTH"));
+				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
+				patient.setLastvisit(resultSet.getString("LASTVISIT"));	
+
+				// **** Uebergabe des Patienten Objekts an die PatientenListe
+				patientList.add(patient);
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// **** Rückgabe der ArrayList (Patientenliste) 
+		return patientList;
+	}
+		
+/****************/		
+/**** Search ****/
+/****************/
 	
-	
-	/**** Search ****/
 	
 	@Override
 	public Patient searchPatientByIdInDB(int id) throws RemoteException {
@@ -242,9 +308,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return this.searchPatientByNameInDB(searchString);
 	}
 
+/**************/	
+/**** File ****/
+/**************/
 	
-	/**** File ****/
-
 	@Override
 	public ArrayList<Patient> readPatientListFromCSV(String list) throws RemoteException {
 		System.out.println("Impl: leite 'readList' an 2CSV weiter");
@@ -252,15 +319,19 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return this.patient2csv.readPatientFromCSV(list);
 	}
 
+// ***********************************
+// **** Write Patient List to CSV ****
+// ***********************************
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
-		System.out.println("Impl: leite 'writeList' an 2CSV weiter");
+		System.out.println("PatientServiceImpl.writePatientListToCSV");
 		this.patient2csv.generateCsvFile(patientList);					//an dieser Stelle nur Weiterleitung, normale Uebergabe, da Verarbeitung eine Ebene tiefer
 	}
 	
-
-	/**** Status ****/
-
+/****************/
+/**** Status ****/
+/****************/
+	
 	@Override
 	public void checkDate(String searchdate) throws RemoteException {
 		// TODO wo soll die MEthode implementiert werden, eigentlich im "search"....

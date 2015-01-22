@@ -82,24 +82,30 @@ public class MaClient {
 				PatientService.deletePatientInDB(24);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 				*/
 				
-			// ************************
-			// * write Patient to CSV *
-			// ************************				
+			// ******************************
+			// **** write Patient to CSV ****
+			// ******************************				
 			System.out.println("#0x - Write CSV with sample data");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 				
-			// Patientenliste (kann auch nur ein Patient enthalten sein)
+			
+			// **** Patientenliste aus DB auslesen ****
+			ArrayList<Patient> patientList = PatientService.getPatientListFromDB();
 			
 			
-			ArrayList<Patient> patientList = new ArrayList<Patient>();
-			patientList.add(new Patient(1, "Theo", "Lingen", "m", 0));
-			patientList.add(new Patient(2, "Leo", "Bingen", "m", 0));
-			patientList.add(new Patient(3, "Klaus", "Mussraus", "m", 0));
-			patientList.add(new Patient(4, "Hans", "Willrein", "m", 0));
+			// **** Patientenliste in CSV Datei schreiben ****
 			PatientService.writePatientListToCSV(patientList);
-			patientList = null;
 			
+			
+			// **** Reset patientList ****
+			patientList = null;
+	
+
+			
+/*****************************/
+/**** ENDE des TRY Blocks ****/
+/*****************************/
 		}
-				
+					
 		catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

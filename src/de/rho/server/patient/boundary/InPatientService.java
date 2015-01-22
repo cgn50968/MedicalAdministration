@@ -39,6 +39,12 @@ public interface InPatientService extends Remote {
 	//For PatientService.deletePatientDB
 	public void deletePatientInDB(int id) throws RemoteException;
 	
+	
+	/**** List ****/
+	
+	// For PatientServiceImpl.getPatientListFromDB
+	public ArrayList<Patient> getPatientListFromDB() throws RemoteException;
+	
 		
 	/**** Search ****/
 	

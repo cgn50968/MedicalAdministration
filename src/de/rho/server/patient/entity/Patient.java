@@ -25,15 +25,16 @@ public class Patient implements Serializable {
 	private String lastvisit;
 	
 	//Der Default-Konstruktor
+	
 	public Patient()  {
 		
 	}
 	
 	
 	//ein zweiter Konstruktor zum Testen der ArrayList
-	public Patient(int id, String firstname, String lastname, String gender, int adressid)  {
+	//public Patient(int id, String firstname, String lastname, String gender, String dayofbirth, int adressid, String lastvisit)  {
 		
-	}
+	//}
 	
 	
 	/**** Getter and Setter ****/

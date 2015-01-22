@@ -75,6 +75,17 @@ public class PatientToDB {
 	}
 	
 	
+	// **************************	
+	// **** get Patient List ****
+	// **************************
+	public String getPatientListSqlStatement() {
+		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
+		
+		// **** create *Get Patient List* sql statement ****
+		String sqlstatement = "SELECT * FROM PATIENT";
+		return sqlstatement;
+	}
+	
 	
 /* - Auskommentiert - Roger - 20.01.2015
  * 

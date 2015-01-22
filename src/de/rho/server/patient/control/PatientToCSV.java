@@ -39,24 +39,33 @@ public class PatientToCSV {
             System.out.println(patientList.get(i)); 
         } 
 		
-		
 		try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("testw.csv"), "UTF-8"));
-            for (Patient patient : patientList)
-            {
+            for (Patient patient : patientList) {
+            	
+            	// **** Neuer String Buffer für Textausgabe pro Zeile **** 
                 StringBuffer oneLine = new StringBuffer();
+                
+                // **** Uebergabe der Attribute an String Buffer ****
                 oneLine.append(patient.getId() <=0 ? "" : patient.getId());
                 oneLine.append(CSV_SEPARATOR);
-                //oneLine.append(patient.getFirstname().trim().length() == 0? "" : patient.getFirstname());
-                //oneLine.append(CSV_SEPARATOR);
-                //oneLine.append(patient.getLastname().trim().length() == 0? "" : patient.getLastname());
-                //oneLine.append(CSV_SEPARATOR);
-                //oneLine.append(patient.getGender().trim().length() == 0? "" : patient.getGender());
-                bw.write(oneLine.toString());
-                bw.newLine();
+                oneLine.append(patient.getFirstname().trim().length() == 0? "" : patient.getFirstname());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getLastname().trim().length() == 0? "" : patient.getLastname());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getGender().trim().length() == 0? "" : patient.getGender());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getDayofbirth().trim().length() == 0? "" : patient.getDayofbirth());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getAddressid()); //<= ? : patient.getAddressid());						Hier müssten wir Sicherstellen, dass die PatientenID nicht 0 ist.
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getLastvisit().trim().length() == 0? "" : patient.getLastvisit());
+                
+                bw.write(oneLine.toString());	// **** Schreiben der Zeile
+                bw.newLine();					// **** Neue Zeile
             }
-            bw.flush();
+            bw.flush();		// Loeschen des Streams (flush = ausspuelen)
             bw.close();
         }
 		
