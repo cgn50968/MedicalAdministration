@@ -45,7 +45,8 @@ public class MaClient {
 			// ************************			
 			// **** create Patient ****
 			// ************************
-			/*System.out.println("#02 - Create new Patient");
+			/*
+			System.out.println("#02 - Create new Patient");
 
 				// Objekt Patient
 				Patient patient = new Patient();
@@ -53,12 +54,13 @@ public class MaClient {
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
 				patient.setGender("m");
+				patient.setDayofbirth("1920-05-29");
 				patient.setAddressid(0);
 				
 				// Funktionsaufruf: create Patient
 				PatientService.createPatientInDB(patient);
 				patient = null; //reset
-				*/
+			*/
 			
 			// **********************
 			// **** read Patient ****
@@ -87,10 +89,12 @@ public class MaClient {
 				
 			// Patientenliste (kann auch nur ein Patient enthalten sein)
 			
+			
 			ArrayList<Patient> patientList = new ArrayList<Patient>();
 			patientList.add(new Patient(1, "Theo", "Lingen", "m", 0));
 			patientList.add(new Patient(2, "Leo", "Bingen", "m", 0));
 			patientList.add(new Patient(3, "Klaus", "Mussraus", "m", 0));
+			patientList.add(new Patient(4, "Hans", "Willrein", "m", 0));
 			PatientService.writePatientListToCSV(patientList);
 			patientList = null;
 			

@@ -32,11 +32,12 @@ public class PatientToDB {
 		String date = DATE_FORMAT.format(today);
 		
 		// **** create *Create Patient* sql statement ****
-		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (";
+		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (";
 		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
-		sqlstatement = sqlstatement + patient.getGender() + "\', ";
+		sqlstatement = sqlstatement + patient.getGender() + "\', \'";
+		sqlstatement = sqlstatement + patient.getDayofbirth() + "\', ";
 		sqlstatement = sqlstatement + patient.getAddressid() + ", \'";
 		sqlstatement = sqlstatement + date + "\')";		
 		return sqlstatement;

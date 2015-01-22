@@ -4,6 +4,7 @@ ID int auto_increment,
 FirstName varchar(20),
 LastName varchar(20),
 Gender char,
+DayOfBirth date,
 LastVisit date,
 AddressID int,
 PRIMARY KEY (ID)

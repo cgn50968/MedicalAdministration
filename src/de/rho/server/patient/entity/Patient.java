@@ -20,6 +20,7 @@ public class Patient implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String gender;
+	private String dayofbirth;
 	private int addressid;
 	private String lastvisit;
 	
@@ -69,6 +70,14 @@ public class Patient implements Serializable {
 		this.gender = gender;
 	}
 
+	public String getDayofbirth() {
+		return dayofbirth;
+	}
+
+	public void setDayofbirth(String dayofbirth) {
+		this.dayofbirth = dayofbirth;
+	}
+	
 	public Integer getAddressid() {
 		return addressid;
 	}
