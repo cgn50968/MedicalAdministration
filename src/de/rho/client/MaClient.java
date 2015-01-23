@@ -107,14 +107,14 @@ public class MaClient {
 				// ************************
 				// **** delete Patient ****
 				// ************************				
-						System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+				/*		System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 						
 							// ******************************
 							// **** call: delete Patient ****
 							// ******************************
 							PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 							
-							
+				*/			
 				// ******************************
 				// **** read Patient from CSV ***
 				// ******************************				
@@ -123,12 +123,12 @@ public class MaClient {
 						// ******************************************
 						// **** read Patient List from CSV File *****
 						// ******************************************
-						//PatientService.readPatientListFromCSV();
+						PatientService.readPatientListFromCSV();
 						
 						// **********************************
 						// **** write Patient List to DB ****
 						// **********************************
-						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
+						//PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 						
 						
 						
@@ -141,7 +141,7 @@ public class MaClient {
 				// ******************************
 				// **** write Patient to CSV ****
 				// ******************************				
-						System.out.println("#0x - write CSV with sample data");		
+				/*		System.out.println("#0x - write CSV with sample data");		
 							
 						// **********************************			
 						// **** get Patient List from DB ****
@@ -157,7 +157,7 @@ public class MaClient {
 						// **** reset patientList ****
 						// ***************************
 						patientList = null;
-				
+				*/
 			
 		/**************************/
 		/**** END OF TRY BLOCK ****/

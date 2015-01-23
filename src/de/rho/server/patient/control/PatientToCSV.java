@@ -1,12 +1,8 @@
 package de.rho.server.patient.control;
 
 import java.io.*;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.patient.entity.Patient;
@@ -24,9 +20,49 @@ import de.rho.server.patient.entity.Patient;
 public class PatientToCSV {
 
 	
-	public ArrayList<Patient> readPatientFromCSV() {
-		System.out.println("reading from CSV..."); // TODO
-		return null;
+	public ArrayList<Patient> readPatientListFromCSV() {
+		
+		System.out.println("reading from CSV...");
+		
+		String fileName = "testw.csv";		 		 // Deklaration Name und ggf. Pfad
+        File file = new File(fileName);				 // Uebergabe der Deklaration an File-Objekt
+        ArrayList<Patient> patientList = new ArrayList<Patient>();
+        
+        try{
+            Scanner inputStream = new Scanner(file); // File-Objekt mit Scanner-Klasse lesen
+            
+            while(inputStream.hasNext()){			 // Bedingung: hasNext()-Methode durchlauft die Schleife line-by-line
+                //String data = inputStream.next();	 // jede einzelne Zeile der Datei in einen String packen
+            	Patient patient = new Patient();
+				patient.setId(Integer.parseInt(inputStream.next()));
+				patient.setFirstname(inputStream.next());
+				patient.setLastname(inputStream.next());	
+				patient.setGender(inputStream.next());
+				patient.setDayofbirth(inputStream.next());
+				patient.setLastvisit(inputStream.next());	
+				patient.setAddressid(Integer.parseInt(inputStream.next()));
+				patient.setStreet(inputStream.next());	
+				patient.setHousenumber(inputStream.next());	
+				patient.setPostalcode(inputStream.next());	
+				patient.setCity(inputStream.next());	
+				
+				// **** Uebergabe des Patienten Objekts an die PatientenListe
+				patientList.add(patient);
+                
+                
+                //System.out.println(data);	//TODO: Problem: den Inhalt von data in eine ArrayList
+               
+                
+                      
+            }
+            inputStream.close();					// nach der Schleife: Scanner schliessen 
+        }
+
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+			
+        return patientList;		//TODO: ArrayList zurueckgeben
 	}
 
 	

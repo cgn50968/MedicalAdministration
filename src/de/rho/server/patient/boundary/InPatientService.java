@@ -11,7 +11,7 @@ import de.rho.server.patient.entity.Patient;
 
 /**
  * @author Andreas Röwert, Heiko Herder, Roger Ordon
- * @version 1.1
+ * @version 1.4
  * 
  * Interface als externe Schnittstelle fuer (RMI)
  * Methodenvorlage fuer PatientService
@@ -22,8 +22,9 @@ public interface InPatientService extends Remote {
 	
 	
 	/**** TEST ****/
-	
+	/*
 	public String createPatient(String patient) throws RemoteException;
+	*/
 	
 	/**** CRUD ****/
 	

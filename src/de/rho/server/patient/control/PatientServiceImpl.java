@@ -34,7 +34,7 @@ public class DateDemo {
 
 /**
  * @author Heiko, Roger
- * @version 1.1
+ * @version 1.4
  * 
  * Implementierung des Services Patient
  * Uebergabestation der Servicemethoden an konkrete Klassen 
@@ -66,15 +66,16 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		super();
 		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV (Defaultkonstruktor)
 		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB (Defaultkonstruktor)
-
 	}
 
 	
 	/**** TEST ****/
-	
+	/*
 	public String createPatient(String test) throws RemoteException {
 		return test;
 	}
+	*/
+	
 	
 /**************/
 /**** CRUD ****/
@@ -527,7 +528,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
-		return this.patient2csv.readPatientFromCSV();
+		return this.patient2csv.readPatientListFromCSV();
 	}
 
 // ***********************************
