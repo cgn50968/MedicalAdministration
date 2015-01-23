@@ -414,27 +414,35 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
 		
-		System.out.println("PatientServiceImpl.writePatientToDB()");
+		System.out.println("PatientServiceImpl.writePatientListToDB()");
 		
-		ArrayList<Patient> toDBliste = patientList;
+		
 				
-		/*for(Patient patient : toDBliste){					//debug-Ausgabe
+		/*for(Patient patient : patientList){					//debug-Ausgabe
 			System.out.println(patient.getLastname());
 			}
 		*/
 		
-		for(Patient patient : toDBliste){					
-			
-			//TODO
-			
-			
-			}
+		sql_statement = this.patient2db.writePatientListSqlStatement(patientList);
+		
+		Connection con = null;					
+		try {
+			con = db_service.connect();
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		db_service.executeQuery(con, sql_statement, true);
+		
+		//TODO
 		
 		
 		
-		
-		
-		System.out.println("Ende: PatientServiceImpl.writePatientToDB()");
+		System.out.println("Ende: PatientServiceImpl.writePatientListToDB()");
 		
 		
 		

@@ -61,7 +61,7 @@ public class PatientToDB {
 		String date = DATE_FORMAT.format(today);
 		
 		// **** create *Create Patient* sql statement ****
-		String sqlstatement = "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (\'";
+		String sqlstatement = "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, lastvisit, addressid) VALUES (\'";
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', \'";
@@ -139,6 +139,50 @@ public class PatientToDB {
 		System.out.println(sqlstatement); //debug		
 		return sqlstatement;
 	}
+	
+	
+	// ****************************	
+	// **** write Patient List ****
+	// ****************************
+	public String writePatientListSqlStatement(ArrayList<Patient> patientList) {
+		System.out.println("PatientToDB.wirtePatientListSqlStatement"); //debug
+		
+		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p INNER JOIN ADDRESS a ON p.addressid=a.id;";
+		
+		ArrayList<Patient> toDBlist = patientList;
+				
+		for(Patient patient : toDBlist){					
+		
+			sqlstatement = sqlstatement + "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, lastvisit, addressid)";
+			sqlstatement = sqlstatement + "VALUES (\'";
+			sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
+			sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
+			sqlstatement = sqlstatement + patient.getGender() + "\', \'";
+			sqlstatement = sqlstatement + patient.getDayofbirth() + "\', \'";
+			sqlstatement = sqlstatement + patient.getLastvisit() + "\', \'";
+			sqlstatement = sqlstatement + patient.getAddressid() + "\'";
+			sqlstatement = sqlstatement + ");";
+		}
+		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-2);
+						
+		for(Patient patient : toDBlist){					
+			
+			sqlstatement = sqlstatement + "INSERT INTO ADDRESS (street, housenumber, postalcode, city)";
+			sqlstatement = sqlstatement + "VALUES (\'";
+			sqlstatement = sqlstatement + patient.getStreet() + "\', \'";
+			sqlstatement = sqlstatement + patient.getHousenumber() + "\', \'";
+			sqlstatement = sqlstatement + patient.getPostalcode() + "\', \'";
+			sqlstatement = sqlstatement + patient.getCity() + "\'";
+			sqlstatement = sqlstatement + ");";
+		}
+		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-3);
+				
+		System.out.println(sqlstatement); //debug
+		
+		return sqlstatement;
+		
+	}
+	
 	
 	
 	// ********************************	
