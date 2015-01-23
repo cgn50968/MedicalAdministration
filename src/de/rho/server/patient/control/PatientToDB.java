@@ -110,13 +110,17 @@ public class PatientToDB {
 	}
 
 	
-	// ************************	
-	// **** delete Patient ****
-	// ************************
-	public String deletePatientSqlStatement(int id) {
-
-		// **** create *Read Patient* sql statement ****
-		String sqlstatement = "DELETE FROM patient WHERE id=" + id;
+	// **************************************	
+	// **** delete Patient (and Address) ****
+	// **************************************
+	public String deletePatientSqlStatement(int id, int addressid) {
+		System.out.println("PatientToDB.deletePatientSqlStatement"); //debug
+		
+		// **** create *delete Patient* sql statement ****
+		String sqlstatement = "DELETE FROM patient WHERE id=" + id + ";\n";
+		sqlstatement = sqlstatement + "DELETE FROM address WHERE id=" + addressid + ";";
+		
+		System.out.println(sqlstatement); //debug
 		return sqlstatement;		
 	}
 	

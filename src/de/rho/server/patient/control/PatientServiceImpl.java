@@ -294,11 +294,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **** Delete Patient ****
 // ************************
 	@Override
-	public void deletePatientInDB(int id) throws RemoteException {
+	public void deletePatientInDB(int id, int addressid) throws RemoteException {
 		System.out.println("PatientServiceImpl.deletePatientInDB()");
 		
 		// **** SQL Statement erstellen ****
-		sql_statement = this.patient2db.deletePatientSqlStatement(id);
+		sql_statement = this.patient2db.deletePatientSqlStatement(id, addressid);
 		
 		
 		// **** Connection zur Datenbank oeffnen ****  

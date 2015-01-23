@@ -37,7 +37,7 @@ public interface InPatientService extends Remote {
 	public void updatePatientInDB(Patient patient) throws RemoteException;
 	
 	//For PatientService.deletePatientDB
-	public void deletePatientInDB(int id) throws RemoteException;
+	public void deletePatientInDB(int id, int addressid) throws RemoteException;
 	
 	
 	/**** List ****/
