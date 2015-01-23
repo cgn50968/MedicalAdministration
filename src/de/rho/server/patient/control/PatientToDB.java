@@ -51,7 +51,8 @@ public class PatientToDB {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 		
 		// **** create *Read Patient* sql statement ****
-		String sqlstatement = "SELECT * FROM PATIENT WHERE id=" + id;
+		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
+		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id WHERE p.id=" + id;
 		return sqlstatement;
 	}
 	
@@ -72,7 +73,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + "lastname=\'" + patient.getLastname() + "\', ";
 		sqlstatement = sqlstatement + "gender=\'" + patient.getGender() + "\', ";
 		sqlstatement = sqlstatement + "dayofbirth=\'" + patient.getDayofbirth() + "\', ";
-		sqlstatement = sqlstatement + "addressid=" + patient.getAddressid() + ", ";
+		//sqlstatement = sqlstatement + "addressid=" + patient.getAddressid() + ", ";
 		sqlstatement = sqlstatement + "lastvisit=\'" + date + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + patient.getId();
 		return sqlstatement;	

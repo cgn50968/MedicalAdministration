@@ -1,7 +1,6 @@
 package de.rho.server.patient.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
@@ -21,22 +20,18 @@ public class Patient implements Serializable {
 	private String lastname;
 	private String gender;
 	private String dayofbirth;
-	private int addressid;
 	private String lastvisit;
+	private int addressid; 
+	private String street;
+	private String housenumber;
+	private String postalcode;
+	private String city;
 	
 	//Der Default-Konstruktor
-	
-	public Patient()  {
+		public Patient()  {
 		
 	}
-	
-	
-	//ein zweiter Konstruktor zum Testen der ArrayList
-	//public Patient(int id, String firstname, String lastname, String gender, String dayofbirth, int adressid, String lastvisit)  {
 		
-	//}
-	
-	
 	/**** Getter and Setter ****/
 	
 	public int getId() {
@@ -79,14 +74,6 @@ public class Patient implements Serializable {
 		this.dayofbirth = dayofbirth;
 	}
 	
-	public Integer getAddressid() {
-		return addressid;
-	}
-
-	public void setAddressid(Integer addressid) {
-		this.addressid = addressid;
-	}
-
 	public String getLastvisit() {
 		return lastvisit;
 	}
@@ -95,11 +82,44 @@ public class Patient implements Serializable {
 		this.lastvisit = lastvisit;
 	}
 
+	public int getAddressid() {
+		return addressid;
+	}
 
-	
+	public void setAddressid(int addressid) {
+		this.addressid = addressid;
+	}
 
-	
-	
-	
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHousenumber() {
+		return housenumber;
+	}
+
+	public void setHousenumber(String housenumber) {
+		this.housenumber = housenumber;
+	}
+
+	public String getPostalcode() {
+		return postalcode;
+	}
+
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 }

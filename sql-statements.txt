@@ -1,0 +1,24 @@
+CREATE TABLE patient
+(id INTEGER auto_increment,
+firstname VARCHAR(25) NOT NULL,
+lastname VARCHAR(25) NOT NULL,
+gender CHAR(25) NOT NULL,
+dayofbirth DATE NOT NULL,
+addressid INTEGER NULL,
+lastvisit DATE NOT NULL,
+PRIMARY KEY (id))
+
+INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (1, 'Roger', 'Ordon', 'm', '1970-05-29', 0, '1970-05-29');
+INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (2, 'Martha', 'Palmersheim', 'w', '1924-10-29', 0, '1924-10-29');
+INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES ((SELECT MAX(id)+1 FROM PATIENT), 'Rene', 'Ordon', 'm', '1976-12-29', 0, '1976-12-29')
+
+
+INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (1, 'Roger', 'Ordon', 'm', '1970-05-29', 0, '2014-05-29')
+
+UPDATE patient SET firstname='Barbara', lastname='Stock', gender='m', dayofbirth='1956-11-11', addressid=1, lastvisit='2014-02-21' WHERE id=3;
+
+DROP TABLE PATIENT
+
+SELECT * FROM PATIENT
+
+SELECT MAX(id)+1 AS id FROM PATIENT

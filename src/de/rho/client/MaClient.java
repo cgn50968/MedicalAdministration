@@ -48,32 +48,36 @@ public class MaClient {
 			// ************************			
 			// **** create Patient ****
 			// ************************
-			/*
-			System.out.println("#02 - Create new Patient");
 			
+			System.out.println("#02 - Create new Patient");
+			/*
 				// Patienten Objekt 
-				patient.setId(1);
+				//patient.setId(1);
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
 				patient.setGender("m");
 				patient.setDayofbirth("1920-05-29");
-				patient.setAddressid(0);
+				patient.setStreet("Landstrasse");
+				patient.setHousenumber("2");
+				patient.setPostalcode("50999");
+				patient.setCity("Köln");
 				
 				// Funktionsaufruf: create Patient
 				PatientService.createPatientInDB(patient);
-				patient = null; //reset
+				//patient = null; //reset
+				// 
 			*/
 			
 			// **********************
 			// **** read Patient ****
 			// **********************
-			/*System.out.println("#03 - Get Patient with id=5");
+			System.out.println("#03 - Get Patient with id=1");
 				
-				// **** Funktionsaufruf: Get Patient with id=5 
-				patient = PatientService.readPatientInDB(5);
-				System.out.println(patient.getFirstname() + " " + patient.getLastname());
-				patient = null;
-				*/
+				// **** Funktionsaufruf: Get Patient with id=1 
+				patient = PatientService.readPatientInDB(1);
+				System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
+				
+				
 
 			// ************************
 			// **** update Patient ****

@@ -160,6 +160,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setGender(resultSet.getString("DAYOFBIRTH"));
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setLastvisit(resultSet.getString("LASTVISIT"));
+				patient.setStreet(resultSet.getString("STREET"));
+				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));
+				patient.setPostalcode(resultSet.getString("POSTALCODE"));
+				patient.setCity(resultSet.getString("CITY"));
 			}
 		} 
 		catch (NumberFormatException e) {
@@ -194,6 +198,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** SQL Statement erstellen ****
 		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
 
+		System.out.println(sql_statement);
+		
 		// **** Connection zur H2 Datenbank oeffnen ****  
 		Connection con = null;
 		try {

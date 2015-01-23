@@ -71,11 +71,11 @@ INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Spielstrass
 INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Horst-Schlemmer-Weg', '99', '50667', 'Köln');
 INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('AppDev-Weg', '101', '50667', 'Köln');
 
-INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Bernd', 'Stromberg', 'm', '1960-04-25', '1');
-INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Walter', 'White', 'm', '1955-06-15', '2');
-INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Harald Schmidt', 'White', 'm', '1951-12-01', '3');
-INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Biene', 'Maja', 'w', '1980-12-01', '4');
-INSERT INTO Patient (FirstName, LastName, Gender, LastVisit, AddressID) VALUES ('Berthold', 'Heisterkamp', 'm', '1975-10-30', '5');
+INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (1, 'Bernd', 'Stromberg', 'm', '1960-04-25', '1960-04-25', '1');
+INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (2, 'Walter', 'White', 'm', '1955-06-15', '1955-06-15', '2');
+INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (3, 'Harald Schmidt', 'White', 'm', '1951-12-01', '1951-12-01', '3');
+INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (4, 'Biene', 'Maja', 'w', '1980-12-01', '1980-12-01', '4');
+INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (5, 'Berthold', 'Heisterkamp', 'm', '1975-10-30', '1975-10-30', '5');
 
 INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Stefan', 'Frank', 'm', '1');
 INSERT INTO Physician (FirstName, LastName, Gender, AddressID) VALUES ('Pille', 'McCoy', 'm', '2');
@@ -88,3 +88,5 @@ INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('2', '2', '2015
 INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('3', '3', '2015-01-03', 'C2 Intox');
 INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('4', '4', '2015-01-02', 'Hyperemesis gravidarum');
 INSERT INTO MT (PatientID, PhysicianID, date, Treatment) VALUES ('4', '4', '2015-01-02', 'Diarrhö');
+
+SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p INNER JOIN ADDRESS a ON p.addressid=a.id;
