@@ -123,12 +123,12 @@ public class MaClient {
 						// ******************************************
 						// **** read Patient List from CSV File *****
 						// ******************************************
-						PatientService.readPatientListFromCSV();
+						//PatientService.readPatientListFromCSV();
 						
 						// **********************************
 						// **** write Patient List to DB ****
 						// **********************************
-						//PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
+						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 						
 						
 						

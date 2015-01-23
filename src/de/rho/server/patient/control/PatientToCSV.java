@@ -2,11 +2,7 @@ package de.rho.server.patient.control;
 
 import java.io.*;
 import java.util.ArrayList;
-//import java.util.Scanner;
 import java.util.StringTokenizer;
-
-
-
 
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.patient.entity.Patient;
@@ -14,7 +10,7 @@ import de.rho.server.patient.entity.Patient;
 
 /**
  * @author Heiko
- * @version 1.2
+ * @version 1.4
  * 
  * konkrete Klasse zum Definieren des Dateizugriffs
  * 
@@ -29,7 +25,7 @@ public class PatientToCSV {
 	
 	public ArrayList<Patient> readPatientListFromCSV() {
 		
-		System.out.println("reading from CSV...");
+		System.out.println("PatientToCSV.readPatientListFromCSV");	//debug
 		
 		FileReader myFile = null;
         BufferedReader buff = null;
@@ -41,7 +37,9 @@ public class PatientToCSV {
             String line;
             try {
 				while ((line = buff.readLine()) != null) {
-				    System.out.println(line); 								// debug
+				    
+					System.out.println(line); 								// debug-Ausgabe
+				    
 				    Patient patient = new Patient();
 				    StringTokenizer st = new StringTokenizer(line, ";");
 				    
@@ -80,11 +78,10 @@ public class PatientToCSV {
             e.printStackTrace();
         }
         
-        System.out.println("#####TOLL:");		//debug
-        System.out.println(patientList);		//debug
+        System.out.println(patientList.toString());								//debug
+        System.out.println("####Ende: PatientToCSV.readPatientListFromCSV");	//debug
         
         return patientList;
-        
         
 	}
 
@@ -118,7 +115,7 @@ public class PatientToCSV {
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getLastvisit().trim().length() == 0? "" : patient.getLastvisit());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(patient.getAddressid() <=0 ? "" : patient.getAddressid());	 //Hier müssten wir Sicherstellen, dass die PatientenID nicht 0 ist.
+                oneLine.append(patient.getAddressid() <=0 ? "" : patient.getAddressid());	 //Hier muessten wir Sicherstellen, dass die PatientenID nicht 0 ist.
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getStreet().trim().length() == 0? "" : patient.getStreet());
                 oneLine.append(CSV_SEPARATOR);
