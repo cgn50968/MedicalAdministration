@@ -58,9 +58,18 @@ public class PatientToCSV {
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getDayofbirth().trim().length() == 0? "" : patient.getDayofbirth());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(patient.getAddressid()); //<= ? : patient.getAddressid());						Hier müssten wir Sicherstellen, dass die PatientenID nicht 0 ist.
-                oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getLastvisit().trim().length() == 0? "" : patient.getLastvisit());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getAddressid() <=0 ? "" : patient.getAddressid());	 //Hier müssten wir Sicherstellen, dass die PatientenID nicht 0 ist.
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getStreet().trim().length() == 0? "" : patient.getStreet());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getHousenumber().trim().length() == 0? "" : patient.getHousenumber());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getPostalcode().trim().length() == 0? "" : patient.getPostalcode());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(patient.getCity().trim().length() == 0? "" : patient.getCity());
+                
                 
                 bw.write(oneLine.toString());	// **** Schreiben der Zeile
                 bw.newLine();					// **** Neue Zeile

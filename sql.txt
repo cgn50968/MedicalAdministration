@@ -65,11 +65,11 @@ REFERENCES Patient(ID);
 
 
 
-INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Heisenbergstrasse', '5', '50170', 'Kerpen');
-INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Strombergallee', '44', '50129', 'Bergheim');
-INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Spielstrasse', '12', '50129', 'Bergheim');
-INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('Horst-Schlemmer-Weg', '99', '50667', 'Köln');
-INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES ('AppDev-Weg', '101', '50667', 'Köln');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES (1, 'Heisenbergstrasse', '5', '50170', 'Kerpen');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES (2, 'Strombergallee', '44', '50129', 'Bergheim');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES (3, 'Spielstrasse', '12', '50129', 'Bergheim');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES (4, 'Horst-Schlemmer-Weg', '99', '50667', 'Köln');
+INSERT INTO Address (Street, HouseNumber, Postalcode, City) VALUES (5, 'AppDev-Weg', '101', '50667', 'Köln');
 
 INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (1, 'Bernd', 'Stromberg', 'm', '1960-04-25', '1960-04-25', '1');
 INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (2, 'Walter', 'White', 'm', '1955-06-15', '1955-06-15', '2');

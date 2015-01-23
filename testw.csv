@@ -1,5 +1,4 @@
-1;Maria;Schmitz;w;1967-10-03;1;2015-01-23
-2;Walter;White;m;1955-06-15;2;1955-06-15
-3;Harald Schmidt;White;m;1951-12-01;3;1951-12-01
-4;Biene;Maja;w;1980-12-01;4;1980-12-01
-5;Berthold;Heisterkamp;m;1975-10-30;5;1975-10-30
+2;Walter;White;m;1955-06-15;1955-06-15;2;Strombergallee;44;50129;Bergheim
+3;Harald Schmidt;White;m;1951-12-01;1951-12-01;3;Spielstrasse;12;50129;Bergheim
+4;Biene;Maja;w;1980-12-01;1980-12-01;4;Horst-Schlemmer-Weg;99;50667;Köln
+5;Berthold;Heisterkamp;m;1975-10-30;1975-10-30;5;AppDev-Weg;101;50667;Köln

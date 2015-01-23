@@ -309,9 +309,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setLastname(resultSet.getString("LASTNAME"));	
 				patient.setGender(resultSet.getString("GENDER"));
 				patient.setDayofbirth(resultSet.getString("DAYOFBIRTH"));
-				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setLastvisit(resultSet.getString("LASTVISIT"));	
-
+				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
+				patient.setStreet(resultSet.getString("STREET"));	
+				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));	
+				patient.setPostalcode(resultSet.getString("POSTALCODE"));	
+				patient.setCity(resultSet.getString("CITY"));	
+				
 				// **** Uebergabe des Patienten Objekts an die PatientenListe
 				patientList.add(patient);
 			}

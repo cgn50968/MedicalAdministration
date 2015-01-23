@@ -98,7 +98,9 @@ public class PatientToDB {
 		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
 		
 		// **** create *Get Patient List* sql statement ****
-		String sqlstatement = "SELECT * FROM PATIENT";
+		//String sqlstatement = "SELECT * FROM PATIENT";
+		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
+		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
 		return sqlstatement;
 	}
 	
