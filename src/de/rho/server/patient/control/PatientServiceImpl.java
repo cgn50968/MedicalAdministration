@@ -60,7 +60,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	private InDaoToFile file_service = FaDaoService.getDaoToFileService(); //to do: benutze file_service-connection
 	private ResultSet resultSet;
 	private String sql_statement;
-	private Integer max_id;
+	private int max_id;
 	
 	protected PatientServiceImpl() throws RemoteException {
 		super();
@@ -180,10 +180,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		Patient patient = new Patient();
 		
-		// **** SQL Statement erstellen ****
+		// *********************************************
+		// **** create SQL Statement - READ PATIENT ****
+		// *********************************************
 		sql_statement = this.patient2db.readPatientSqlStatement(id);
-				
-		// **** Connection zur Datenbank oeffnen ****  
+
+		
+		// ****************************************
+		// **** open Connection to H2 Database ****  
+		// ****************************************
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -196,11 +201,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** SQL Query ausfuehren, ResultSet erwartet ****
+		// **************************************************
+		// **** execute SQL Query - MAX(id) FROM ADDRESS ****
+		// **************************************************
 		resultSet = db_service.executeQuery(con, sql_statement, true);
 		
 		
-		//**** ResultSet in Patient Objekt speichern ****
+		// *******************************************
+		// **** write ResultSet to Patient object ****
+		// *******************************************
 		try {
 			while(resultSet.next()) {
 				patient.setId(Integer.parseInt(resultSet.getString("ID")));
@@ -224,7 +233,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** Connection zur H2 Datenbank schliessen ****
+		// ***************************************
+		// **** close DB Connection/ResultSet ****
+		// ***************************************
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schließen
 		}
@@ -233,7 +244,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** Rückgabe des Patientenobjekts **** 
+		// *******************************
+		// **** return Patient object ****
+		// *******************************
 		return patient;
 	}
 

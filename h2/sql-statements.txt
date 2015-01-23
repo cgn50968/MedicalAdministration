@@ -12,13 +12,15 @@ INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALU
 INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES ((SELECT MAX(id)+1 FROM PATIENT), 'Rene', 'Ordon', 'm', '1976-12-29', 0, '1976-12-29');
 
 
-DROP TABLE PATIENT;
+
 
 SELECT * FROM PATIENT;
 
 SELECT MAX(id)+1 AS id FROM PATIENT;
 
 
+DROP TABLE PATIENT;
+DROP TABLE ADDRESS;
 
 
 CREATE TABLE Patient

@@ -30,28 +30,32 @@ public class MaClient {
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
 			//InPhysicianService PhysicianService = (InPhysicianService) Naming.lookup("rmi://localhost:1099/PhysicianService");
 			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
-			System.out.println("#01 - Start MaClient");
-			System.out.println("MaClient up and running\n");
+
+			System.out.println("#01 - Start MaClient\n");
+            
+			System.out.println("-----------------------");
+			System.out.println("MaClient up and running");
+            System.out.println("-----------------------");			
 			
-			// **** Variablen und Objekte ****
+			// *******************************
+			// **** Variables und Objects ****
+			// *******************************
 			Patient patient = new Patient();
 			
 			
-			//------------------------------------------------------
-			//Testaufruf einer Methode eines Services auf dem Server
-			//------------------------------------------------------
+/**********************************/
+/**** TEST CALLS ON RMI SERVER ****/
+/**********************************/
 			
-		
-			//Patient patient = new Patient(1234567);
-			//System.out.println(PatientService.createPatient("TEST Patient"));
 			
-			// ************************			
-			// **** create Patient ****
-			// ************************
+	// ************************			
+	// **** create Patient ****
+	// ************************
+			System.out.println("#02 - create new Patient");
 			
-			System.out.println("#02 - Create new Patient");
-			
-				// Patienten Objekt 
+				// ****************************
+				// **** set Patient object ****
+				// **************************** 
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
 				patient.setGender("m");
@@ -61,29 +65,32 @@ public class MaClient {
 				patient.setPostalcode("50999");
 				patient.setCity("Köln");
 				
-				// Funktionsaufruf: create Patient
+				// ******************************
+				// **** call: create Patient ****
+				// ******************************
 				PatientService.createPatientInDB(patient);
-				//patient = null; //reset
-				
 			
 			
-			// **********************
-			// **** read Patient ****
-			// **********************
-			System.out.println("#03 - Get Patient with id=1");
+	// **********************
+	// **** read Patient ****
+	// **********************
+			System.out.println("#03 - get Patient with id=1");
 				
-				// **** Funktionsaufruf: Get Patient with id=1 
+				// *************************************
+				// **** call: get Patient with id=1 ****
+				// *************************************
 				patient = PatientService.readPatientInDB(1);
 				System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
 				
-				
 
-			// ************************
-			// **** update Patient ****
-			// ************************		
-			System.out.println("#04 - Update Patient with id=1");
+	// ************************
+	// **** update Patient ****
+	// ************************		
+			System.out.println("#04 - update Patient with id=1");
 			
-				//Patienten Objekt
+				// ****************************
+				// **** set Patient object ****
+				// ****************************
 				patient.setId(1);
 				patient.setFirstname("Maria");
 				patient.setLastname("Schmitz");
@@ -91,41 +98,47 @@ public class MaClient {
 				patient.setDayofbirth("1967-10-03");
 				patient.setAddressid(1);
 				
-				// **** Funktionsaufruf: update Patient ****
+				// ******************************
+				// **** call: update Patient ****
+				// ******************************
 				PatientService.updatePatientInDB(patient);
 								
 			
-			// ************************
-			// **** delete Patient ****
-			// ************************				
+	// ************************
+	// **** delete Patient ****
+	// ************************				
 			/*System.out.println("#05 - Delete Patient with id=24");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 			
-				// **** Funktionsaufruf: delete Patient ****
+				// ******************************
+				// **** call: delete Patient ****
+				// ******************************
 				PatientService.deletePatientInDB(24);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 				*/
 				
-			// ******************************
-			// **** write Patient to CSV ****
-			// ******************************				
-			System.out.println("#0x - Write CSV with sample data");		
+	// ******************************
+	// **** write Patient to CSV ****
+	// ******************************				
+			System.out.println("#0x - write CSV with sample data");		
 				
-			
-			// **** Patientenliste aus DB auslesen ****
+			// **********************************			
+			// **** get Patient List from DB ****
+			// **********************************
 			ArrayList<Patient> patientList = PatientService.getPatientListFromDB();
 			
-			
-			// **** Patientenliste in CSV Datei schreiben ****
+			// ******************************************
+			// **** write Patient List into CSV File ****
+			// ******************************************
 			PatientService.writePatientListToCSV(patientList);
 			
-			
-			// **** Reset patientList ****
+			// ***************************
+			// **** reset patientList ****
+			// ***************************
 			patientList = null;
 	
 
-			
-/*****************************/
-/**** ENDE des TRY Blocks ****/
-/*****************************/
+/**************************/
+/**** END OF TRY BLOCK ****/
+/**************************/
 		}
 					
 		catch (MalformedURLException e) {
