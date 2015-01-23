@@ -20,12 +20,12 @@ import de.rho.server.patient.entity.Patient;
  * 
  *
  */
-
+ 
 public class PatientToCSV {
 
 	
-	public ArrayList<Patient> readPatientFromCSV(String list) {
-		System.out.println("reading from CSV..."); //CSV als Dateiformat angedacht
+	public ArrayList<Patient> readPatientFromCSV() {
+		System.out.println("reading from CSV..."); // TODO
 		return null;
 	}
 
@@ -91,59 +91,7 @@ public class PatientToCSV {
 		
 		
 		
-		/*    private static void writeToCSV(ArrayList<Product> productList)
-	    {
-	        try
-	        {
-	            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("products.csv"), "UTF-8"));
-	            for (Product product : productList)
-	            {
-	                StringBuffer oneLine = new StringBuffer();
-	                oneLine.append(product.getId() <=0 ? "" : product.getId());
-	                oneLine.append(CSV_SEPARATOR);
-	                oneLine.append(product.getName().trim().length() == 0? "" : product.getName());
-	                oneLine.append(CSV_SEPARATOR);
-	                oneLine.append(product.getCostPrice() < 0 ? "" : product.getCostPrice());
-	                oneLine.append(CSV_SEPARATOR);
-	                oneLine.append(product.isVatApplicable() ? "Yes" : "No");
-	                bw.write(oneLine.toString());
-	                bw.newLine();
-	            }
-	            bw.flush();
-	            bw.close();
-	        }
 		
-		*/
-		
-			
-		//eine Moeglichkeit:
-		/*
-		try	{
-		    FileWriter writer = new FileWriter("c:/Users/heiko/Documents/GitHub/MedicalAdministration/testw.csv");
-	 
-		    String strid = Integer.toString(patient.getId());
-		    String straddrid = Integer.toString(patient.getAddressid());
-		    
-		    
-		    
-		    writer.append(strid);
-		    writer.append(';');
-		    writer.append(patient.getFirstname());
-		    writer.append(';');
-		    writer.append(patient.getLastname());
-		    writer.append(';');
-		    writer.append(patient.getGender());
-		    writer.append(';');
-		    writer.append(straddrid);
-		    		    
-		    writer.flush();
-		    writer.close();
-		}
-		
-		catch(IOException e) {
-		     e.printStackTrace();
-		} 
-		 */
 		
 	}
 

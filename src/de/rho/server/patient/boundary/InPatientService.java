@@ -44,7 +44,7 @@ public interface InPatientService extends Remote {
 	
 	// For PatientServiceImpl.getPatientListFromDB
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException;
-	
+	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException;
 		
 	/**** Search ****/
 	
@@ -57,8 +57,8 @@ public interface InPatientService extends Remote {
 	
 	/**** File ****/
 
-	//For PatientServiceImpl.searchPatientListFromCSV
-	public ArrayList<Patient> readPatientListFromCSV(String list) throws RemoteException;
+	//For PatientServiceImpl.readPatientListFromCSV
+	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException;
 
 	//For PatientServiceImpl.writePatientListToCSV
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException;

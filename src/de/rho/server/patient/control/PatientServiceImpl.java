@@ -332,9 +332,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /**** List ****/
 /**************/
 	
-// **************************
-// **** Get Patient List ****
-// **************************
+// *****************************
+// **** Get Patient List DB ****
+// *****************************
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException {
 		System.out.println("PatientServiceImpl.getPatientListFromDB()");
 	
@@ -403,7 +403,18 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** Rückgabe der ArrayList (Patientenliste) 
 		return patientList;
 	}
-		
+
+// *******************************
+// **** Write Patient List DB ****
+// *******************************
+	
+	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
+		System.out.println("PatientServiceImpl.writePatientToDB()");
+			
+				//TODO
+		}
+	
+	
 /****************/		
 /**** Search ****/
 /****************/
@@ -425,11 +436,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /**** File ****/
 /**************/
 	
+// ***********************************
+// **** Read Patient List from CSV ***
+// ***********************************	
 	@Override
-	public ArrayList<Patient> readPatientListFromCSV(String list) throws RemoteException {
-		System.out.println("Impl: leite 'readList' an 2CSV weiter");
-		//return this.patient2csv.readPatientListFromCSV(ArrayList(list));
-		return this.patient2csv.readPatientFromCSV(list);
+	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException {
+		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
+		return this.patient2csv.readPatientFromCSV();
 	}
 
 // ***********************************
