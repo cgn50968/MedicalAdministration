@@ -135,8 +135,25 @@ public class PatientToDB {
 		//String sqlstatement = "SELECT * FROM PATIENT";
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
+	
+		System.out.println(sqlstatement); //debug		
 		return sqlstatement;
 	}
+	
+	
+	// ********************************	
+	// **** search Patient by Name ****
+	// ********************************
+	public String searchPatientByNameSqlStatement(String lastname) {
+		System.out.println("PatientToDB.searchPatientByNameSqlStatement"); //debug
+		
+		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
+		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id WHERE p.lastname LIKE \'%" + lastname + "%\'";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;
+	}
+	
 	
 	
 /* - Auskommentiert - Roger - 20.01.2015

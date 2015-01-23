@@ -359,8 +359,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// **** SQL Query ausfuehren, ResultSet erwartet ****
 		resultSet = db_service.executeQuery(con, sql_statement, true);
 		
-				
-		// **** Patient List erstellen ****
+		// *****************************
+		// **** create Patient List ****
+		// *****************************
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 		
 		try {
@@ -391,9 +392,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** Connection zur Datenbank schliessen ****
+		// ***************************************
+		// **** close DB Connection/ResultSet ****
+		// ***************************************
 		try {
-			db_service.disconnect(con, resultSet);		
+			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -426,12 +429,94 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		return this.searchPatientByIdInDB(id);
 	}
 	
+	
+// *******************************
+// **** Search Patient by Name ***
+// *******************************	
 	@Override
-	public ArrayList<Patient> searchPatientByNameInDB(String searchString) throws RemoteException {
-		System.out.println("Impl: leite 'searchByNameInDB' an 2DB weiter");
-		return this.searchPatientByNameInDB(searchString);
+	public ArrayList<Patient> searchPatientByNameInDB(String lastname) throws RemoteException {
+		System.out.println("PatientServiceImpl.searchPatientByNameInDB()");
+		
+		
+		// ***********************************************
+		// **** create SQL Statement - Search Patient ****
+		// ***********************************************
+		sql_statement = this.patient2db.searchPatientByNameSqlStatement(lastname);
+		
+		
+		// ****************************************
+		// **** open Connection to H2 Database ****  
+		// ****************************************
+		Connection con = null;					
+		try {
+			con = db_service.connect();
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// ***************************
+		// **** execute SQL Query ****
+		// ***************************
+		resultSet = db_service.executeQuery(con, sql_statement, true);
+		
+				
+		// *****************************
+		// **** create Patient List ****
+		// *****************************
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		
+		try {
+			while(resultSet.next()) {				// Pro Datensatz
+				
+				Patient patient = new Patient();
+				patient.setId(Integer.parseInt(resultSet.getString("ID")));
+				patient.setFirstname(resultSet.getString("FIRSTNAME"));
+				patient.setLastname(resultSet.getString("LASTNAME"));	
+				patient.setGender(resultSet.getString("GENDER"));
+				patient.setDayofbirth(resultSet.getString("DAYOFBIRTH"));
+				patient.setLastvisit(resultSet.getString("LASTVISIT"));	
+				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
+				patient.setStreet(resultSet.getString("STREET"));	
+				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));	
+				patient.setPostalcode(resultSet.getString("POSTALCODE"));	
+				patient.setCity(resultSet.getString("CITY"));	
+				
+				// *********************************************
+				// **** Save Patient object in PatientListe ****
+				// *********************************************
+				patientList.add(patient);
+			}
+		}
+		catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		
+		// ***************************************
+		// **** close DB Connection/ResultSet ****
+		// ***************************************
+		try {
+			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		// ****************************
+		// **** return PatientList ****
+		// ****************************	
+		return patientList;
 	}
 
+	
 /**************/	
 /**** File ****/
 /**************/
