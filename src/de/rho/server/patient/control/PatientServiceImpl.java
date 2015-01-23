@@ -528,7 +528,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
-		return this.patient2csv.readPatientListFromCSV();
+		return patient2csv.readPatientListFromCSV();
 	}
 
 // ***********************************

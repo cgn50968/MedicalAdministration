@@ -2,7 +2,11 @@ package de.rho.server.patient.control;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.Scanner;
+import java.util.StringTokenizer;
+
+
+
 
 import de.rho.server.dao.persistence.DaoToFile;
 import de.rho.server.patient.entity.Patient;
@@ -20,53 +24,71 @@ import de.rho.server.patient.entity.Patient;
 public class PatientToCSV {
 
 	
+	private static final String CSV_SEPARATOR = ";"; //Konstante
+	
+	
 	public ArrayList<Patient> readPatientListFromCSV() {
 		
 		System.out.println("reading from CSV...");
 		
-		String fileName = "testw.csv";		 		 // Deklaration Name und ggf. Pfad
-        File file = new File(fileName);				 // Uebergabe der Deklaration an File-Objekt
+		FileReader myFile = null;
+        BufferedReader buff = null;
         ArrayList<Patient> patientList = new ArrayList<Patient>();
-        
-        try{
-            Scanner inputStream = new Scanner(file); // File-Objekt mit Scanner-Klasse lesen
-            
-            while(inputStream.hasNext()){			 // Bedingung: hasNext()-Methode durchlauft die Schleife line-by-line
-                //String data = inputStream.next();	 // jede einzelne Zeile der Datei in einen String packen
-            	Patient patient = new Patient();
-				patient.setId(Integer.parseInt(inputStream.next()));
-				patient.setFirstname(inputStream.next());
-				patient.setLastname(inputStream.next());	
-				patient.setGender(inputStream.next());
-				patient.setDayofbirth(inputStream.next());
-				patient.setLastvisit(inputStream.next());	
-				patient.setAddressid(Integer.parseInt(inputStream.next()));
-				patient.setStreet(inputStream.next());	
-				patient.setHousenumber(inputStream.next());	
-				patient.setPostalcode(inputStream.next());	
-				patient.setCity(inputStream.next());	
+ 
+        try {
+            myFile = new FileReader("testw.csv");
+            buff = new BufferedReader(myFile);
+            String line;
+            try {
+				while ((line = buff.readLine()) != null) {
+				    System.out.println(line); 								// debug
+				    Patient patient = new Patient();
+				    StringTokenizer st = new StringTokenizer(line, ";");
+				    
+				    patient.setId(Integer.parseInt(st.nextToken()));
+					patient.setFirstname(st.nextToken());
+					patient.setLastname(st.nextToken());	
+					patient.setGender(st.nextToken());
+					patient.setDayofbirth(st.nextToken());
+					patient.setLastvisit(st.nextToken());
+					patient.setAddressid(Integer.parseInt(st.nextToken()));
+					patient.setStreet(st.nextToken());
+					patient.setHousenumber(st.nextToken());
+					patient.setPostalcode(st.nextToken());
+					patient.setCity(st.nextToken());
+				           
+				    patientList.add(patient);
+				}
 				
-				// **** Uebergabe des Patienten Objekts an die PatientenListe
-				patientList.add(patient);
-                
-                
-                //System.out.println(data);	//TODO: Problem: den Inhalt von data in eine ArrayList
-               
-                
-                      
-            }
-            inputStream.close();					// nach der Schleife: Scanner schliessen 
+				buff.close();
+		        myFile.close();
+				
+				
+			}
+            
+            catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+            
+            catch (IOException e) {
+				e.printStackTrace();
+			}
+            
         }
 
         catch (FileNotFoundException e){
             e.printStackTrace();
         }
-			
-        return patientList;		//TODO: ArrayList zurueckgeben
+        
+        System.out.println("#####TOLL:");		//debug
+        System.out.println(patientList);		//debug
+        
+        return patientList;
+        
+        
 	}
 
 	
-	private static final String CSV_SEPARATOR = ";"; //Konstante
 	
 	public void generateCsvFile(ArrayList<Patient> patientList){
 		
