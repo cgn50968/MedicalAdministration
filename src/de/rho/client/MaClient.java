@@ -50,9 +50,8 @@ public class MaClient {
 			// ************************
 			
 			System.out.println("#02 - Create new Patient");
-			/*
+			
 				// Patienten Objekt 
-				//patient.setId(1);
 				patient.setFirstname("Theo");
 				patient.setLastname("Lingen");
 				patient.setGender("m");
@@ -65,8 +64,8 @@ public class MaClient {
 				// Funktionsaufruf: create Patient
 				PatientService.createPatientInDB(patient);
 				//patient = null; //reset
-				// 
-			*/
+				
+			
 			
 			// **********************
 			// **** read Patient ****

@@ -20,11 +20,40 @@ import de.rho.server.patient.entity.Patient;
 
 public class PatientToDB {
 
+	
+	// ******************************
+	// **** MAX(id) from Patient ****
+	// ******************************
+	public String selectMaxIdFromAddressSqlStatement() {
+		System.out.println("PatientToDB.selectMaxIdFromAddressSqlStatement()"); //debug
+		String sqlstatement = "SELECT MAX(id)+1 AS id FROM ADDRESS;";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;
+	}
+	
+	// ************************
+	// **** create Address ****
+	// ************************
+	public String createAddressSqlStatement(Patient patient, int id) {
+		System.out.println("PatientToDB.createAddressSqlStatement()"); //debug
+		String sqlstatement = "INSERT INTO ADDRESS (id, street, housenumber, postalcode, city) VALUES (";
+		sqlstatement = sqlstatement + id + ", \'";
+		sqlstatement = sqlstatement + patient.getStreet() + "\', \'";
+		sqlstatement = sqlstatement + patient.getHousenumber() + "\', \'";
+		sqlstatement = sqlstatement + patient.getPostalcode() + "\', \'";
+		sqlstatement = sqlstatement + patient.getCity() + "\');";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;
+	}
+	
+	
 	// ************************
 	// **** create Patient ****
 	// ************************
-	public String createPatientSqlStatement(Patient patient) {
-		System.out.println("PatientToDB.createPatientSqlStatement"); //debug
+	public String createPatientSqlStatement(Patient patient, int id) {
+		System.out.println("PatientToDB.createPatientSqlStatement()"); //debug
 		
 		// **** create Date ****
 		Date today = new Date();
@@ -32,14 +61,15 @@ public class PatientToDB {
 		String date = DATE_FORMAT.format(today);
 		
 		// **** create *Create Patient* sql statement ****
-		String sqlstatement = "INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (";
-		sqlstatement = sqlstatement + "(SELECT MAX(id)+1 FROM PATIENT), \'"; 
+		String sqlstatement = "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, addressid, lastvisit) VALUES (\'";
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', \'";
 		sqlstatement = sqlstatement + patient.getDayofbirth() + "\', ";
-		sqlstatement = sqlstatement + patient.getAddressid() + ", \'";
-		sqlstatement = sqlstatement + date + "\')";		
+		sqlstatement = sqlstatement + id + ", \'";
+		sqlstatement = sqlstatement + date + "\');";	
+		
+		System.out.println(sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -51,8 +81,8 @@ public class PatientToDB {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 		
 		// **** create *Read Patient* sql statement ****
-		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
-		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id WHERE p.id=" + id;
+		String sqlstatement = "SELECT p.*, a.street, a.housenumber, a.postalcode, a.city FROM patient AS p ";
+		sqlstatement = sqlstatement + "INNER JOIN address AS a ON p.addressid=a.id WHERE p.id=" + id + ";";
 		return sqlstatement;
 	}
 	
