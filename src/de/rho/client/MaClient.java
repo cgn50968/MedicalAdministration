@@ -26,13 +26,13 @@ public class MaClient {
 	public static void main(String[] args) {
 		
 		try {
+
+			System.out.println("#01 - Start MaClient\n");
 			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
 			//InPhysicianService PhysicianService = (InPhysicianService) Naming.lookup("rmi://localhost:1099/PhysicianService");
 			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
-
-			System.out.println("#01 - Start MaClient\n");
-            
+           
 			System.out.println("-----------------------");
 			System.out.println("MaClient up and running");
             System.out.println("-----------------------");			
@@ -51,11 +51,14 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-				/*		System.out.println("#02 - create new Patient");
+						System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
 							// **************************** 
+						
+							/**** Statt Bildschirmeingabe ****/
+						
 							patient.setFirstname("Theo");
 							patient.setLastname("Lingen");
 							patient.setGender("m");
@@ -70,7 +73,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-				*/		
+						
 				// **********************
 				// **** read Patient ****
 				// **********************

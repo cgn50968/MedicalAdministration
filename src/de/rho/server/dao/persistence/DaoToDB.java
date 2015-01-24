@@ -57,7 +57,7 @@ public class DaoToDB implements InDaoToDB {
 		
 
 	/**** execute SQL Query ****/
-	public ResultSet executeQuery(Connection con, String sql, Boolean ret) {
+	public ResultSet executeQuery(Connection con, String sql_statement, Boolean returnResultSet) {
 		System.out.println("DaoToDB.executeQuery"); //debug
 			
 		/** reset **/
@@ -65,13 +65,26 @@ public class DaoToDB implements InDaoToDB {
 		preStat = null;
 		
 		try {
-			preStat = con.prepareStatement(sql);
-			if (ret == false) {
+			
+			// *********************************************
+			// **** Connection to DB with SQL-Statement ****
+			// *********************************************
+			preStat = con.prepareStatement(sql_statement);
+			
+			// ******************************
+			// ***** return NO ResultSet ****
+			// ******************************
+			if (returnResultSet == false) {
 				preStat.execute();
 			}
-			else if (ret == true) {
+			
+			// **************************
+			// **** return ResultSet ****
+			// **************************
+			else if (returnResultSet == true) {
 				resultSet = preStat.executeQuery();
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

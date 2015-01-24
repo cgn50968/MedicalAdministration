@@ -58,9 +58,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	/** Connection-Services **/
 	private InDaoToDB db_service = FaDaoService.getDaoToDBService();
 	private InDaoToFile file_service = FaDaoService.getDaoToFileService(); //to do: benutze file_service-connection
+	
+	
+	// ***************************
+	// **** declare Variables ****
+	// ***************************	
 	private ResultSet resultSet;
 	private String sql_statement;
 	private int max_id;
+	
 	
 	protected PatientServiceImpl() throws RemoteException {
 		super();
@@ -88,9 +94,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void createPatientInDB(Patient patient) throws RemoteException {
 		System.out.println("PatientServiceImpl.createPatientInDB()");
 
-		// ************************
-		// **** reset variable ****
-		// ************************
+		// ***************************************
+		// **** reset variable for Address ID ****
+		// ***************************************
 		max_id = 0;
 		
 		// *****************************************************
@@ -98,6 +104,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// *****************************************************
 		sql_statement = this.patient2db.selectMaxIdFromAddressSqlStatement();
 		
+		/***************************************************************************************/
+		/**** Wenn MAX(id) = Null dann muss der erste Wert 1 sein (1. Datensatz in Address) ****/
+		/***************************************************************************************/
 		
 		// ****************************************
 		// **** open Connection to H2 Database ****  

@@ -48,7 +48,6 @@ public class PatientToDB {
 		return sqlstatement;
 	}
 	
-	
 	// ************************
 	// **** create Patient ****
 	// ************************
@@ -65,9 +64,10 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', \'";
-		sqlstatement = sqlstatement + patient.getDayofbirth() + "\', ";
-		sqlstatement = sqlstatement + id + ", \'";
-		sqlstatement = sqlstatement + date + "\');";	
+		sqlstatement = sqlstatement + patient.getDayofbirth() + "\', \'";
+		sqlstatement = sqlstatement + date + "\', ";
+		sqlstatement = sqlstatement + id + "); ";
+	
 		
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;
