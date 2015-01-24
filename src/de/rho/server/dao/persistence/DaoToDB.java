@@ -17,7 +17,7 @@ public class DaoToDB implements InDaoToDB {
 			
 	/**
 	 * @author Heiko, Roger
-	 * @version 1.21
+	 * @version 1.4
 	 * @return java.sql.Connection
 	 *   
 	 */
@@ -79,6 +79,31 @@ public class DaoToDB implements InDaoToDB {
 		return resultSet;
 	}
 
+	
+	/**** execute anything ****/
+    public ResultSet execute(Connection con, String sql, Boolean ret) {
+    	System.out.println("DaoToDB.execute.anything"); //debug
+		
+		/** reset **/
+		resultSet = null;
+		preStat = null;
+		
+		try {
+			preStat = con.prepareStatement(sql);
+			if (ret == false) {
+				preStat.execute();
+			}
+			else if (ret == true) {
+				resultSet = preStat.executeQuery();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return resultSet;
+    }
+	
+	
 	
 	/**** close Connection ****/
 	public void disconnect(Connection con, ResultSet res) throws SQLException {

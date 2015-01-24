@@ -23,6 +23,9 @@ public interface InDaoToDB {
 	/**** execute SQL Query ****/
     public ResultSet executeQuery(Connection con, String sql, Boolean ret);
     
+    /**** execute anything ****/
+    public ResultSet execute(Connection con, String sql, Boolean ret);
+    
     /**** close Connection ****/
     public void disconnect(Connection con, ResultSet res) throws SQLException;
     

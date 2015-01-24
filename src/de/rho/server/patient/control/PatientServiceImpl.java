@@ -436,19 +436,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
-		db_service.executeQuery(con, sql_statement, true);
+		db_service.execute(con, sql_statement, false);
 		
 		//TODO
-		
-		
-		
+				
 		System.out.println("Ende: PatientServiceImpl.writePatientListToDB()");
-		
-		
-		
-		
-		
-		}
+				
+	}
 	
 	
 /****************/		

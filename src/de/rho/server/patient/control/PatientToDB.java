@@ -147,14 +147,16 @@ public class PatientToDB {
 	public String writePatientListSqlStatement(ArrayList<Patient> patientList) {
 		System.out.println("PatientToDB.wirtePatientListSqlStatement"); //debug
 		
-		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p INNER JOIN ADDRESS a ON p.addressid=a.id;";
+		//String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p INNER JOIN ADDRESS a ON p.addressid=a.id;";
 		
+		String sqlstatement = "";
 		ArrayList<Patient> toDBlist = patientList;
-				
+		
 		for(Patient patient : toDBlist){					
 		
-			sqlstatement = sqlstatement + "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, lastvisit, addressid)";
+			sqlstatement = sqlstatement + "INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, lastvisit, addressid)";
 			sqlstatement = sqlstatement + "VALUES (\'";
+			sqlstatement = sqlstatement + patient.getId() + "\', \'";
 			sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 			sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 			sqlstatement = sqlstatement + patient.getGender() + "\', \'";
@@ -164,17 +166,21 @@ public class PatientToDB {
 			sqlstatement = sqlstatement + ");";
 		}
 		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-2);
-						
+		
+		/*
 		for(Patient patient : toDBlist){					
 			
-			sqlstatement = sqlstatement + "INSERT INTO ADDRESS (street, housenumber, postalcode, city)";
+			sqlstatement = sqlstatement + "INSERT INTO ADDRESS (id, street, housenumber, postalcode, city)";
 			sqlstatement = sqlstatement + "VALUES (\'";
+			sqlstatement = sqlstatement + patient.getAddressid() + "\', \'";
 			sqlstatement = sqlstatement + patient.getStreet() + "\', \'";
 			sqlstatement = sqlstatement + patient.getHousenumber() + "\', \'";
 			sqlstatement = sqlstatement + patient.getPostalcode() + "\', \'";
 			sqlstatement = sqlstatement + patient.getCity() + "\'";
 			sqlstatement = sqlstatement + ");";
 		}
+		*/
+		
 		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-3);
 				
 		System.out.println(sqlstatement); //debug
