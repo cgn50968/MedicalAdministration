@@ -147,14 +147,28 @@ public class PatientToDB {
 	public String writePatientListSqlStatement(ArrayList<Patient> patientList) {
 		System.out.println("PatientToDB.wirtePatientListSqlStatement"); //debug
 		
-		//String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p INNER JOIN ADDRESS a ON p.addressid=a.id;";
+		System.out.println("Achtung: Tabellen werden ueberschrieben!");
+		System.out.println("----------------------------------------\n");
+		System.out.println("Fortfahren? - Eingabe:j/n");
+		
+		ArrayList<Patient> toDBlist = patientList;
+		
+		
+		//TODO: select für vorherigen check, ob tabelle vorhanden
 		
 		String sqlstatement = "";
-		ArrayList<Patient> toDBlist = patientList;
+		sqlstatement = sqlstatement + "DROP TABLE PATIENT;";
+		sqlstatement = sqlstatement + "DROP TABLE ADDRESS;";
+				
+		sqlstatement = sqlstatement + "CREATE TABLE Patient (ID int auto_increment, FirstName varchar(20), LastName varchar(20), Gender char, DayOfBirth varchar(10), LastVisit varchar(10), AddressID int,	PRIMARY KEY (ID));";		
+		sqlstatement = sqlstatement + "CREATE TABLE Address (ID int not null, Street varchar(20), HouseNumber varchar(20), PostalCode varchar(5), City varchar(20), PRIMARY KEY (ID));";
+		sqlstatement = sqlstatement + "ALTER TABLE Patient ADD FOREIGN KEY (AddressID) REFERENCES Address(ID);";
+		
+		sqlstatement = sqlstatement + "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT AS p INNER JOIN ADDRESS AS a ON p.addressid=a.id;";
 		
 		for(Patient patient : toDBlist){					
 		
-			sqlstatement = sqlstatement + "INSERT INTO PATIENT (id, firstname, lastname, gender, dayofbirth, lastvisit, addressid)";
+			sqlstatement = sqlstatement + "INSERT INTO PATIENT (p.id, p.firstname, p.lastname, p.gender, p.dayofbirth, p.lastvisit, p.addressid)";
 			sqlstatement = sqlstatement + "VALUES (\'";
 			sqlstatement = sqlstatement + patient.getId() + "\', \'";
 			sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
@@ -168,6 +182,8 @@ public class PatientToDB {
 		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-2);
 		
 		/*
+		//sqlstatement = sqlstatement + "DROP TABLE ADDRESS;";
+		
 		for(Patient patient : toDBlist){					
 			
 			sqlstatement = sqlstatement + "INSERT INTO ADDRESS (id, street, housenumber, postalcode, city)";
