@@ -1,10 +1,9 @@
 package de.rho.server.dao.persistence;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
 
 import de.rho.server.dao.boundary.InDaoToFile;
-import de.rho.server.patient.entity.Patient;
+
 
 public class DaoToFile implements InDaoToFile{
 
@@ -19,13 +18,18 @@ public class DaoToFile implements InDaoToFile{
 	}
 
 	@Override
-	public void generateFile() {
+	public boolean generateFile() {
 		
-		//if File schon da print "Datei schon vorhanden, bitte erst loeschen"
-		//else writeFile()
+		File file = new File (locateFile()); //nutzt Rueckgabewert (pathtofile) von locateFile()
 		
+		if (file.exists()) {
+			System.out.println("Datei vorhanden. Erstellen-Status: 'false'.");
+			return false;
+		}
+		
+		else {
+			System.out.println("Datei nicht vorhanden. Erstellen-Status: 'true'. Datei kann erstellt werden.");
+			return true;			 
+		}
 	}
-
-	
-
 }
