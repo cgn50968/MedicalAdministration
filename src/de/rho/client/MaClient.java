@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +24,7 @@ import de.rho.server.patient.entity.Patient;
 public class MaClient {
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		try {
 
@@ -56,13 +57,16 @@ public class MaClient {
 							// ****************************
 							// **** set Patient object ****
 							// **************************** 
+
+							SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 						
-							/**** Statt Bildschirmeingabe ****/
+							/**** Instead of User input ****/
+
 						
 							patient.setFirstname("Theo");
 							patient.setLastname("Lingen");
 							patient.setGender("m");
-							patient.setDayofbirth("1920-05-29");
+							patient.setDayofbirth(format.parse("29.05.1920"));
 							patient.setStreet("Landstrasse");
 							patient.setHousenumber("2");
 							patient.setPostalcode("50999");
@@ -118,38 +122,36 @@ public class MaClient {
 							PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 							
 				*/			
-				// ******************************
-				// **** read Patient from CSV ***
-				// ******************************				
-						System.out.println("#0x - read CSV with sample data");		
+				// *****************************************
+				// **** import Patient from CSV into DB ****
+				// *****************************************				
+						System.out.println("#0x - import Patients from CSV with sample data");		
 							
-						// ******************************************
-						// **** read Patient List from CSV File *****
-						// ******************************************
-						//PatientService.readPatientListFromCSV(); // nicht notwendig, wenn der nachfolgende call ausgefuehrt wird!!!!!
+						// *****************************************
+						// **** read Patient List from CSV File ****
+						// *****************************************
+						ArrayList<Patient> patientList = PatientService.readPatientListFromCSV();
 						
 						// **********************************
 						// **** write Patient List to DB ****
 						// **********************************
-						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
-						
-						
+						PatientService.writePatientListToDB(patientList);
 						
 						// ***************************
-						// **** reset patientList ****
+						// **** clear patientList ****
 						// ***************************
-						//patientList = null;
+						patientList.clear();
 			
 			
 				// ******************************
 				// **** write Patient to CSV ****
 				// ******************************				
-				/*		System.out.println("#0x - write CSV with sample data");		
+						System.out.println("#0x - write CSV with sample data");		
 							
 						// **********************************			
 						// **** get Patient List from DB ****
 						// **********************************
-						ArrayList<Patient> patientList = PatientService.getPatientListFromDB();
+						patientList = PatientService.getPatientListFromDB();
 						
 						// ******************************************
 						// **** write Patient List into CSV File ****
@@ -157,10 +159,10 @@ public class MaClient {
 						PatientService.writePatientListToCSV(patientList);
 						
 						// ***************************
-						// **** reset patientList ****
+						// **** clear patientList ****
 						// ***************************
-						patientList = null;
-				*/
+						patientList.clear();
+			
 			
 		/**************************/
 		/**** END OF TRY BLOCK ****/

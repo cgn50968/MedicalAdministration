@@ -9,7 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.boundary.InDaoToFile;
@@ -226,9 +229,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setFirstname(resultSet.getString("FIRSTNAME"));
 				patient.setLastname(resultSet.getString("LASTNAME"));	
 				patient.setGender(resultSet.getString("GENDER"));
-				patient.setGender(resultSet.getString("DAYOFBIRTH"));
+				patient.setDayofbirth(resultSet.getDate("DAYOFBIRTH"));
+				patient.setLastvisit(resultSet.getDate("LASTVISIT"));
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
-				patient.setLastvisit(resultSet.getString("LASTVISIT"));
 				patient.setStreet(resultSet.getString("STREET"));
 				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));
 				patient.setPostalcode(resultSet.getString("POSTALCODE"));
@@ -382,8 +385,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setFirstname(resultSet.getString("FIRSTNAME"));
 				patient.setLastname(resultSet.getString("LASTNAME"));	
 				patient.setGender(resultSet.getString("GENDER"));
-				patient.setDayofbirth(resultSet.getString("DAYOFBIRTH"));
-				patient.setLastvisit(resultSet.getString("LASTVISIT"));	
+				patient.setDayofbirth(resultSet.getDate("DAYOFBIRTH"));
+				patient.setLastvisit(resultSet.getDate("LASTVISIT"));
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setStreet(resultSet.getString("STREET"));	
 				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));	
@@ -422,18 +425,20 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // *******************************
 	
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
+		System.out.println("PatientServiceImpl.writePatientListToDB()"); // debug
 		
-		System.out.println("PatientServiceImpl.writePatientListToDB()");
-		
-		
+        for (Patient patient : patientList) {
+        	System.out.println(patient.getLastname());
+        	this.createPatientInDB(patient);
+        }
 				
 		/*for(Patient patient : patientList){					//debug-Ausgabe
 			System.out.println(patient.getLastname());
 			}
 		*/
 		
-		sql_statement = this.patient2db.writePatientListSqlStatement(patientList);
-		
+		//sql_statement = this.patient2db.writePatientListSqlStatement(patientList);
+		/*
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -450,7 +455,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		//TODO
 				
 		System.out.println("Ende: PatientServiceImpl.writePatientListToDB()");
-				
+		*/		
 	}
 	
 	
@@ -513,8 +518,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setFirstname(resultSet.getString("FIRSTNAME"));
 				patient.setLastname(resultSet.getString("LASTNAME"));	
 				patient.setGender(resultSet.getString("GENDER"));
-				patient.setDayofbirth(resultSet.getString("DAYOFBIRTH"));
-				patient.setLastvisit(resultSet.getString("LASTVISIT"));	
+				patient.setDayofbirth(resultSet.getDate("DAYOFBIRTH"));
+				patient.setLastvisit(resultSet.getDate("LASTVISIT"));
 				patient.setAddressid(Integer.parseInt(resultSet.getString("ADDRESSID")));
 				patient.setStreet(resultSet.getString("STREET"));	
 				patient.setHousenumber(resultSet.getString("HOUSENUMBER"));	
@@ -555,13 +560,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 /**************/	
 /**** File ****/
-/**************/
+/**
+ * @throws ParseException ************/
 	
 // ***********************************
 // **** Read Patient List from CSV ***
 // ***********************************	
 	@Override
-	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException {
+	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
 		return this.patient2csv.readPatientListFromCSV();
 	}

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import de.rho.server.patient.entity.Patient;
@@ -59,7 +60,7 @@ public interface InPatientService extends Remote {
 	/**** File ****/
 
 	//For PatientServiceImpl.readPatientListFromCSV
-	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException;
+	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException;
 
 	//For PatientServiceImpl.writePatientListToCSV
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException;

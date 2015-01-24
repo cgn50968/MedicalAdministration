@@ -3,9 +3,6 @@ package de.rho.server.patient.control;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-
-import de.rho.server.dao.persistence.DaoToDB;
 import de.rho.server.patient.entity.Patient;
 
 
@@ -20,6 +17,30 @@ import de.rho.server.patient.entity.Patient;
 
 public class PatientToDB {
 
+
+/*****************/
+/**** General ****/
+/*****************/
+	
+	// ******************************
+	// **** create Date of Today ****
+	// ******************************
+	Date today = new Date();
+	
+	
+	// ****************************
+	// **** format Date for DB ****
+	// ****************************
+	public String formatDateForDB(Date date) {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String datefordb = DATE_FORMAT.format(date);
+		return datefordb;
+	}
+		
+
+/*********************/
+/**** SQL Queries ****/
+/*********************/
 	
 	// ******************************
 	// **** MAX(id) from Patient ****
@@ -31,6 +52,7 @@ public class PatientToDB {
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;
 	}
+	
 	
 	// ************************
 	// **** create Address ****
@@ -48,24 +70,22 @@ public class PatientToDB {
 		return sqlstatement;
 	}
 	
+	
 	// ************************
 	// **** create Patient ****
 	// ************************
 	public String createPatientSqlStatement(Patient patient, int id) {
 		System.out.println("PatientToDB.createPatientSqlStatement()"); //debug
-		
-		// **** create Date ****
-		Date today = new Date();
-		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-		String date = DATE_FORMAT.format(today);
-		
+
+		// ***********************************************
 		// **** create *Create Patient* sql statement ****
+		// ***********************************************
 		String sqlstatement = "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, lastvisit, addressid) VALUES (\'";
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getGender() + "\', \'";
-		sqlstatement = sqlstatement + patient.getDayofbirth() + "\', \'";
-		sqlstatement = sqlstatement + date + "\', ";
+		sqlstatement = sqlstatement + this.formatDateForDB(patient.getDayofbirth()) + "\', \'";		// call formatDateForDB
+		sqlstatement = sqlstatement + this.formatDateForDB(today) + "\', ";							// call formatDateForDB
 		sqlstatement = sqlstatement + id + "); ";
 	
 		
@@ -144,6 +164,7 @@ public class PatientToDB {
 	// ****************************	
 	// **** write Patient List ****
 	// ****************************
+	/*
 	public String writePatientListSqlStatement(ArrayList<Patient> patientList) {
 		System.out.println("PatientToDB.wirtePatientListSqlStatement"); //debug
 		
@@ -195,16 +216,15 @@ public class PatientToDB {
 			sqlstatement = sqlstatement + patient.getCity() + "\'";
 			sqlstatement = sqlstatement + ");";
 		}
-		*/
+		
 		
 		//sqlstatement = sqlstatement.substring(0, sqlstatement.length()-3);
 				
 		System.out.println(sqlstatement); //debug
 		
 		return sqlstatement;
-		
 	}
-	
+	*/
 	
 	
 	// ********************************	

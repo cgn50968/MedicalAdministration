@@ -1,6 +1,7 @@
 package de.rho.server.patient.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -19,8 +20,8 @@ public class Patient implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String gender;
-	private String dayofbirth;
-	private String lastvisit;
+	private Date dayofbirth;
+	private Date lastvisit;
 	private int addressid; 
 	private String street;
 	private String housenumber;
@@ -66,19 +67,19 @@ public class Patient implements Serializable {
 		this.gender = gender;
 	}
 
-	public String getDayofbirth() {
+	public Date getDayofbirth() {
 		return dayofbirth;
 	}
 
-	public void setDayofbirth(String dayofbirth) {
+	public void setDayofbirth(Date dayofbirth) {
 		this.dayofbirth = dayofbirth;
 	}
 	
-	public String getLastvisit() {
+	public Date getLastvisit() {
 		return lastvisit;
 	}
 
-	public void setLastvisit(String lastvisit) {
+	public void setLastvisit(Date lastvisit) {
 		this.lastvisit = lastvisit;
 	}
 
