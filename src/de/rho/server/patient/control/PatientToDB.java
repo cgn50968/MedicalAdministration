@@ -99,8 +99,10 @@ public class PatientToDB {
 	// **********************
 	public String readPatientSqlStatement(int id) {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
-		
+
+		// *********************************************
 		// **** create *Read Patient* sql statement ****
+		// *********************************************
 		String sqlstatement = "SELECT p.*, a.street, a.housenumber, a.postalcode, a.city FROM patient AS p ";
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON p.addressid=a.id WHERE p.id=" + id + ";";
 		return sqlstatement;
