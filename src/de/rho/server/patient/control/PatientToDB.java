@@ -1,7 +1,6 @@
 package de.rho.server.patient.control;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import de.rho.server.patient.entity.Patient;
 
@@ -125,7 +124,6 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + "lastname=\'" + patient.getLastname() + "\', ";
 		sqlstatement = sqlstatement + "gender=\'" + patient.getGender() + "\', ";
 		sqlstatement = sqlstatement + "dayofbirth=\'" + patient.getDayofbirth() + "\', ";
-		//sqlstatement = sqlstatement + "addressid=" + patient.getAddressid() + ", ";
 		sqlstatement = sqlstatement + "lastvisit=\'" + date + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + patient.getId();
 		return sqlstatement;	
@@ -154,7 +152,7 @@ public class PatientToDB {
 		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
 		
 		// **** create *Get Patient List* sql statement ****
-		//String sqlstatement = "SELECT * FROM PATIENT";
+		
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
 	

@@ -7,7 +7,7 @@ public interface InDaoToFile {
 	public String locateFile();
 		
 	/**** Permission to generate file ****/
-	public boolean generateFile();
+	public boolean permitFileGeneration();
 	    
 	
 

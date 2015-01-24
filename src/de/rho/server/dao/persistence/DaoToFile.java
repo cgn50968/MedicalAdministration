@@ -18,17 +18,17 @@ public class DaoToFile implements InDaoToFile{
 	}
 
 	@Override
-	public boolean generateFile() {
+	public boolean permitFileGeneration() {
 		
 		File file = new File (locateFile()); //nutzt Rueckgabewert (pathtofile) von locateFile()
 		
 		if (file.exists()) {
-			System.out.println("Datei vorhanden. Erstellen-Status: 'false'.");
+			System.out.println("Datei vorhanden. Erstellen-Status: 'false'. (Nein)");
 			return false;
 		}
 		
 		else {
-			System.out.println("Datei nicht vorhanden. Erstellen-Status: 'true'. Datei kann erstellt werden.");
+			System.out.println("Datei nicht vorhanden. Erstellen-Status: 'true'. (Ja) Datei kann erstellt werden.");
 			return true;			 
 		}
 	}

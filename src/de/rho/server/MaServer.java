@@ -6,8 +6,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import de.rho.server.dao.boundary.InDaoToDB;
-import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.control.FaPatientService;
 

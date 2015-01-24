@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.boundary.InDaoToFile;
@@ -20,24 +16,9 @@ import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
 
-/*
-import java.util.Date;
-  
-public class DateDemo {
-   public static void main(String args[]) {
-       // Instantiate a Date object
-       Date date = new Date();
-        
-       // display time and date using toString()
-       System.out.println(date.toString());
-   }
-}
- */
-
-
 /**
  * @author Heiko, Roger
- * @version 1.4
+ * @version 1.5
  * 
  * Implementierung des Services Patient
  * Uebergabestation der Servicemethoden an konkrete Klassen 
@@ -47,30 +28,31 @@ public class DateDemo {
 public class PatientServiceImpl extends UnicastRemoteObject implements InPatientService {
 	
 	
-	//Alternative:
-	//interface variable = factory.methode...
-	
-	//Trennung von Methoden-Service (File, DB) und Connection-Service (File, DB)
+	private static final long serialVersionUID = 123456789;
 	
 
-	/** Methoden-Services **/
-	private PatientToCSV patient2csv; 	 				//Deklaration fuer CSV
-	private PatientToDB patient2db;				 		//Deklaration fuer DB
-	
-	
-	/** Connection-Services **/
-	private InDaoToDB db_service = FaDaoService.getDaoToDBService();
-	private InDaoToFile file_service = FaDaoService.getDaoToFileService(); //to do: benutze file_service-connection
-	
-	
 	// ***************************
 	// **** declare Variables ****
-	// ***************************	
+	// ***************************
+	
+	/** Methoden-Services **/
+	private PatientToCSV patient2csv; 	 									//Deklaration fuer CSV-Methoden
+	private PatientToDB patient2db;				 							//Deklaration fuer DB-Methoden
+		
+	/** Connection-Services **/
+	private InDaoToDB db_service = FaDaoService.getDaoToDBService(); 		//Deklaration fuer DB-Connection-Service
+	private InDaoToFile file_service = FaDaoService.getDaoToFileService();	//to do: benutze file_service-connection
+			
 	private ResultSet resultSet;
 	private String sql_statement;
 	private int max_id;
 	
 	
+	
+	// ********************
+	// **** Contructor ****
+	// ********************
+		
 	protected PatientServiceImpl() throws RemoteException {
 		super();
 		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV (Defaultkonstruktor)
@@ -416,23 +398,21 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // *******************************
 // **** Write Patient List DB ****
 // *******************************
-	
+	@Override
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
 		System.out.println("PatientServiceImpl.writePatientListToDB()"); // debug
 	
 		// ****************************************
-		// **** open Connection to H2 Database ****  
+		// **** open Connection to Database *******  
 		// ****************************************
 		Connection con = null;
 		try {
 			con = db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -464,11 +444,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
     				max_id = Integer.parseInt(resultSet.getString("ID"));
     				System.out.println(max_id);
     			}
-    		} catch (NumberFormatException e1) {
-    			// TODO Auto-generated catch block
+    		}
+    		catch (NumberFormatException e1) {
     			e1.printStackTrace();
-    		} catch (SQLException e1) {
-    			// TODO Auto-generated catch block
+    		}
+    		catch (SQLException e1) {
     			e1.printStackTrace();
     		}
 
@@ -505,7 +485,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -514,8 +493,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /****************/		
 /**** Search ****/
 /****************/
-	
-	
 	@Override
 	public Patient searchPatientByIdInDB(int id) throws RemoteException {
 		System.out.println("Impl: leite 'searchByIdInDB' an 2DB weiter");
@@ -526,6 +503,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // *******************************
 // **** Search Patient by Name ***
 // *******************************	
+	
 	@Override
 	public ArrayList<Patient> searchPatientByNameInDB(String lastname) throws RemoteException {
 		System.out.println("PatientServiceImpl.searchPatientByNameInDB()");
@@ -621,6 +599,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
+		
+		file_service.locateFile();
+		file_service.permitFileGeneration();
+		
 		return this.patient2csv.readPatientListFromCSV();
 	}
 
@@ -629,14 +611,25 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ***********************************
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
-		System.out.println("PatientServiceImpl.writePatientListToCSV()");
-		this.patient2csv.generateCsvFile(patientList);					//an dieser Stelle nur Weiterleitung, normale Uebergabe, da Verarbeitung eine Ebene tiefer
+		
+		System.out.println("PatientServiceImpl.writePatientListToCSV()");	//debug
+		
+		file_service.locateFile();											//Datei ermitteln
+		
+		boolean permit = file_service.permitFileGeneration();				//Datei vorhanden?
+								
+		if ( permit = true){
+			this.patient2csv.generateCsvFile(patientList);					//nur an dieser Stelle Weiterleitung, Verarbeitung eine Ebene tiefer
+		}
+		else {
+			System.out.println("Abbruch, da Datei bereits vorhanden - bitte Dateinamen aendern.");
+		}
+		
 	}
 	
 /****************/
 /**** Status ****/
 /****************/
-	
 	@Override
 	public void checkDate(String searchdate) throws RemoteException {
 		// TODO wo soll die MEthode implementiert werden, eigentlich im "search"....

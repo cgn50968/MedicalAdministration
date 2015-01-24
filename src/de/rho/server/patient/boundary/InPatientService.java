@@ -1,7 +1,5 @@
 package de.rho.server.patient.boundary;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -20,12 +18,6 @@ import de.rho.server.patient.entity.Patient;
  */
 
 public interface InPatientService extends Remote {
-	
-	
-	/**** TEST ****/
-	/*
-	public String createPatient(String patient) throws RemoteException;
-	*/
 	
 	/**** CRUD ****/
 	

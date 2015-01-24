@@ -28,6 +28,7 @@ public class PatientToCSV {
 	
 	private static final String CSV_SEPARATOR = ";"; //Konstante
 	
+	
 
 // ************************************
 // **** Read Patient List From CSV ****
@@ -40,12 +41,11 @@ public class PatientToCSV {
         ArrayList<Patient> patientList = new ArrayList<Patient>();
  
         try {
-        	// **** Create File Object ****
-            myFile = new FileReader("testw.csv");
-            // **** Create Buffer Object ****
-            buff = new BufferedReader(myFile);
-            // **** line Object
-            String line;
+        	
+            myFile = new FileReader("testw.csv");	// **** Create File Object ****
+            buff = new BufferedReader(myFile);		// **** Create Buffer Object ****
+            String line;							// **** Zeilen als String ***
+            
             try {
             	
 				// ***********************************
@@ -117,8 +117,7 @@ public class PatientToCSV {
             	// **** Neuer String Buffer für Textausgabe pro Zeile **** 
                 StringBuffer oneLine = new StringBuffer();
                 
-   
-                
+                   
                 // **** Uebergabe der Attribute an String Buffer ****
                 oneLine.append(patient.getId() <=0 ? "" : patient.getId());
                 oneLine.append(CSV_SEPARATOR);
