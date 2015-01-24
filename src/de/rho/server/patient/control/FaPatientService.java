@@ -14,7 +14,9 @@ import de.rho.server.patient.boundary.InPatientService;
 
 public class FaPatientService {
 
-	//Interface Zuweisung - PatientService
+	// ******************************************************************
+	// **** Interface - return PatientServiceImpl for PatientService ****
+	// ******************************************************************
 	public static InPatientService getPatientService() throws RemoteException {
 		return new PatientServiceImpl();
 	}

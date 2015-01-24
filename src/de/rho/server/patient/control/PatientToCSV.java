@@ -21,6 +21,10 @@ import de.rho.server.patient.entity.Patient;
  
 public class PatientToCSV {
 
+    // **********************************************************
+    // **** create SimpleDateFormat to format String to Date ****
+    // **********************************************************
+	SimpleDateFormat sdformat = new SimpleDateFormat("dd.MM.yyyy");
 	
 	private static final String CSV_SEPARATOR = ";"; //Konstante
 	
@@ -43,11 +47,7 @@ public class PatientToCSV {
             // **** line Object
             String line;
             try {
-			    // **********************************************************
-			    // **** create SimpleDateFormat to format String to Date ****
-			    // **********************************************************
-				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-
+            	
 				// ***********************************
             	// **** For each line in CSV File ****
 				// ***********************************
@@ -62,8 +62,8 @@ public class PatientToCSV {
 					patient.setFirstname(st.nextToken());
 					patient.setLastname(st.nextToken());	
 					patient.setGender(st.nextToken());
-					patient.setDayofbirth(format.parse(st.nextToken()));		// format String to Date
-					patient.setLastvisit(format.parse(st.nextToken()));			// format String to Date
+					patient.setDayofbirth(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDayFormat
+					patient.setLastvisit(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDayFormat
 					patient.setAddressid(Integer.parseInt(st.nextToken()));
 					patient.setStreet(st.nextToken());
 					patient.setHousenumber(st.nextToken());
@@ -117,6 +117,8 @@ public class PatientToCSV {
             	// **** Neuer String Buffer für Textausgabe pro Zeile **** 
                 StringBuffer oneLine = new StringBuffer();
                 
+   
+                
                 // **** Uebergabe der Attribute an String Buffer ****
                 oneLine.append(patient.getId() <=0 ? "" : patient.getId());
                 oneLine.append(CSV_SEPARATOR);
@@ -126,9 +128,9 @@ public class PatientToCSV {
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getGender().trim().length() == 0? "" : patient.getGender());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(patient.getDayofbirth());	// Date 
+                oneLine.append(sdformat.format(patient.getDayofbirth()));		// Date (sdformat.format()) SimpleDayFormat
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(patient.getLastvisit());		// Date 
+                oneLine.append(sdformat.format(patient.getLastvisit()));		// Date (sdformat.format()) SimpleDayFormat
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getAddressid() <=0 ? "" : patient.getAddressid());	 //Hier muessten wir Sicherstellen, dass die PatientenID nicht 0 ist.
                 oneLine.append(CSV_SEPARATOR);

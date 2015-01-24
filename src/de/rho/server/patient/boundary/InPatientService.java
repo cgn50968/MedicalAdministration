@@ -46,6 +46,8 @@ public interface InPatientService extends Remote {
 	
 	// For PatientServiceImpl.getPatientListFromDB
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException;
+	
+	// For PatientServiceImpl.writePatientListToDB
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException;
 		
 	/**** Search ****/
