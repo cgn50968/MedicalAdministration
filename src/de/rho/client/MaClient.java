@@ -52,7 +52,7 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-				/*		System.out.println("#02 - create new Patient");
+						System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
@@ -75,7 +75,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-				*/		
+						
 				// **********************
 				// **** read Patient ****
 				// **********************
@@ -163,7 +163,39 @@ public class MaClient {
 						// ***************************
 						//patientList.clear();
 			
-			
+				// *************************************
+				// **** search Patient by Last Name ****
+				// *************************************
+						System.out.println("#0x - search Patient by Last-Name");		
+								
+						// **************************************************
+						// **** search Patient with Last Name = 'Lingen' ****
+						// **************************************************
+						String lastname = "Lingen";
+								
+						// ***********************
+						// **** search Patient ****
+						// ***********************
+						ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
+								
+						// ****************************
+						// **** show search result ****
+						// ****************************
+						for (Patient patient01 : patientList) {
+							String output = patient01.getId() + " ";
+							output = output + patient01.getFirstname() + " ";
+							output = output + patient01.getLastname() + " ";
+							output = output + patient01.getGender() + " ";
+							output = output + patient01.getDayofbirth() + " ";
+							output = output + patient01.getLastvisit() + " ";
+							output = output + patient01.getStreet() + " ";
+							output = output + patient01.getHousenumber() + " ";
+							output = output + patient01.getPostalcode() + " ";
+							output = output + patient01.getCity();
+							System.out.println(output);
+						}
+
+						
 		/**************************/
 		/**** END OF TRY BLOCK ****/
 		/**************************/

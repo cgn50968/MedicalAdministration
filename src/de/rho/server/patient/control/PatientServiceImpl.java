@@ -65,98 +65,98 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /**** CRUD ****/
 /**************/
 	
-// ************************
-// **** create Patient ****
-// ************************
-	@Override
-	public void createPatientInDB(Patient patient) throws RemoteException {
-		System.out.println("PatientServiceImpl.createPatientInDB()");
+	// ************************
+	// **** create Patient ****
+	// ************************
+		@Override
+		public void createPatientInDB(Patient patient) throws RemoteException {
+			System.out.println("PatientServiceImpl.createPatientInDB()");
 
-		// ***************************************
-		// **** reset variable for Address ID ****
-		// ***************************************
-		max_id = 0;
-		
-		// *****************************************************
-		// **** create SQL Statement - MAX(id) FROM ADDRESS ****
-		// *****************************************************
-		sql_statement = this.patient2db.selectMaxIdFromAddressSqlStatement();
-		
-	/***************************************************************************************/
-	/**** Wenn MAX(id) = Null dann muss der erste Wert 1 sein (1. Datensatz in Address) ****/
-	/***************************************************************************************/
-		
-		// ****************************************
-		// **** open Connection to H2 Database ****  
-		// ****************************************
-		Connection con = null;
-		try {
-			con = db_service.connect();
-		} 
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		// **************************************************
-		// **** execute SQL Query - MAX(id) FROM ADDRESS ****
-		// **************************************************
-		resultSet = db_service.executeQuery(con, sql_statement, true);
-		
-		try {
-			while(resultSet.next()) {
-				max_id = Integer.parseInt(resultSet.getString("ID"));
-				System.out.println(max_id);
+			// ***************************************
+			// **** reset variable for Address ID ****
+			// ***************************************
+			max_id = 1;
+			
+			// *****************************************************
+			// **** create SQL Statement - MAX(id) FROM ADDRESS ****
+			// *****************************************************
+			sql_statement = this.patient2db.selectMaxIdFromAddressSqlStatement();
+			
+		/***************************************************************************************/
+		/**** Wenn MAX(id) = Null dann muss der erste Wert 1 sein (1. Datensatz in Address) ****/
+		/***************************************************************************************/
+			
+			// ****************************************
+			// **** open Connection to H2 Database ****  
+			// ****************************************
+			Connection con = null;
+			try {
+				con = db_service.connect();
+			} 
+			catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+
+			
+			// **************************************************
+			// **** execute SQL Query - MAX(id) FROM ADDRESS ****
+			// **************************************************
+			resultSet = db_service.executeQuery(con, sql_statement, true);
+			
+			try {
+				while(resultSet.next()) {
+					max_id = Integer.parseInt(resultSet.getString("ID"));
+					System.out.println(max_id);
+				}
+			} catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			
+			// ***********************************************
+			// **** create SQL Statement - CREATE ADDRESS ****
+			// ***********************************************
+			sql_statement = this.patient2db.createAddressSqlStatement(patient, max_id);
+
+			
+			// ********************************************
+			// **** execute SQL Query - CREATE ADDRESS ****
+			// ********************************************
+			db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+
+		
+			// ***********************************************
+			// **** create SQL Statement - CREATE PATIENT ****
+			// ***********************************************
+			sql_statement = this.patient2db.createPatientSqlStatement(patient, max_id);
+			
+
+			// ********************************************
+			// **** execute SQL Query - CREATE PATIENT ****
+			// ********************************************
+			db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+					
+			
+			// ***************************************
+			// **** close DB Connection/ResultSet ****
+			// ***************************************
+			try {
+				db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
-		
-		// ***********************************************
-		// **** create SQL Statement - CREATE ADDRESS ****
-		// ***********************************************
-		sql_statement = this.patient2db.createAddressSqlStatement(patient, max_id);
-
-		
-		// ********************************************
-		// **** execute SQL Query - CREATE ADDRESS ****
-		// ********************************************
-		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
-
-	
-		// ***********************************************
-		// **** create SQL Statement - CREATE PATIENT ****
-		// ***********************************************
-		sql_statement = this.patient2db.createPatientSqlStatement(patient, max_id);
-		
-
-		// ********************************************
-		// **** execute SQL Query - CREATE PATIENT ****
-		// ********************************************
-		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
-				
-		
-		// ***************************************
-		// **** close DB Connection/ResultSet ****
-		// ***************************************
-		try {
-			db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
-		} 
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	
 // **********************
