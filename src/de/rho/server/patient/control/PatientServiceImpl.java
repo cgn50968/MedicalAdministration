@@ -49,9 +49,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 	
 	
-	// ********************
-	// **** Contructor ****
-	// ********************
+	// *********************
+	// **** Constructor ****
+	// *********************
 		
 	protected PatientServiceImpl() throws RemoteException {
 		super();
@@ -606,8 +606,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
 		
-		String filelocation = file_service.locateFile();		//hat Rueckgabetyp pathtofile
-				
+		String filelocation = file_service.locateFile();					//hat Rueckgabetyp pathtofile
+		
+		System.out.println("-Calling List Generation-Method....");
 		return this.patient2csv.readPatientListFromCSV(filelocation);
 	}
 
@@ -623,7 +624,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		boolean permit = file_service.permitFileGeneration();				//Datei vorhanden?
 								
-		if ( permit = true){												//Wenn Erlaubnis(=Datei nicht vorhanden)
+		if ( permit == true){												//Wenn Erlaubnis(=Datei nicht vorhanden)
 			
 			System.out.println("-Calling File Generation-Method....");
 			

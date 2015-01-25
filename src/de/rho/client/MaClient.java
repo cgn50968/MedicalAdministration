@@ -15,7 +15,7 @@ import de.rho.server.patient.entity.Patient;
 
 /**
  * @author Heiko, Roger
- * @version 1.1
+ * @version 1.5
  * 
  * Client zum Aufrufen der entfernten Methoden einer Praxisverwaltung
  *
@@ -52,7 +52,7 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-						System.out.println("#02 - create new Patient");
+				/*		System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
@@ -75,7 +75,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-						
+				*/	
 				// **********************
 				// **** read Patient ****
 				// **********************
@@ -123,50 +123,37 @@ public class MaClient {
 				// *****************************************
 				// **** import Patient from CSV into DB ****
 				// *****************************************	
-				/*			
-						System.out.println("#0x - import Patients from CSV with sample data");		
 							
-						// *****************************************
-						// **** read Patient List from CSV File ****
-						// *****************************************
-						ArrayList<Patient> patientList = PatientService.readPatientListFromCSV();
+						System.out.println("#0x - import PatientList from CSV");		
 						
-						// **********************************
-						// **** write Patient List to DB ****
-						// **********************************
-						PatientService.writePatientListToDB(patientList);
+						//Bitte Aufrufverbund fuers testen nicht aendern
+						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 						
-						// ***************************
-						// **** clear patientList ****
-						// ***************************
-						patientList.clear();
-			
-				*/
+						//TODO "ö"
+						
+						//viel wichtiger: was ist mit der RMI- Verbindung?
+						//patientList.clear();
+		
+				
 				// **********************************
 				// **** write PatientList to CSV ****
 				// **********************************				
+				/*		
 						System.out.println("#0x - write PatientList to CSV");		
-							
-						// **********************************			
-						// **** get Patient List from DB ****
-						// **********************************
-						
-						
-						
-						// ******************************************
-						// **** write Patient List into CSV File ****
-						// ******************************************
+															
+						//Bitte Aufrufverbund fuers testen nicht aendern
 						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+						
 						//TODO "ö"
-						// ***************************
-						// **** clear patientList ****
-						// ***************************
+												
+						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
 			
+				*/
 				// *************************************
 				// **** search Patient by Last Name ****
 				// *************************************
-						System.out.println("#0x - search Patient by Last-Name");		
+				/*		System.out.println("#0x - search Patient by Last-Name");		
 								
 						// **************************************************
 						// **** search Patient with Last Name = 'Lingen' ****
@@ -195,7 +182,7 @@ public class MaClient {
 							System.out.println(output);
 						}
 
-						
+					*/	
 		/**************************/
 		/**** END OF TRY BLOCK ****/
 		/**************************/

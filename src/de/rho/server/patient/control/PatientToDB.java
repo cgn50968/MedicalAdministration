@@ -7,9 +7,9 @@ import de.rho.server.patient.entity.Patient;
 
 /**
  * @author Heiko, Roger
- * @version 1.1
+ * @version 1.5
  * 
- * konkrete Klasse zum Definieren der SQL-Statements
+ * konkrete Klasse zum Aufbereiten und Definieren der SQL-Statements
  *
  */
 
@@ -99,9 +99,8 @@ public class PatientToDB {
 	public String readPatientSqlStatement(int id) {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 
-		// *********************************************
+				
 		// **** create *Read Patient* sql statement ****
-		// *********************************************
 		String sqlstatement = "SELECT p.*, a.street, a.housenumber, a.postalcode, a.city FROM patient AS p ";
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON p.addressid=a.id WHERE p.id=" + id + ";";
 		return sqlstatement;
@@ -152,7 +151,6 @@ public class PatientToDB {
 		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
 		
 		// **** create *Get Patient List* sql statement ****
-		
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
 	
