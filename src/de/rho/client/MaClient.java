@@ -129,7 +129,7 @@ public class MaClient {
 						//Bitte Aufrufverbund fuers testen nicht aendern
 						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 						
-						//TODO "ö"
+						//TODO "ö": import laueft sauber, der tokenizer ist es nicht
 						
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
@@ -189,21 +189,17 @@ public class MaClient {
 		}
 					
 		catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-					
+				
 	}
-			
 	
 }
