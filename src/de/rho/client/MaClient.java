@@ -52,7 +52,7 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-						System.out.println("#02 - create new Patient");
+				/*		System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
@@ -60,9 +60,7 @@ public class MaClient {
 
 							SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 						
-							/**** Instead of User input ****/
-
-						
+													
 							patient.setFirstname("Theo");
 							patient.setLastname("Lingen");
 							patient.setGender("m");
@@ -77,7 +75,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-						
+				*/		
 				// **********************
 				// **** read Patient ****
 				// **********************
@@ -125,7 +123,7 @@ public class MaClient {
 				// *****************************************
 				// **** import Patient from CSV into DB ****
 				// *****************************************	
-							
+				/*			
 						System.out.println("#0x - import Patients from CSV with sample data");		
 							
 						// *****************************************
@@ -143,15 +141,17 @@ public class MaClient {
 						// ***************************
 						patientList.clear();
 			
-			
-				// ******************************
-				// **** write Patient to CSV ****
-				// ******************************				
-						System.out.println("#0x - write CSV with sample data");		
+				*/
+				// **********************************
+				// **** write PatientList to CSV ****
+				// **********************************				
+						System.out.println("#0x - write PatientList to CSV");		
 							
 						// **********************************			
 						// **** get Patient List from DB ****
 						// **********************************
+						
+						ArrayList<Patient> patientList = new ArrayList<Patient>();
 						patientList = PatientService.getPatientListFromDB();
 						
 						// ******************************************
