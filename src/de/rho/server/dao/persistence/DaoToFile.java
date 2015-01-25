@@ -8,11 +8,11 @@ import de.rho.server.dao.boundary.InDaoToFile;
 public class DaoToFile implements InDaoToFile{
 
 	@Override
-	public String locateFile() {
+	public String locateFile() {			//koennte man auch ueber Client mitgeben
 		
 		String filetype = (".csv");
 		String filename = ("testw"+filetype);
-		String pathtofile = ("c:/Users/heiko/Documents/GitHub/MedicalAdministration/"+filename);
+		String pathtofile = (""+filename); // hier koennte auch ein vollstaendiger Pfad stehen c:/Users/heiko/Documents/GitHub/MedicalAdministration/
 		 
 		return pathtofile;
 	}

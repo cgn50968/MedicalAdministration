@@ -21,28 +21,26 @@ import de.rho.server.patient.entity.Patient;
  
 public class PatientToCSV {
 
-    // **********************************************************
-    // **** create SimpleDateFormat to format String to Date ****
-    // **********************************************************
-	SimpleDateFormat sdformat = new SimpleDateFormat("dd.MM.yyyy");
+    
+	private static final String CSV_SEPARATOR = ";"; 				//Festlegen des Separators als Konstante
 	
-	private static final String CSV_SEPARATOR = ";"; //Konstante
-	
-	
+	SimpleDateFormat sdformat = new SimpleDateFormat("dd.MM.yyyy"); // create SimpleDateFormat to format String to Date
+
 
 // ************************************
 // **** Read Patient List From CSV ****
 // ************************************
-	public ArrayList<Patient> readPatientListFromCSV() throws ParseException {
+	public ArrayList<Patient> readPatientListFromCSV(String filelocation) throws ParseException {
 		System.out.println("PatientToCSV.readPatientListFromCSV");	//debug
 		
+		String fl = filelocation;
 		FileReader myFile = null;
         BufferedReader buff = null;
         ArrayList<Patient> patientList = new ArrayList<Patient>();
  
         try {
         	
-            myFile = new FileReader("testw.csv");	// **** Create File Object ****
+            myFile = new FileReader(fl);			// **** Create File Object mit Pfad und Name
             buff = new BufferedReader(myFile);		// **** Create Buffer Object ****
             String line;							// **** Zeilen als String ***
             
@@ -62,24 +60,21 @@ public class PatientToCSV {
 					patient.setFirstname(st.nextToken());
 					patient.setLastname(st.nextToken());	
 					patient.setGender(st.nextToken());
-					patient.setDayofbirth(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDayFormat
-					patient.setLastvisit(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDayFormat
+					patient.setDayofbirth(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDateFormat
+					patient.setLastvisit(sdformat.parse(st.nextToken()));		// format String to Date - SimpleDateFormat
 					patient.setAddressid(Integer.parseInt(st.nextToken()));
 					patient.setStreet(st.nextToken());
 					patient.setHousenumber(st.nextToken());
 					patient.setPostalcode(st.nextToken());
 					patient.setCity(st.nextToken());
-				    
-					// ********************************************
-					// **** add Patient object to Patient List ****
-					// ********************************************
-				    patientList.add(patient);
+				    					
+				    patientList.add(patient);			// **** add Patient object to Patient List ****
 				}
-				// **************************************
-				// **** close Buffer and File object ****
-				// **************************************
-				buff.close();
-		        myFile.close();		
+				
+            					
+				buff.close();							// **** close Buffer and File object
+		        myFile.close();							
+		        
 			}
             catch (NumberFormatException e) {
 				e.printStackTrace();
@@ -102,16 +97,18 @@ public class PatientToCSV {
 // ***************************
 // **** Generate CSV File ****
 // ***************************	
-	public void generateCsvFile(ArrayList<Patient> patientList){
-		System.out.println("PatientToCSV.generateCsvFile");	//debug
+	public void generateCsvFile(ArrayList<Patient> patientList, String filelocation){
 		
-		for(int i=0;i<patientList.size();i++){ 			//debug-Ausgabe Array-Liste
+		System.out.println("PatientToCSV.generateCsvFile");	//debug
+		for(int i=0;i<patientList.size();i++){ 				//debug-Ausgabe Array-Liste
             System.out.println(patientList.get(i)); 
         } 
 		
+		String fl = filelocation;							//Pfaduebergabe
+				
 		try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("testw.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fl), "UTF-8"));
             for (Patient patient : patientList) {
             	
             	// **** Neuer String Buffer für Textausgabe pro Zeile **** 

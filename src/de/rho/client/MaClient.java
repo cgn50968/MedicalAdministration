@@ -151,18 +151,17 @@ public class MaClient {
 						// **** get Patient List from DB ****
 						// **********************************
 						
-						ArrayList<Patient> patientList = new ArrayList<Patient>();
-						patientList = PatientService.getPatientListFromDB();
+						
 						
 						// ******************************************
 						// **** write Patient List into CSV File ****
 						// ******************************************
-						PatientService.writePatientListToCSV(patientList);
-						
+						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+						//TODO "ö"
 						// ***************************
 						// **** clear patientList ****
 						// ***************************
-						patientList.clear();
+						//patientList.clear();
 			
 			
 		/**************************/

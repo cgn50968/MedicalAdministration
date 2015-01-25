@@ -378,19 +378,25 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+				
 		
 		// ***************************************
 		// **** close DB Connection/ResultSet ****
 		// ***************************************
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schließen
+			
+			System.out.println("PatientServiceImpl.getPatientListFromDB()");		//debug
+			System.out.println("-----Inhalt der ArrayListe aus der DB:");			//debug
+			System.out.println(patientList.toString());								//debug
+			
+			
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		
+				
 		// **** Rückgabe der ArrayList (Patientenliste) 
 		return patientList;
 	}
@@ -600,10 +606,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
 		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
 		
-		file_service.locateFile();
-		file_service.permitFileGeneration();
-		
-		return this.patient2csv.readPatientListFromCSV();
+		String filelocation = file_service.locateFile();		//hat Rueckgabetyp pathtofile
+				
+		return this.patient2csv.readPatientListFromCSV(filelocation);
 	}
 
 // ***********************************
@@ -614,14 +619,18 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		System.out.println("PatientServiceImpl.writePatientListToCSV()");	//debug
 		
-		file_service.locateFile();											//Datei ermitteln
+		String filelocation = file_service.locateFile();					//Datei ermitteln
 		
 		boolean permit = file_service.permitFileGeneration();				//Datei vorhanden?
 								
-		if ( permit = true){
-			this.patient2csv.generateCsvFile(patientList);					//nur an dieser Stelle Weiterleitung, Verarbeitung eine Ebene tiefer
+		if ( permit = true){												//Wenn Erlaubnis(=Datei nicht vorhanden)
+			
+			System.out.println("-Calling File Generation-Method....");
+			
+			this.patient2csv.generateCsvFile(patientList, filelocation);	//an dieser Stelle Weiterleitung, Verarbeitung eine Ebene tiefer
 		}
 		else {
+			System.out.println("*** ACHTUNG ***");
 			System.out.println("Abbruch, da Datei bereits vorhanden - bitte Dateinamen aendern.");
 		}
 		
