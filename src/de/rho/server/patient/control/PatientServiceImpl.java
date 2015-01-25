@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 import de.rho.server.dao.boundary.InDaoToFile;
@@ -47,8 +49,12 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	private String sql_statement;
 	private int max_id;
 	
+	// ******************************
+	// **** create Date of today ****
+	// ******************************
+	Date today = new Date();
 	
-	
+
 	// *********************
 	// **** Constructor ****
 	// *********************
@@ -665,11 +671,79 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /****************/
 /**** Status ****/
 /****************/
+
+// **********************************
+// **** Check Date of last visit ****
+// **********************************
 	@Override
-	public void checkDate(String searchdate) throws RemoteException {
-		// TODO wo soll die MEthode implementiert werden, eigentlich im "search"....
-		System.out.println("Impl: noch keine Weiterleitung implementiert");
+	public Boolean checkDateOfLastVisit(Patient patient) throws RemoteException {
+		System.out.println("PatientServiceImpl.checkDateOfLastVisit");
 		
+		// ------------------------------------
+		// -- register Patient Card (yes/no) --
+		// ------------------------------------
+		Boolean registerPatientCard = false;
+		
+		// -------------------------
+		// -- Declare Date Format --
+		// -------------------------
+		SimpleDateFormat year = new SimpleDateFormat("yyyy");
+		SimpleDateFormat month = new SimpleDateFormat("MM");
+
+		// ----------------------------------------
+		// -- Get 'year' of last visit and today --
+		// ----------------------------------------
+		String yearOfLastVisit = year.format(patient.getLastvisit());
+		String yearOfToday = year.format(today);
+		
+		// -----------------------------------------
+		// -- Get 'month' of last visit and today --
+		// -----------------------------------------
+		int monthOfLastVisit = Integer.parseInt(month.format(patient.getLastvisit()));
+		int monthOfToday = Integer.parseInt(month.format(today));
+		
+		// ---------------------------------------------
+		// -- if year of last visit unequal this year --
+		// ---------------------------------------------
+		if (yearOfLastVisit != yearOfToday) {
+			registerPatientCard = true; // -- no registration required 
+		}
+		
+		// -- Erste Quartal: Ergebnis von (3 minus Aktueller Monat) liegt zwischen 0 und 2 
+		else if ((3 - monthOfToday) >= 0 && (3 - monthOfToday) <= 2 ) {
+			
+			if (monthOfLastVisit >= 1 && monthOfLastVisit >= 3) {
+				registerPatientCard = true; // -- no registration required				
+			}	
+		}
+		
+		// -- Zweite Quartal: Ergebnis von (6 minus Aktueller Monat) liegt zwischen 0 und 2 
+		else if ((6 - monthOfToday) >= 0 && (6 - monthOfToday) <= 2 ) {
+			
+			if (monthOfLastVisit >= 4 && monthOfLastVisit >= 6) {
+				registerPatientCard = true; // -- no registration required				
+			}			
+		}
+
+		// -- Dritte Quartal: Ergebnis von (9 minus Aktueller Monat) liegt zwischen 0 und 2 
+		else if ((9 - monthOfToday) >= 0 && (9 - monthOfToday) <= 2 ) {
+			if (monthOfLastVisit >= 7 && monthOfLastVisit >= 9) {
+				registerPatientCard = true; // -- no registration required
+			}			
+		}
+
+		// -- Vierte Quartal: Ergebnis von (12 minus Aktueller Monat) liegt zwischen 0 und 2 
+		else if ((12 - monthOfToday) >= 0 && (12 - monthOfToday) <= 2 ) {
+
+			if (monthOfLastVisit >= 10 && monthOfLastVisit >= 12) {
+				registerPatientCard = true; // -- no registration required
+			}			
+		}
+		
+		// ---------------------------------------------
+		// -- return if Card registration is required --
+		// ---------------------------------------------
+		return registerPatientCard;
 	}
 
 }
