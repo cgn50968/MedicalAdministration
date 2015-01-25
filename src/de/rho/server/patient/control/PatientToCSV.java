@@ -119,7 +119,7 @@ public class PatientToCSV {
 				
 		try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fl), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fl)));
  
         	// -------------------------------------
         	// -- For each Patient in PatientList -- 

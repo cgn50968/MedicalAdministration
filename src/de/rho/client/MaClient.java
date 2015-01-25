@@ -145,7 +145,7 @@ public class MaClient {
 						
 						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
 																		
-						//TODO "ö" - ListFromDB sauber, pruefe writeListtoCSV
+						//TODO "ö" - writer ist der Uebeltaeter
 												
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
