@@ -33,6 +33,9 @@ public class PatientToCSV {
 	public ArrayList<Patient> readPatientListFromCSV(String filelocation) throws ParseException {
 		System.out.println("PatientToCSV.readPatientListFromCSV");	//debug
 		
+		// -----------------------------------
+		// -- Declare Objects and Variables --
+		// -----------------------------------
 		String fl = filelocation;
 		FileReader myFile = null;
         BufferedReader buff = null;
@@ -40,15 +43,15 @@ public class PatientToCSV {
  
         try {
         	
-            myFile = new FileReader(fl);			// **** Create File Object mit Pfad und Name
-            buff = new BufferedReader(myFile);		// **** Create Buffer Object ****
-            String line;							// **** Zeilen als String ***
+            myFile = new FileReader(fl);			// -- Create File Object with Path and Name
+            buff = new BufferedReader(myFile);		// -- Create Buffer Object
+            String line;							// -- Line als String 
             
             try {
             	
-				// ***********************************
-            	// **** For each line in CSV File ****
-				// ***********************************
+				// -------------------------------------------------
+            	// -- Read to Buffer - line by line from CSV File --
+				// -------------------------------------------------
             	while ((line = buff.readLine()) != null) {
 				    
 					System.out.println(line); 								// debug-Ausgabe
@@ -67,12 +70,17 @@ public class PatientToCSV {
 					patient.setHousenumber(st.nextToken());
 					patient.setPostalcode(st.nextToken());
 					patient.setCity(st.nextToken());
-				    					
-				    patientList.add(patient);			// **** add Patient object to Patient List ****
+				    
+					// ----------------------------------------
+					// -- add Patient object to Patient List --
+					// ----------------------------------------
+				    patientList.add(patient);			
 				}
 				
-            					
-				buff.close();							// **** close Buffer and File object
+				// ----------------------------------
+            	// -- close Buffer and File object --
+				// ----------------------------------
+				buff.close();						
 		        myFile.close();							
 		        
 			}
@@ -90,6 +98,9 @@ public class PatientToCSV {
         System.out.println(patientList.toString());								//debug
         System.out.println("####Ende: PatientToCSV.readPatientListFromCSV");	//debug
         
+		// ------------------------
+		// -- return PatientList --
+		// ------------------------	
         return patientList;  
 	}
 
@@ -98,24 +109,30 @@ public class PatientToCSV {
 // **** Generate CSV File ****
 // ***************************	
 	public void generateCsvFile(ArrayList<Patient> patientList, String filelocation){
-		
 		System.out.println("PatientToCSV.generateCsvFile");	//debug
-		for(int i=0;i<patientList.size();i++){ 				//debug-Ausgabe Array-Liste
-            System.out.println(patientList.get(i)); 
-        } 
-		
-		String fl = filelocation;							//Pfaduebergabe
+
+		// ----------------------
+		// -- Path to CSV File --
+		// ----------------------
+		String fl = filelocation;							
 				
 		try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fl), "UTF-8"));
+ 
+        	// -------------------------------------
+        	// -- For each Patient in PatientList -- 
+        	// -------------------------------------
             for (Patient patient : patientList) {
             	
-            	// **** Neuer String Buffer für Textausgabe pro Zeile **** 
+            	// -----------------------------------
+            	// -- Create String Buffer for Text -- 
+            	// -----------------------------------
                 StringBuffer oneLine = new StringBuffer();
                 
-                   
-                // **** Uebergabe der Attribute an String Buffer ****
+            	// ------------------------------------------
+                // -- Create CSV String and save in Buffer --
+                // ------------------------------------------
                 oneLine.append(patient.getId() <=0 ? "" : patient.getId());
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getFirstname().trim().length() == 0? "" : patient.getFirstname());
@@ -138,12 +155,14 @@ public class PatientToCSV {
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(patient.getCity().trim().length() == 0? "" : patient.getCity());
                 
-                
-                bw.write(oneLine.toString());	// **** Schreiben der Zeile
-                bw.newLine();					// **** Neue Zeile
+                // --------------------------------------
+                // -- Write text-line to Buffer object --
+                // --------------------------------------
+                bw.write(oneLine.toString());	// -- write line
+                bw.newLine();					// -- new line
             }
-            bw.flush();		// Loeschen des Streams (flush = ausspuelen)
-            bw.close();
+            bw.flush();		// -- delete text in Buffer (flush = ausspuelen)
+            bw.close();     // -- close Buffer
         }
 		catch (UnsupportedEncodingException e) {
 		}

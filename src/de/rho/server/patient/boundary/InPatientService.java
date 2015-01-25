@@ -19,50 +19,61 @@ import de.rho.server.patient.entity.Patient;
 
 public interface InPatientService extends Remote {
 	
-	/**** CRUD ****/
+/**************/
+/**** CRUD ****/
+/**************/
 	
-	//For PatientService.createPatientDB
+	// -- For PatientService.createPatientDB
 	public void createPatientInDB(Patient patient) throws RemoteException;
 	
-	//For PatientService.readPatientDB
+	// -- For PatientService.readPatientDB
 	public Patient readPatientInDB(int id) throws RemoteException;
 	
-	//For PatientService.updatePatientDB
+	// -- For PatientService.updatePatientDB
 	public void updatePatientInDB(Patient patient) throws RemoteException;
 	
-	//For PatientService.deletePatientDB
+	// -- For PatientService.deletePatientDB
 	public void deletePatientInDB(int id, int addressid) throws RemoteException;
 	
 	
-	/**** List ****/
+/**************/
+/**** List ****/
+/**************/
 	
-	// For PatientServiceImpl.getPatientListFromDB
+	// -- For PatientServiceImpl.getPatientListFromDB
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException;
 	
-	// For PatientServiceImpl.writePatientListToDB
+	// -- For PatientServiceImpl.writePatientListToDB
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException;
-		
-	/**** Search ****/
+
 	
-	//For PatientServiceImpl.searchPatientByIdInDB	
+/****************/
+/**** Search ****/
+/****************/
+	
+	// -- For PatientServiceImpl.searchPatientByIdInDB	
 	public Patient searchPatientByIdInDB(int id) throws RemoteException;
 
-	//For PatientServiceImpl.searchPatientByNameInDB
+	// -- For PatientServiceImpl.searchPatientByNameInDB
 	public ArrayList<Patient> searchPatientByNameInDB(String searchString) throws RemoteException;
 	
 	
-	/**** File ****/
-
-	//For PatientServiceImpl.readPatientListFromCSV
+/**************/
+/**** File ****/
+/**************/
+	
+	// -- For PatientServiceImpl.readPatientListFromCSV
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException;
 
-	//For PatientServiceImpl.writePatientListToCSV
+	// -- For PatientServiceImpl.writePatientListToCSV
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException;
 
 	
-	/**** Status ****/
-
-	//For PatientServiceImpl.checkDate
+/****************/
+/**** Status ****/
+/****************/
+	
+	// -- For PatientServiceImpl.checkDate
 	public void checkDate(String searchdate) throws RemoteException;
 
 		

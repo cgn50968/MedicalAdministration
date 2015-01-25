@@ -17,16 +17,13 @@ import java.sql.SQLException;
 
 public interface InDaoToDB {
 	
-	/**** open Connection to DB ****/
+	// -- For open Connection to DB
 	public Connection connect() throws FileNotFoundException, IOException;
 	
-	/**** execute SQL Query ****/
-    public ResultSet executeQuery(Connection con, String sql, Boolean ret);
+	// -- For execute SQL Query
+    public ResultSet executeQuery(Connection con, String sql_statement, Boolean returnResultSet);
     
-    /**** execute anything ****/
-    public ResultSet execute(Connection con, String sql, Boolean ret);
-    
-    /**** close Connection ****/
-    public void disconnect(Connection con, ResultSet res) throws SQLException;
+    // -- For close Connection 
+    public void disconnect(Connection con, ResultSet resultSet) throws SQLException;
     
 }

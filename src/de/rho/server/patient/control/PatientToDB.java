@@ -46,6 +46,10 @@ public class PatientToDB {
 	// ******************************
 	public String selectMaxIdFromAddressSqlStatement() {
 		System.out.println("PatientToDB.selectMaxIdFromAddressSqlStatement()"); //debug
+		
+		// --------------------------------------------------------
+		// -- create *CREATE MAX(id) FROM ADDRESS* sql statement --
+		// --------------------------------------------------------
 		String sqlstatement = "SELECT MAX(id)+1 AS id FROM ADDRESS;";
 		
 		System.out.println(sqlstatement); //debug
@@ -58,6 +62,10 @@ public class PatientToDB {
 	// ************************
 	public String createAddressSqlStatement(Patient patient, int id) {
 		System.out.println("PatientToDB.createAddressSqlStatement()"); //debug
+
+		// -------------------------------------------
+		// -- create *CREATE ADDRESS* sql statement --
+		// -------------------------------------------	
 		String sqlstatement = "INSERT INTO ADDRESS (id, street, housenumber, postalcode, city) VALUES (";
 		sqlstatement = sqlstatement + id + ", \'";
 		sqlstatement = sqlstatement + patient.getStreet() + "\', \'";
@@ -76,9 +84,9 @@ public class PatientToDB {
 	public String createPatientSqlStatement(Patient patient, int id) {
 		System.out.println("PatientToDB.createPatientSqlStatement()"); //debug
 
-		// ***********************************************
-		// **** create *Create Patient* sql statement ****
-		// ***********************************************
+		// -------------------------------------------
+		// -- create *CREATE PATIENT* sql statement --
+		// -------------------------------------------
 		String sqlstatement = "INSERT INTO PATIENT (firstname, lastname, gender, dayofbirth, lastvisit, addressid) VALUES (\'";
 		sqlstatement = sqlstatement + patient.getFirstname() + "\', \'";
 		sqlstatement = sqlstatement + patient.getLastname() + "\', \'";
@@ -87,7 +95,6 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + this.formatDateForDB(today) + "\', ";							// call formatDateForDB
 		sqlstatement = sqlstatement + id + "); ";
 	
-		
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;
 	}
@@ -99,10 +106,13 @@ public class PatientToDB {
 	public String readPatientSqlStatement(int id) {
 		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
 
-				
-		// **** create *Read Patient* sql statement ****
+		// -----------------------------------------		
+		// -- create *Read Patient* sql statement --
+		// -----------------------------------------
 		String sqlstatement = "SELECT p.*, a.street, a.housenumber, a.postalcode, a.city FROM patient AS p ";
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON p.addressid=a.id WHERE p.id=" + id + ";";
+		
+		System.out.println(sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -111,20 +121,20 @@ public class PatientToDB {
 	// **** update Patient ****
 	// ************************
 	public String updatePatientSqlStatement(Patient patient) {
+		System.out.println("PatientToDB.updatePatientSqlStatement"); //debug
 		
-		// **** create Date ****
-		Date today = new Date();
-		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-		String date = DATE_FORMAT.format(today);
-		
-		// **** create *Update Patient* sql statement ****
+		// -------------------------------------------
+		// -- create *UPDATE PATIENT* sql statement --
+		// -------------------------------------------
 		String sqlstatement = "UPDATE patient SET ";
 		sqlstatement = sqlstatement + "firstname=\'" + patient.getFirstname() + "\', ";
 		sqlstatement = sqlstatement + "lastname=\'" + patient.getLastname() + "\', ";
 		sqlstatement = sqlstatement + "gender=\'" + patient.getGender() + "\', ";
-		sqlstatement = sqlstatement + "dayofbirth=\'" + patient.getDayofbirth() + "\', ";
-		sqlstatement = sqlstatement + "lastvisit=\'" + date + "\' ";
+		sqlstatement = sqlstatement + "dayofbirth=\'" + this.formatDateForDB(patient.getDayofbirth()) + "\', ";
+		sqlstatement = sqlstatement + "lastvisit=\'" + this.formatDateForDB(today) + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + patient.getId();
+		
+		System.out.println(sqlstatement); //debug
 		return sqlstatement;	
 	}
 
@@ -135,7 +145,9 @@ public class PatientToDB {
 	public String deletePatientSqlStatement(int id, int addressid) {
 		System.out.println("PatientToDB.deletePatientSqlStatement"); //debug
 		
-		// **** create *delete Patient* sql statement ****
+		// -------------------------------------------
+		// -- create *DELETE PATIENT* sql statement --
+		// -------------------------------------------
 		String sqlstatement = "DELETE FROM patient WHERE id=" + id + ";\n";
 		sqlstatement = sqlstatement + "DELETE FROM address WHERE id=" + addressid + ";";
 		
@@ -150,7 +162,9 @@ public class PatientToDB {
 	public String getPatientListSqlStatement() {
 		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
 		
-		// **** create *Get Patient List* sql statement ****
+		// ---------------------------------------------
+		// -- create *GET PATIENT LIST* sql statement --
+		// ---------------------------------------------
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
 	
@@ -165,6 +179,9 @@ public class PatientToDB {
 	public String searchPatientByNameSqlStatement(String lastname) {
 		System.out.println("PatientToDB.searchPatientByNameSqlStatement"); //debug
 		
+		// ---------------------------------------------
+		// -- create *SEARCH PATIENT* sql statement --
+		// ---------------------------------------------
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id WHERE p.lastname LIKE \'%" + lastname + "%\'";
 		

@@ -72,23 +72,19 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		public void createPatientInDB(Patient patient) throws RemoteException {
 			System.out.println("PatientServiceImpl.createPatientInDB()");
 
-			// ***************************************
-			// **** reset variable for Address ID ****
-			// ***************************************
+			// -----------------------------------
+			// -- reset variable for Address ID --
+			// -----------------------------------
 			max_id = 1;
 			
-			// *****************************************************
-			// **** create SQL Statement - MAX(id) FROM ADDRESS ****
-			// *****************************************************
+			// -------------------------------------------------
+			// -- create SQL Statement - MAX(id) FROM ADDRESS --
+			// -------------------------------------------------
 			sql_statement = this.patient2db.selectMaxIdFromAddressSqlStatement();
 			
-		/***************************************************************************************/
-		/**** Wenn MAX(id) = Null dann muss der erste Wert 1 sein (1. Datensatz in Address) ****/
-		/***************************************************************************************/
-			
-			// ****************************************
-			// **** open Connection to H2 Database ****  
-			// ****************************************
+			// ------------------------------------
+			// -- open Connection to H2 Database --  
+			// ------------------------------------
 			Connection con = null;
 			try {
 				con = db_service.connect();
@@ -103,9 +99,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			}
 
 			
-			// **************************************************
-			// **** execute SQL Query - MAX(id) FROM ADDRESS ****
-			// **************************************************
+			// ----------------------------------------------
+			// -- execute SQL Query - MAX(id) FROM ADDRESS --
+			// ----------------------------------------------
 			resultSet = db_service.executeQuery(con, sql_statement, true);
 			
 			try {
@@ -122,33 +118,33 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			}
 
 			
-			// ***********************************************
-			// **** create SQL Statement - CREATE ADDRESS ****
-			// ***********************************************
+			// -------------------------------------------
+			// -- create SQL Statement - CREATE ADDRESS --
+			// -------------------------------------------
 			sql_statement = this.patient2db.createAddressSqlStatement(patient, max_id);
 
 			
-			// ********************************************
-			// **** execute SQL Query - CREATE ADDRESS ****
-			// ********************************************
+			// ----------------------------------------
+			// -- execute SQL Query - CREATE ADDRESS --
+			// ----------------------------------------
 			db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 
 		
-			// ***********************************************
-			// **** create SQL Statement - CREATE PATIENT ****
-			// ***********************************************
+			// -------------------------------------------
+			// -- create SQL Statement - CREATE PATIENT --
+			// -------------------------------------------
 			sql_statement = this.patient2db.createPatientSqlStatement(patient, max_id);
 			
 
-			// ********************************************
-			// **** execute SQL Query - CREATE PATIENT ****
-			// ********************************************
+			// ----------------------------------------
+			// -- execute SQL Query - CREATE PATIENT --
+			// ----------------------------------------
 			db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 					
 			
-			// ***************************************
-			// **** close DB Connection/ResultSet ****
-			// ***************************************
+			// ---------------------------------------
+			// -- close DB Connection and ResultSet --
+			// ---------------------------------------
 			try {
 				db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 			} 
@@ -168,15 +164,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		Patient patient = new Patient();
 		
-		// *********************************************
-		// **** create SQL Statement - READ PATIENT ****
-		// *********************************************
+		// -----------------------------------------
+		// -- create SQL Statement - READ PATIENT --
+		// -----------------------------------------
 		sql_statement = this.patient2db.readPatientSqlStatement(id);
 
 		
-		// ****************************************
-		// **** open Connection to H2 Database ****  
-		// ****************************************
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -189,15 +185,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **************************************************
-		// **** execute SQL Query - MAX(id) FROM ADDRESS ****
-		// **************************************************
+		// ----------------------------------------------
+		// -- execute SQL Query - MAX(id) FROM ADDRESS --
+		// ----------------------------------------------
 		resultSet = db_service.executeQuery(con, sql_statement, true);
 		
 		
-		// *******************************************
-		// **** write ResultSet to Patient object ****
-		// *******************************************
+		// ---------------------------------------
+		// -- write ResultSet to Patient object --
+		// ---------------------------------------
 		try {
 			while(resultSet.next()) {
 				patient.setId(Integer.parseInt(resultSet.getString("ID")));
@@ -221,9 +217,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// ***************************************
-		// **** close DB Connection/ResultSet ****
-		// ***************************************
+		// ---------------------------------------
+		// -- close DB Connection and ResultSet --
+		// ---------------------------------------
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
 		}
@@ -232,9 +228,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// *******************************
-		// **** return Patient object ****
-		// *******************************
+		// ---------------------------
+		// -- return Patient object --
+		// ---------------------------
 		return patient;
 	}
 
@@ -246,12 +242,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void updatePatientInDB(Patient patient) throws RemoteException {
 		System.out.println("PatientServiceImpl.updatePatientInDB()");
 
-		// **** SQL Statement erstellen ****
+		// --------------------------
+		// -- create SQL Statement --
+		// --------------------------
 		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
 
-		System.out.println(sql_statement);
 		
-		// **** Connection zur H2 Datenbank oeffnen ****  
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------
 		Connection con = null;
 		try {
 			con = db_service.connect();
@@ -264,13 +263,17 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** SQL Query ausfuehren ****
+		// ----------------------------------------
+		// -- execute SQL Query - UPDATE PATIENT --
+		// ----------------------------------------
 		db_service.executeQuery(con, sql_statement, false);
 		
 		
-		// **** Connection zur H2 Datenbank schliessen ****
+		// ----------------------------------------
+		// -- close DB Connection / no ResultSet --
+		// ----------------------------------------
 		try {
-			db_service.disconnect(con, null);		//null als Parameter, damit der zweite Parameter bestehen bleiben kann.
+			db_service.disconnect(con, null);		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -285,11 +288,16 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void deletePatientInDB(int id, int addressid) throws RemoteException {
 		System.out.println("PatientServiceImpl.deletePatientInDB()");
 		
-		// **** SQL Statement erstellen ****
+		
+		// --------------------------
+		// -- create SQL Statement --
+		// --------------------------
 		sql_statement = this.patient2db.deletePatientSqlStatement(id, addressid);
 		
 		
-		// **** Connection zur Datenbank oeffnen ****  
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------
 		Connection con = null;
 		try {
 			con = db_service.connect();
@@ -302,11 +310,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** SQL Query ausfuehren ****
+		// ----------------------------------------
+		// -- execute SQL Query - DELETE PATIENT --
+		// ----------------------------------------
 		db_service.executeQuery(con, sql_statement, false);
 		
 		
-		// **** Connection zur Datenbank schliessen ****
+		// ----------------------------------------
+		// -- close DB Connection / no ResultSet --
+		// ----------------------------------------
 		try {
 			db_service.disconnect(con, null);		
 		} 
@@ -327,11 +339,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		System.out.println("PatientServiceImpl.getPatientListFromDB()");
 	
 
-		// **** SQL Statement erstellen ****
+		// --------------------------
+		// -- create SQL Statement --
+		// --------------------------
 		sql_statement = this.patient2db.getPatientListSqlStatement();
 		
 		
-		// **** Connection zur Datenbank oeffnen ****  
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------ 
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -344,12 +360,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **** SQL Query ausfuehren, ResultSet erwartet ****
+		// --------------------------------------------
+		// -- execute SQL Query - resultSet expected --
+		// --------------------------------------------
 		resultSet = db_service.executeQuery(con, sql_statement, true);
 		
-		// *****************************
-		// **** create Patient List ****
-		// *****************************
+		// -------------------------
+		// -- create Patient List --
+		// -------------------------
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 		
 		try {
@@ -368,7 +386,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setPostalcode(resultSet.getString("POSTALCODE"));	
 				patient.setCity(resultSet.getString("CITY"));	
 				
-				// **** Uebergabe des Patienten Objekts an die PatientenListe
+				// -----------------------------------------
+				// -- Save Patient object in PatientListe --
+				// -----------------------------------------
 				patientList.add(patient);
 			}
 		}
@@ -380,24 +400,24 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 				
 		
-		// ***************************************
-		// **** close DB Connection/ResultSet ****
-		// ***************************************
+		// ---------------------------------------
+		// -- close DB Connection and ResultSet --
+		// ---------------------------------------
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
 			
 			System.out.println("PatientServiceImpl.getPatientListFromDB()");		//debug
 			System.out.println("-----Inhalt der ArrayListe aus der DB:");			//debug
-			System.out.println(patientList.toString());								//debug
-			
-			
+			System.out.println(patientList.toString());								//debug	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 				
-		// **** R¸ckgabe der ArrayList (Patientenliste) 
+		// ------------------------
+		// -- return PatientList --
+		// ------------------------	
 		return patientList;
 	}
 
@@ -408,9 +428,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
 		System.out.println("PatientServiceImpl.writePatientListToDB()"); // debug
 	
-		// ****************************************
-		// **** open Connection to Database *******  
-		// ****************************************
+		
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------
 		Connection con = null;
 		try {
 			con = db_service.connect();
@@ -423,26 +444,26 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// **********************************************		
-		// **** Import Patients step by step into DB ****
-		// **********************************************
+		// ------------------------------------------		
+		// -- Import Patients step by step into DB --
+		// ------------------------------------------
         for (Patient patient : patientList) {
         	
-    		// ***************************************
-    		// **** reset variable for Address ID ****
-    		// ***************************************
+    		// -----------------------------------
+    		// -- reset variable for Address ID --
+    		// -----------------------------------
     		max_id = 0;
     		
     		
-    		// *****************************************************
-    		// **** create SQL Statement - MAX(id) FROM ADDRESS ****
-    		// *****************************************************
+    		// -------------------------------------------------
+    		// -- create SQL Statement - MAX(id) FROM ADDRESS --
+    		// -------------------------------------------------
     		sql_statement = this.patient2db.selectMaxIdFromAddressSqlStatement();
     		
     		
-    		// **************************************************
-    		// **** execute SQL Query - MAX(id) FROM ADDRESS ****
-    		// **************************************************
+    		// ----------------------------------------------
+    		// -- execute SQL Query - MAX(id) FROM ADDRESS --
+    		// ----------------------------------------------
     		resultSet = db_service.executeQuery(con, sql_statement, true);
     		
     		try {
@@ -459,34 +480,34 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
     		}
 
     		
-    		// ***********************************************
-    		// **** create SQL Statement - CREATE ADDRESS ****
-    		// ***********************************************
+    		// -------------------------------------------
+    		// -- create SQL Statement - CREATE ADDRESS --
+    		// -------------------------------------------
     		sql_statement = this.patient2db.createAddressSqlStatement(patient, max_id);
 
     		
-    		// ********************************************
-    		// **** execute SQL Query - CREATE ADDRESS ****
-    		// ********************************************
+    		// ----------------------------------------
+    		// -- execute SQL Query - CREATE ADDRESS --
+    		// ----------------------------------------
     		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 
     	
-    		// ***********************************************
-    		// **** create SQL Statement - CREATE PATIENT ****
-    		// ***********************************************
+    		// -------------------------------------------
+    		// -- create SQL Statement - CREATE PATIENT --
+    		// -------------------------------------------
     		sql_statement = this.patient2db.createPatientSqlStatement(patient, max_id);
     		
 
-    		// ********************************************
-    		// **** execute SQL Query - CREATE PATIENT ****
-    		// ********************************************
+    		// ----------------------------------------
+    		// -- execute SQL Query - CREATE PATIENT --
+    		// ----------------------------------------
     		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
         }
 		
   
-		// ***************************************
-		// **** close DB Connection/ResultSet ****
-		// ***************************************
+		// ---------------------------------------
+		// -- close DB Connection and ResultSet --
+		// ---------------------------------------
 		try {
 			db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 		} 
@@ -515,15 +536,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		System.out.println("PatientServiceImpl.searchPatientByNameInDB()");
 		
 		
-		// ***********************************************
-		// **** create SQL Statement - Search Patient ****
-		// ***********************************************
+		// -------------------------------------------
+		// -- create SQL Statement - SEARCH PATIENT --
+		// -------------------------------------------
 		sql_statement = this.patient2db.searchPatientByNameSqlStatement(lastname);
 		
 		
-		// ****************************************
-		// **** open Connection to H2 Database ****  
-		// ****************************************
+		// ------------------------------------
+		// -- open Connection to H2 Database --  
+		// ------------------------------------
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -535,15 +556,15 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			e.printStackTrace();
 		}
 		
-		// ***************************
-		// **** execute SQL Query ****
-		// ***************************
+		// ----------------------------------------
+		// -- execute SQL Query - SEARCH PATIENT --
+		// ----------------------------------------
 		resultSet = db_service.executeQuery(con, sql_statement, true);
 		
 				
-		// *****************************
-		// **** create Patient List ****
-		// *****************************
+		// ------------------------
+		// -- create PatientList --
+		// ------------------------	
 		ArrayList<Patient> patientList = new ArrayList<Patient>();
 		
 		try {
@@ -562,9 +583,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				patient.setPostalcode(resultSet.getString("POSTALCODE"));	
 				patient.setCity(resultSet.getString("CITY"));	
 				
-				// *********************************************
-				// **** Save Patient object in PatientListe ****
-				// *********************************************
+				// -----------------------------------------
+				// -- Save Patient object in PatientListe --
+				// -----------------------------------------
 				patientList.add(patient);
 			}
 		}
@@ -576,20 +597,20 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 	
 		
-		// ***************************************
-		// **** close DB Connection/ResultSet ****
-		// ***************************************
+		// ---------------------------------------
+		// -- close DB Connection and ResultSet --
+		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
+			db_service.disconnect(con, resultSet);		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
-		// ****************************
-		// **** return PatientList ****
-		// ****************************	
+		// ------------------------
+		// -- return PatientList --
+		// ------------------------	
 		return patientList;
 	}
 
@@ -608,6 +629,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		String filelocation = file_service.locateFile();					//hat Rueckgabetyp pathtofile
 		
+		// -----------------------------
+		// -- return location of File --
+		// -----------------------------	
 		System.out.println("-Calling List Generation-Method....");
 		return this.patient2csv.readPatientListFromCSV(filelocation);
 	}
@@ -636,6 +660,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 	}
+	
 	
 /****************/
 /**** Status ****/

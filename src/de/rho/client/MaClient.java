@@ -93,9 +93,9 @@ public class MaClient {
 				// ************************		
 				/*		System.out.println("#04 - update Patient with id=1");
 						
-							// ****************************
-							// **** set Patient object ****
-							// ****************************
+							// ------------------------
+							// -- set Patient object --
+							// ------------------------
 							patient.setId(1);
 							patient.setFirstname("Maria");
 							patient.setLastname("Schmitz");
@@ -103,9 +103,9 @@ public class MaClient {
 							patient.setDayofbirth("1967-10-03");
 							patient.setAddressid(1);
 							
-							// ******************************
-							// **** call: update Patient ****
-							// ******************************
+							// --------------------------
+							// -- call: update Patient --
+							// --------------------------
 							PatientService.updatePatientInDB(patient);
 											
 				*/		
@@ -114,9 +114,9 @@ public class MaClient {
 				// ************************				
 				/*		System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 						
-							// ******************************
-							// **** call: delete Patient ****
-							// ******************************
+							// --------------------------
+							// -- call: delete Patient --
+							// --------------------------
 							PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 							
 				*/			
@@ -155,19 +155,19 @@ public class MaClient {
 				// *************************************
 				/*		System.out.println("#0x - search Patient by Last-Name");		
 								
-						// **************************************************
-						// **** search Patient with Last Name = 'Lingen' ****
-						// **************************************************
+						// ----------------------------------------------
+						// -- search Patient with Last Name = 'Lingen' --
+						// ----------------------------------------------
 						String lastname = "Lingen";
 								
-						// ***********************
-						// **** search Patient ****
-						// ***********************
+						// --------------------
+						// -- search Patient --
+						// --------------------
 						ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
 								
-						// ****************************
-						// **** show search result ****
-						// ****************************
+						// ------------------------
+						// -- show search result --
+						// ------------------------
 						for (Patient patient01 : patientList) {
 							String output = patient01.getId() + " ";
 							output = output + patient01.getFirstname() + " ";
