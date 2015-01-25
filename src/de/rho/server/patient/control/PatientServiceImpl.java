@@ -712,38 +712,64 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- Erste Quartal: Ergebnis von (3 minus Aktueller Monat) liegt zwischen 0 und 2 
 		else if ((3 - monthOfToday) >= 0 && (3 - monthOfToday) <= 2 ) {
 			
-			if (monthOfLastVisit >= 1 && monthOfLastVisit >= 3) {
-				registerPatientCard = true; // -- no registration required				
+			if (monthOfLastVisit >= 1 && monthOfLastVisit <= 3) {
+				registerPatientCard = false; // -- no registration required				
 			}	
+			else {
+				registerPatientCard = true; // -- registration required	
+			}
 		}
 		
 		// -- Zweite Quartal: Ergebnis von (6 minus Aktueller Monat) liegt zwischen 0 und 2 
 		else if ((6 - monthOfToday) >= 0 && (6 - monthOfToday) <= 2 ) {
 			
-			if (monthOfLastVisit >= 4 && monthOfLastVisit >= 6) {
-				registerPatientCard = true; // -- no registration required				
-			}			
+			if (monthOfLastVisit >= 4 && monthOfLastVisit <= 6) {
+				registerPatientCard = false; // -- no registration required				
+			}	
+			else {
+				registerPatientCard = true; // -- no registration required	
+			}
 		}
 
 		// -- Dritte Quartal: Ergebnis von (9 minus Aktueller Monat) liegt zwischen 0 und 2 
 		else if ((9 - monthOfToday) >= 0 && (9 - monthOfToday) <= 2 ) {
-			if (monthOfLastVisit >= 7 && monthOfLastVisit >= 9) {
-				registerPatientCard = true; // -- no registration required
-			}			
+			if (monthOfLastVisit >= 7 && monthOfLastVisit <= 9) {
+				registerPatientCard = false; // -- no registration required
+			}	
+			else {
+				registerPatientCard = true; // -- no registration required	
+			}
 		}
 
 		// -- Vierte Quartal: Ergebnis von (12 minus Aktueller Monat) liegt zwischen 0 und 2 
 		else if ((12 - monthOfToday) >= 0 && (12 - monthOfToday) <= 2 ) {
 
-			if (monthOfLastVisit >= 10 && monthOfLastVisit >= 12) {
-				registerPatientCard = true; // -- no registration required
-			}			
+			if (monthOfLastVisit >= 10 && monthOfLastVisit <= 12) {
+				registerPatientCard = false; // -- no registration required
+			}	
+			else {
+				registerPatientCard = true; // -- no registration required	
+			}
 		}
 		
 		// ---------------------------------------------
 		// -- return if Card registration is required --
 		// ---------------------------------------------
 		return registerPatientCard;
+		
+		/*
+
+		Hintergedanke: Liegt der aktuelle Monat in einem Quartal, dann ergibt 
+		die Aufgabe (Größter Monat in einem Quartal minus dem aktuellen Monat)
+		immer einen Wert zwischen 0 und 2. 
+		
+		3-1 =  2	6-3 =  3	9- 6 =  3	12- 8 = 4 
+		3-2 =  1	6-4 =  2	9- 7 =  2	12- 9 = 3
+		3-3 =  0	6-5 =  1	9- 8 =  1	12-10 = 2
+		3-4 = -1	6-6 =  0	9- 9 =  0	12-11 = 1
+		3-5 = -2	6-7 = -1	9-10 = -1   12-12 = 0
+
+		*/
 	}
 
 }
