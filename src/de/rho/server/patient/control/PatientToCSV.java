@@ -57,7 +57,7 @@ public class PatientToCSV {
 					System.out.println(line); 								// debug-Ausgabe
 				    
 				    Patient patient = new Patient();
-				    StringTokenizer st = new StringTokenizer(line, ";");
+				    StringTokenizer st = new StringTokenizer(line,";");
 				
 				    patient.setId(Integer.parseInt(st.nextToken()));
 					patient.setFirstname(st.nextToken());
