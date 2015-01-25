@@ -123,7 +123,7 @@ public class MaClient {
 				// *****************************************
 				// **** import Patient from CSV into DB ****
 				// *****************************************	
-							
+				/*			
 						System.out.println("#0x - import PatientList from CSV");		
 						
 						//Bitte Aufrufverbund fuers testen nicht aendern
@@ -134,22 +134,23 @@ public class MaClient {
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
 		
-				
+				*/
 				// **********************************
 				// **** write PatientList to CSV ****
 				// **********************************				
-				/*		
+						
 						System.out.println("#0x - write PatientList to CSV");		
 															
 						//Bitte Aufrufverbund fuers testen nicht aendern
-						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
 						
-						//TODO "ö"
+						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+																		
+						//TODO "ö" - ListFromDB sauber, pruefe writeListtoCSV
 												
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
 			
-				*/
+				
 				// *************************************
 				// **** search Patient by Last Name ****
 				// *************************************

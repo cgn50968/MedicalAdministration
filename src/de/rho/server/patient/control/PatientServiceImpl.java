@@ -345,9 +345,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		sql_statement = this.patient2db.getPatientListSqlStatement();
 		
 		
-		// ------------------------------------
-		// -- open Connection to H2 Database --  
-		// ------------------------------------ 
+		// ---------------------------------
+		// -- open Connection to Database --  
+		// --------------------------------- 
 		Connection con = null;					
 		try {
 			con = db_service.connect();
@@ -405,10 +405,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ---------------------------------------
 		try {
 			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
-			
-			System.out.println("PatientServiceImpl.getPatientListFromDB()");		//debug
-			System.out.println("-----Inhalt der ArrayListe aus der DB:");			//debug
-			System.out.println(patientList.toString());								//debug	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -418,6 +414,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------
 		// -- return PatientList --
 		// ------------------------	
+				
+		System.out.println("PatientServiceImpl.getPatientListFromDB()");		//debug
+		System.out.println("-----Inhalt der ArrayListe aus der DB:");			//debug
+				  	
 		return patientList;
 	}
 
@@ -629,9 +629,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 		String filelocation = file_service.locateFile();					//hat Rueckgabetyp pathtofile
 		
-		// -----------------------------
-		// -- return location of File --
-		// -----------------------------	
+		// ----------------------------------
+		// -- call & return list from CSV  --
+		// ----------------------------------	
 		System.out.println("-Calling List Generation-Method....");
 		return this.patient2csv.readPatientListFromCSV(filelocation);
 	}
