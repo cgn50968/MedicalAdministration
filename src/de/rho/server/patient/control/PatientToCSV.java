@@ -30,7 +30,7 @@ public class PatientToCSV {
 // ************************************
 // **** Read Patient List From CSV ****
 // ************************************
-	public ArrayList<Patient> readPatientListFromCSV(String filelocation) throws ParseException {
+	public ArrayList<Patient> readCSVFile(String filelocation) throws ParseException {
 		System.out.println("PatientToCSV.readPatientListFromCSV");	//debug
 		
 		// -----------------------------------

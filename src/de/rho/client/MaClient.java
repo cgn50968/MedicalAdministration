@@ -52,7 +52,7 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-				/*		System.out.println("#02 - create new Patient");
+						System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
@@ -75,7 +75,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-				*/	
+					
 				// **********************
 				// **** read Patient ****
 				// **********************
@@ -138,7 +138,7 @@ public class MaClient {
 				// **********************************
 				// **** write PatientList to CSV ****
 				// **********************************				
-				/*		
+						
 						System.out.println("#0x - write PatientList to CSV");		
 															
 						//Bitte Aufrufverbund fuers testen nicht aendern
@@ -150,7 +150,7 @@ public class MaClient {
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
 			
-				*/
+				
 				// *************************************
 				// **** search Patient by Last Name ****
 				// *************************************

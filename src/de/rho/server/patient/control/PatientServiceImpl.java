@@ -76,7 +76,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	// ************************
 		@Override
 		public void createPatientInDB(Patient patient) throws RemoteException {
-			System.out.println("PatientServiceImpl.createPatientInDB()");
+			System.out.println("\nPatientServiceImpl.createPatientInDB()");
 
 			// -----------------------------------
 			// -- reset variable for Address ID --
@@ -166,7 +166,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **********************
 	@Override
 	public Patient readPatientInDB(int id) throws RemoteException {
-		System.out.println("PatientServiceImpl.readPatientInDB()");
+		System.out.println("\nPatientServiceImpl.readPatientInDB()");
 		
 		Patient patient = new Patient();
 		
@@ -246,7 +246,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ************************	
 	@Override
 	public void updatePatientInDB(Patient patient) throws RemoteException {
-		System.out.println("PatientServiceImpl.updatePatientInDB()");
+		System.out.println("\nPatientServiceImpl.updatePatientInDB()");
 
 		// --------------------------
 		// -- create SQL Statement --
@@ -292,7 +292,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ************************
 	@Override
 	public void deletePatientInDB(int id, int addressid) throws RemoteException {
-		System.out.println("PatientServiceImpl.deletePatientInDB()");
+		System.out.println("\nPatientServiceImpl.deletePatientInDB()");
 		
 		
 		// --------------------------
@@ -342,7 +342,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **** Get Patient List DB ****
 // *****************************
 	public ArrayList<Patient> getPatientListFromDB() throws RemoteException {
-		System.out.println("PatientServiceImpl.getPatientListFromDB()");
+		System.out.println("\nPatientServiceImpl.getPatientListFromDB()");
 	
 
 		// --------------------------
@@ -432,7 +432,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // *******************************
 	@Override
 	public void writePatientListToDB(ArrayList<Patient> patientList) throws RemoteException {
-		System.out.println("PatientServiceImpl.writePatientListToDB()"); // debug
+		System.out.println("\nPatientServiceImpl.writePatientListToDB()"); // debug
 	
 		
 		// ------------------------------------
@@ -528,7 +528,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /****************/
 	@Override
 	public Patient searchPatientByIdInDB(int id) throws RemoteException {
-		System.out.println("Impl: leite 'searchByIdInDB' an 2DB weiter");
+		System.out.println("\nImpl: leite 'searchByIdInDB' an 2DB weiter");
 		return this.searchPatientByIdInDB(id);
 	}
 	
@@ -539,7 +539,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 	@Override
 	public ArrayList<Patient> searchPatientByNameInDB(String lastname) throws RemoteException {
-		System.out.println("PatientServiceImpl.searchPatientByNameInDB()");
+		System.out.println("\nPatientServiceImpl.searchPatientByNameInDB()");
 		
 		
 		// -------------------------------------------
@@ -631,7 +631,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ***********************************	
 	@Override
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
-		System.out.println("PatientServiceImpl.readPatientListFromCSV()");
+		System.out.println("\nPatientServiceImpl.readPatientListFromCSV()");
 		
 		String filelocation = file_service.locateFile();					//hat Rueckgabetyp pathtofile
 		
@@ -639,7 +639,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- call & return list from CSV  --
 		// ----------------------------------	
 		System.out.println("-Calling List Generation-Method....");
-		return this.patient2csv.readPatientListFromCSV(filelocation);
+		return this.patient2csv.readCSVFile(filelocation);
 	}
 
 // ***********************************
@@ -648,7 +648,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
 		
-		System.out.println("PatientServiceImpl.writePatientListToCSV()");	//debug
+		System.out.println("\nPatientServiceImpl.writePatientListToCSV()");	//debug
 		
 		String filelocation = file_service.locateFile();					//Datei ermitteln
 		
@@ -677,7 +677,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **********************************
 	@Override
 	public Boolean checkDateOfLastVisit(Patient patient) throws RemoteException {
-		System.out.println("PatientServiceImpl.checkDateOfLastVisit");
+		System.out.println("\nPatientServiceImpl.checkDateOfLastVisit");
 		
 		// ------------------------------------
 		// -- register Patient Card (yes/no) --
