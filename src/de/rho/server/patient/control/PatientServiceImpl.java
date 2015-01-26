@@ -447,9 +447,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		System.out.println("\nPatientServiceImpl.writePatientListToDB()"); // debug
 	
 		
-		// ------------------------------------
-		// -- open Connection to H2 Database --  
-		// ------------------------------------
+		// ---------------------------------
+		// -- open Connection to Database --  
+		// ---------------------------------
 		Connection con = null;
 		try {
 			con = db_service.connect();
