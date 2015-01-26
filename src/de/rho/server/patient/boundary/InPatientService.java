@@ -74,7 +74,7 @@ public interface InPatientService extends Remote {
 /****************/
 	
 	// -- For PatientServiceImpl.checkDate
-	public Boolean checkDateOfLastVisit(Patient patient) throws RemoteException;
+	public int checkDateOfLastVisit(Patient patient) throws RemoteException;
 
 		
 	

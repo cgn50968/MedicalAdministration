@@ -40,8 +40,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	/** Methoden-Services **/
 	private PatientToCSV patient2csv; 	 									//Deklaration fuer CSV-Methoden
 	private PatientToDB patient2db;				 							//Deklaration fuer DB-Methoden
-		
-	/** Connection-Services **/
+	
+	/** Connection-Services over Interface **/
 	private InDaoToDB db_service = FaDaoService.getDaoToDBService(); 		//Deklaration fuer DB-Connection-Service
 	private InDaoToFile file_service = FaDaoService.getDaoToFileService();	//to do: benutze file_service-connection
 			
@@ -104,7 +104,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 				e.printStackTrace();
 			}
 
-			
+		
 			// ----------------------------------------------
 			// -- execute SQL Query - MAX(id) FROM ADDRESS --
 			// ----------------------------------------------
@@ -639,9 +639,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- call & return list from CSV  --
 		// ----------------------------------	
 		return this.patient2csv.readCSVFile(filelocation);
-
 	}
 
+	
 // ***********************************
 // **** Write Patient List to CSV ****
 // ***********************************
@@ -675,13 +675,13 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **** Check Date of last visit ****
 // **********************************
 	@Override
-	public Boolean checkDateOfLastVisit(Patient patient) throws RemoteException {
+	public int checkDateOfLastVisit(Patient patient) throws RemoteException {
 		System.out.println("\nPatientServiceImpl.checkDateOfLastVisit");
 		
 		// ------------------------------------
 		// -- register Patient Card (yes/no) --
 		// ------------------------------------
-		boolean registerPatientCard = false;
+		int registerPatientCard = 0; // 0 = no registration required
 		
 		// -------------------------
 		// -- Declare Date Format --
@@ -692,68 +692,114 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- Get 'year' of last visit and today --
 		// ----------------------------------------
-		String yearOfLastVisit = year.format(patient.getLastvisit());
-		String yearOfToday = year.format(today);
-		
+		int yearOfLastVisit = Integer.parseInt(year.format(patient.getLastvisit()));
+		System.out.println(yearOfLastVisit);
+		int yearOfToday = Integer.parseInt(year.format(today));
+		System.out.println(yearOfToday);
+				
 		// -----------------------------------------
 		// -- Get 'month' of last visit and today --
 		// -----------------------------------------
 		int monthOfLastVisit = Integer.parseInt(month.format(patient.getLastvisit()));
+		System.out.println(monthOfLastVisit);
 		int monthOfToday = Integer.parseInt(month.format(today));
+		System.out.println(monthOfToday);
 		
-		// ---------------------------------------------
-		// -- if year of last visit unequal this year --
-		// ---------------------------------------------
+		
+		// ------------------------------------------------
+		// -- if year of last visit unequal to this year --
+		// ------------------------------------------------
 		if (yearOfLastVisit != yearOfToday) {
-			registerPatientCard = true; // -- no registration required 
+			registerPatientCard = 1; // -- registration required 
+			System.out.println("year is different");
 		}
-		
-		// -- Erste Quartal: Ergebnis von (3 minus Aktueller Monat) liegt zwischen 0 und 2 
+		// -----------------------------------------------------------
+		// -- 1st Quarter: Result of (3 - Current Month) = (0 to 2) --
+		// -----------------------------------------------------------
 		else if ((3 - monthOfToday) >= 0 && (3 - monthOfToday) <= 2 ) {
 			
 			if (monthOfLastVisit >= 1 && monthOfLastVisit <= 3) {
-				registerPatientCard = false; // -- no registration required				
+				// ------------------------------
+				// -- no registration required --
+				// ------------------------------
+				registerPatientCard = 0;
+				System.out.println("1st Quarter - no Card required");
 			}	
 			else {
-				registerPatientCard = true; // -- registration required	
+				// ---------------------------
+				// -- registration required --
+				// ---------------------------
+				registerPatientCard = 1;
+				System.out.println("1st Quarter - Card required");
 			}
 		}
 		
-		// -- Zweite Quartal: Ergebnis von (6 minus Aktueller Monat) liegt zwischen 0 und 2 
+		// -----------------------------------------------------------
+		// -- 2nd Quarter: Result of (6 - Current Month) = (0 to 2) --
+		// -----------------------------------------------------------
 		else if ((6 - monthOfToday) >= 0 && (6 - monthOfToday) <= 2 ) {
 			
 			if (monthOfLastVisit >= 4 && monthOfLastVisit <= 6) {
-				registerPatientCard = false; // -- no registration required				
+				// ------------------------------
+				// -- no registration required --
+				// ------------------------------
+				registerPatientCard = 0;			
+				System.out.println("2nd Quarter - no Card required");
 			}	
 			else {
-				registerPatientCard = true; // -- no registration required	
+				// ---------------------------
+				// -- registration required --
+				// ---------------------------
+				registerPatientCard = 1;
+				System.out.println("2nd Quarter - Card required");
 			}
 		}
 
-		// -- Dritte Quartal: Ergebnis von (9 minus Aktueller Monat) liegt zwischen 0 und 2 
+		// -----------------------------------------------------------
+		// -- 3rd Quarter: Result of (9 - Current Month) = (0 to 2) --
+		// -----------------------------------------------------------
 		else if ((9 - monthOfToday) >= 0 && (9 - monthOfToday) <= 2 ) {
 			if (monthOfLastVisit >= 7 && monthOfLastVisit <= 9) {
-				registerPatientCard = false; // -- no registration required
+				// ------------------------------
+				// -- no registration required --
+				// ------------------------------
+				registerPatientCard = 0;
+				System.out.println("3rd Quarter - no Card required");
 			}	
 			else {
-				registerPatientCard = true; // -- no registration required	
+				// ---------------------------
+				// -- registration required --
+				// ---------------------------
+				registerPatientCard = 1;
+				System.out.println("3rd Quarter - Card required");
 			}
 		}
 
-		// -- Vierte Quartal: Ergebnis von (12 minus Aktueller Monat) liegt zwischen 0 und 2 
+		// ------------------------------------------------------------
+		// -- 4th Quarter: Result of (12 - Current Month) = (0 to 2) --
+		// ------------------------------------------------------------
 		else if ((12 - monthOfToday) >= 0 && (12 - monthOfToday) <= 2 ) {
 
 			if (monthOfLastVisit >= 10 && monthOfLastVisit <= 12) {
-				registerPatientCard = false; // -- no registration required
+				// ------------------------------
+				// -- no registration required --
+				// ------------------------------
+				registerPatientCard = 0; 
+				System.out.println("4th Quarter - no Card required");
 			}	
 			else {
-				registerPatientCard = true; // -- no registration required	
+				// ---------------------------
+				// -- registration required --
+				// ---------------------------
+				registerPatientCard = 1;
+				System.out.println("4th Quarter - Card required");
 			}
 		}
 		
 		// ---------------------------------------------
 		// -- return if Card registration is required --
 		// ---------------------------------------------
+		System.out.println(registerPatientCard);
 		return registerPatientCard;
 		
 		/*

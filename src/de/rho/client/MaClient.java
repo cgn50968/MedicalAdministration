@@ -52,7 +52,7 @@ public class MaClient {
 				// ************************			
 				// **** create Patient ****
 				// ************************
-						System.out.println("#02 - create new Patient");
+				/*		System.out.println("#02 - create new Patient");
 						
 							// ****************************
 							// **** set Patient object ****
@@ -75,7 +75,7 @@ public class MaClient {
 							// ******************************
 							PatientService.createPatientInDB(patient);
 						
-					
+				*/	
 				// **********************
 				// **** read Patient ****
 				// **********************
@@ -84,10 +84,28 @@ public class MaClient {
 							// *************************************
 							// **** call: get Patient with id=1 ****
 							// *************************************
-							patient = PatientService.readPatientInDB(1);
+							patient = PatientService.readPatientInDB(40);
 							System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
 							
 				
+				// **********************************
+				// **** Check Date of last visit ****
+				// **********************************
+						System.out.println("#0x - check date of last visit");		
+													
+							int registerPatientCard = PatientService.checkDateOfLastVisit(patient);
+							if (registerPatientCard == 1) {
+								System.out.println(registerPatientCard);
+								System.out.println("Neues Quartal: Versicherungskarte muss eingelesen werden.");
+							}
+							else {
+								System.out.println(registerPatientCard);
+								System.out.println("Versicherungskarte wurde in diesem Quartal bereits registriert.");
+							}
+								
+							//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
+																
+							
 				// ************************
 				// **** update Patient ****
 				// ************************		
@@ -184,15 +202,6 @@ public class MaClient {
 						}
 
 					*/
-						
-				// **********************************
-				// **** Check Date of last visit ****
-				// **********************************
-						System.out.println("#0x - check date of last visit");		
-										
-						PatientService.checkDateOfLastVisit(PatientService.readPatientInDB(1));
-					
-						//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
 						
 		/**************************/
 		/**** END OF TRY BLOCK ****/
