@@ -638,8 +638,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------
 		// -- call & return list from CSV  --
 		// ----------------------------------	
-		System.out.println("-Calling List Generation-Method....");
 		return this.patient2csv.readCSVFile(filelocation);
+
 	}
 
 // ***********************************
@@ -647,7 +647,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // ***********************************
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
-		
 		System.out.println("\nPatientServiceImpl.writePatientListToCSV()");	//debug
 		
 		String filelocation = file_service.locateFile();					//Datei ermitteln
