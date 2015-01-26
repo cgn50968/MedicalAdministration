@@ -79,7 +79,7 @@ public class MaClient {
 				// **********************
 				// **** read Patient ****
 				// **********************
-				/*		System.out.println("#03 - get Patient with id=1");
+						System.out.println("#03 - get Patient with id=1");
 							
 							// *************************************
 							// **** call: get Patient with id=1 ****
@@ -87,7 +87,7 @@ public class MaClient {
 							patient = PatientService.readPatientInDB(1);
 							System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
 							
-				*/
+				
 				// ************************
 				// **** update Patient ****
 				// ************************		
@@ -123,18 +123,18 @@ public class MaClient {
 				// *****************************************
 				// **** import Patient from CSV into DB ****
 				// *****************************************	
-							
+				/*			
 						System.out.println("#0x - import PatientList from CSV");		
 						
 						//Bitte Aufrufverbund fuers testen nicht aendern
 						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 						
-						//TODO "ö": import laueft sauber, der tokenizer ist es nicht
+						//TODO Leerzeichenpruefung
 						
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
 		
-				
+				*/
 				// **********************************
 				// **** write PatientList to CSV ****
 				// **********************************				
@@ -144,6 +144,8 @@ public class MaClient {
 						//Bitte Aufrufverbund fuers testen nicht aendern
 						
 						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+						
+						//TODO Leerzeichenpruefung
 												
 						//viel wichtiger: was ist mit der RMI- Verbindung?
 						//patientList.clear();
@@ -181,7 +183,17 @@ public class MaClient {
 							System.out.println(output);
 						}
 
-					*/	
+					*/
+						
+				// **********************************
+				// **** Check Date of last visit ****
+				// **********************************
+						System.out.println("#0x - check date of last visit");		
+										
+						PatientService.checkDateOfLastVisit(PatientService.readPatientInDB(1));
+					
+						//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
+						
 		/**************************/
 		/**** END OF TRY BLOCK ****/
 		/**************************/

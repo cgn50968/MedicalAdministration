@@ -682,7 +682,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		// -- register Patient Card (yes/no) --
 		// ------------------------------------
-		Boolean registerPatientCard = false;
+		boolean registerPatientCard = false;
 		
 		// -------------------------
 		// -- Declare Date Format --
