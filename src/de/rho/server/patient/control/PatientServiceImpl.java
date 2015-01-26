@@ -248,12 +248,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void updatePatientInDB(Patient patient) throws RemoteException {
 		System.out.println("\nPatientServiceImpl.updatePatientInDB()");
 
-		// --------------------------
-		// -- create SQL Statement --
-		// --------------------------
-		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
-
-		
 		// ------------------------------------
 		// -- open Connection to H2 Database --  
 		// ------------------------------------
@@ -269,11 +263,29 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
+		// --------------------------
+		// -- create SQL Statement --
+		// --------------------------
+		sql_statement = this.patient2db.updatePatientSqlStatement(patient);
+		
+		
 		// ----------------------------------------
 		// -- execute SQL Query - UPDATE PATIENT --
 		// ----------------------------------------
 		db_service.executeQuery(con, sql_statement, false);
 		
+
+		// --------------------------
+		// -- create SQL Statement --
+		// --------------------------
+		sql_statement = this.patient2db.updateAddressSqlStatement(patient);
+		
+		
+		// ----------------------------------------
+		// -- execute SQL Query - UPDATE ADDRESS --
+		// ----------------------------------------
+		db_service.executeQuery(con, sql_statement, false);
+
 		
 		// ----------------------------------------
 		// -- close DB Connection / no ResultSet --
@@ -526,12 +538,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 /****************/		
 /**** Search ****/
 /****************/
-	@Override
-	public Patient searchPatientByIdInDB(int id) throws RemoteException {
-		System.out.println("\nImpl: leite 'searchByIdInDB' an 2DB weiter");
-		return this.searchPatientByIdInDB(id);
-	}
-	
 	
 // *******************************
 // **** Search Patient by Name ***

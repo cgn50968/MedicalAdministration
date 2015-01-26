@@ -30,7 +30,7 @@ public class PatientToDB {
 	// ****************************
 	// **** format Date for DB ****
 	// ****************************
-	public String formatDateForDB(Date date) {
+	private String formatDateForDB(Date date) {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 		String datefordb = DATE_FORMAT.format(date);
 		return datefordb;
@@ -104,7 +104,7 @@ public class PatientToDB {
 	// **** read Patient ****
 	// **********************
 	public String readPatientSqlStatement(int id) {
-		System.out.println("PatientToDB.readPatientSqlStatement"); //debug
+		System.out.println("PatientToDB.readPatientSqlStatement()"); //debug
 
 		// -----------------------------------------		
 		// -- create *Read Patient* sql statement --
@@ -121,7 +121,7 @@ public class PatientToDB {
 	// **** update Patient ****
 	// ************************
 	public String updatePatientSqlStatement(Patient patient) {
-		System.out.println("PatientToDB.updatePatientSqlStatement"); //debug
+		System.out.println("PatientToDB.updatePatientSqlStatement()"); //debug
 		
 		// -------------------------------------------
 		// -- create *UPDATE PATIENT* sql statement --
@@ -138,12 +138,33 @@ public class PatientToDB {
 		return sqlstatement;	
 	}
 
+
+	// ************************	
+	// **** update Address ****
+	// ************************
+	public String updateAddressSqlStatement(Patient patient) {
+		System.out.println("PatientToDB.updateAddressSqlStatement()"); //debug
+		
+		// -------------------------------------------
+		// -- create *UPDATE ADDRESS* sql statement --
+		// -------------------------------------------
+		String sqlstatement = "UPDATE address SET ";
+		sqlstatement = sqlstatement + "street=\'" + patient.getStreet() + "\', ";
+		sqlstatement = sqlstatement + "housenumber=\'" + patient.getHousenumber() + "\', ";
+		sqlstatement = sqlstatement + "postalcode=\'" + patient.getPostalcode() + "\', ";
+		sqlstatement = sqlstatement + "city=\'" + patient.getCity() + "\' ";
+		sqlstatement = sqlstatement + "WHERE id=" + patient.getAddressid() + ";";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;	
+	}
+	
 	
 	// **************************************	
 	// **** delete Patient (and Address) ****
 	// **************************************
 	public String deletePatientSqlStatement(int id, int addressid) {
-		System.out.println("PatientToDB.deletePatientSqlStatement"); //debug
+		System.out.println("PatientToDB.deletePatientSqlStatement()"); //debug
 		
 		// -------------------------------------------
 		// -- create *DELETE PATIENT* sql statement --
@@ -160,7 +181,7 @@ public class PatientToDB {
 	// **** get Patient List ****
 	// **************************
 	public String getPatientListSqlStatement() {
-		System.out.println("PatientToDB.getPatientListSqlStatement"); //debug
+		System.out.println("PatientToDB.getPatientListSqlStatement()"); //debug
 		
 		// ---------------------------------------------
 		// -- create *GET PATIENT LIST* sql statement --
@@ -177,7 +198,7 @@ public class PatientToDB {
 	// **** search Patient by Name ****
 	// ********************************
 	public String searchPatientByNameSqlStatement(String lastname) {
-		System.out.println("PatientToDB.searchPatientByNameSqlStatement"); //debug
+		System.out.println("PatientToDB.searchPatientByNameSqlStatement()"); //debug
 		
 		// ---------------------------------------------
 		// -- create *SEARCH PATIENT* sql statement --

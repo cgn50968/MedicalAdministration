@@ -50,9 +50,6 @@ public interface InPatientService extends Remote {
 /****************/
 /**** Search ****/
 /****************/
-	
-	// -- For PatientServiceImpl.searchPatientByIdInDB	
-	public Patient searchPatientByIdInDB(int id) throws RemoteException;
 
 	// -- For PatientServiceImpl.searchPatientByNameInDB
 	public ArrayList<Patient> searchPatientByNameInDB(String searchString) throws RemoteException;

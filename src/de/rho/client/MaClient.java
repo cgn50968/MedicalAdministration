@@ -42,6 +42,7 @@ public class MaClient {
 			// **** Variables und Objects ****
 			// *******************************
 			Patient patient = new Patient();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			
 			
 			/**********************************/
@@ -54,25 +55,21 @@ public class MaClient {
 				// ************************
 				/*		System.out.println("#02 - create new Patient");
 						
-							// ****************************
-							// **** set Patient object ****
-							// **************************** 
-
-							SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-						
-													
+							// ------------------------
+							// -- set Patient object --
+							// ------------------------ 
 							patient.setFirstname("Theo");
 							patient.setLastname("Lingen");
 							patient.setGender("m");
-							patient.setDayofbirth(format.parse("29.05.1920"));
+							patient.setDayofbirth(dateFormat.parse("29.05.1920"));
 							patient.setStreet("Landstrasse");
 							patient.setHousenumber("2");
 							patient.setPostalcode("50999");
 							patient.setCity("Köln");
 							
-							// ******************************
-							// **** call: create Patient ****
-							// ******************************
+							// --------------------------
+							// -- call: create Patient --
+							// --------------------------
 							PatientService.createPatientInDB(patient);
 						
 				*/	
@@ -81,10 +78,10 @@ public class MaClient {
 				// **********************
 						System.out.println("#03 - get Patient with id=1");
 							
-							// *************************************
-							// **** call: get Patient with id=1 ****
-							// *************************************
-							patient = PatientService.readPatientInDB(40);
+							// ---------------------------------
+							// -- call: get Patient with id=1 --
+							// ---------------------------------
+							patient = PatientService.readPatientInDB(1);
 							System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
 							
 				
@@ -109,7 +106,7 @@ public class MaClient {
 				// ************************
 				// **** update Patient ****
 				// ************************		
-				/*		System.out.println("#04 - update Patient with id=1");
+						System.out.println("#04 - update Patient with id=1");
 						
 							// ------------------------
 							// -- set Patient object --
@@ -118,15 +115,19 @@ public class MaClient {
 							patient.setFirstname("Maria");
 							patient.setLastname("Schmitz");
 							patient.setGender("w");
-							patient.setDayofbirth("1967-10-03");
+							patient.setDayofbirth(dateFormat.parse("03.10.1967"));
 							patient.setAddressid(1);
+							patient.setStreet("Hauptstrasse");
+							patient.setHousenumber("6");
+							patient.setPostalcode("53902");
+							patient.setCity("Bad Münstereifel");
 							
 							// --------------------------
 							// -- call: update Patient --
 							// --------------------------
 							PatientService.updatePatientInDB(patient);
 											
-				*/		
+						
 				// ************************
 				// **** delete Patient ****
 				// ************************				
