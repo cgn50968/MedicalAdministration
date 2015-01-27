@@ -42,8 +42,8 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	private PatientToDB patient2db;				 							//Deklaration fuer DB-Methoden
 	
 	/** Connection-Services over Interface **/
-	private InDaoToDB db_service = FaDaoService.getDaoToDBService(); 		//Deklaration fuer DB-Connection-Service
-	private InDaoToFile file_service = FaDaoService.getDaoToFileService();	//to do: benutze file_service-connection
+	private InDaoToDB db_service; 		//= FaDaoService.getDaoToDBService()
+	private InDaoToFile file_service;	//= FaDaoService.getDaoToFileService()
 			
 	private ResultSet resultSet;
 	private String sql_statement;
@@ -61,8 +61,10 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		
 	protected PatientServiceImpl() throws RemoteException {
 		super();
-		this.patient2csv = new PatientToCSV(); //Initialisierung/Instanziierung der "Objektverbindung" CSV (Defaultkonstruktor)
-		this.patient2db = new PatientToDB();   //Initialisierung/Instanziierung der "Objektverbindung" DB (Defaultkonstruktor)
+		this.patient2csv = new PatientToCSV(); 						// -- Initialisierung/Instanziierung der "Objektverbindung" CSV (Defaultkonstruktor)
+		this.patient2db = new PatientToDB();   						// -- Initialisierung/Instanziierung der "Objektverbindung" DB (Defaultkonstruktor)
+		this.db_service = FaDaoService.getDaoToDBService(); 		// -- Initialisierung/Instanziierung des DB Service
+		this.file_service = FaDaoService.getDaoToFileService();		// -- Initialisierung/Instanziierung des File Service
 	}
 
 	
