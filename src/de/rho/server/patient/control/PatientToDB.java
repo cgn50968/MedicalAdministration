@@ -99,9 +99,9 @@ public class PatientToDB {
 	}
 	
 	
-/*******************************/
-/**** SQL Queries - PATIENT ****/
-/*******************************/
+/**************************************/
+/**** SQL Queries - PATIENT - CRUD ****/
+/**************************************/
 	
 	// ************************
 	// **** create Patient ****
@@ -179,7 +179,11 @@ public class PatientToDB {
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;		
 	}
+
 	
+/**************************************/
+/**** SQL Queries - PATIENT - CRUD ****/
+/**************************************/
 	
 	// **************************	
 	// **** get Patient List ****

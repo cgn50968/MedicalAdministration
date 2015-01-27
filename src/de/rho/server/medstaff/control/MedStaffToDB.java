@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.rho.server.medstaff.entity.MedStaff;
-import de.rho.server.patient.entity.Patient;
+
 
 public class MedStaffToDB {
 
@@ -91,9 +91,9 @@ public class MedStaffToDB {
 	}
 	
 	
-/********************************/
-/**** SQL Queries - MEDSTAFF ****/
-/********************************/
+/***************************************/
+/**** SQL Queries - MEDSTAFF - CRUD ****/
+/***************************************/
 
 	// ************************
 	// **** create MedStaff ****
@@ -171,6 +171,28 @@ public class MedStaffToDB {
 		
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;		
+	}
+
+	
+/***************************************/
+/**** SQL Queries - MEDSTAFF - List ****/
+/***************************************/
+
+	// **************************	
+	// **** get Patient List ****
+	// **************************
+	public String getMedStaffListSqlStatement() {
+		System.out.println("MedStaffToDB.getMedStaffListSqlStatement()"); //debug
+			
+		// ----------------------------------------------
+		// -- create *GET MedStaff LIST* sql statement --
+		// ----------------------------------------------
+		String sqlstatement = "SELECT m.*, r.role, a.street, a.housenumber, a.postalcode, a.city FROM medstaff AS m ";
+		sqlstatement = sqlstatement + "INNER JOIN address AS a ON m.addressid=a.id ";
+		sqlstatement = sqlstatement + "INNER JOIN roles AS r ON m.roleid=r.id;";
+		
+		System.out.println(sqlstatement); //debug		
+		return sqlstatement;
 	}
 	
 }

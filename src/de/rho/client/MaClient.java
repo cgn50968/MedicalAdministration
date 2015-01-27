@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.entity.MedStaff;
@@ -169,7 +170,8 @@ public class MaClient {
 		System.out.println("#0x - write PatientList to CSV");		
 															
 		//Bitte Aufrufverbund fuers testen nicht aendern
-						
+		
+		// -- Get PatientList object > Write PatientList object to file --
 		PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
 						
 		//TODO Leerzeichenpruefung
@@ -289,7 +291,26 @@ public class MaClient {
 		// --------------------------
 		MedStaffService.deleteMedStaffInDB(2, 7);		// -- (2 = id, 7 = addressid)	
 */	
-				
+
+	// **********************************
+	// **** get MedStaffList From DB ****
+	// **********************************
+		System.out.println("\n#E: - get MedStaff List");
+													
+		// ------------------------------------
+		// -- call: get MedStaffList From DB --
+		// ------------------------------------
+		ArrayList<MedStaff> medstaffList = MedStaffService.getMedStaffListFromDB();
+		
+    	// ---------------------------------------
+    	// -- For each medstaff in medstaffList -- 
+    	// ---------------------------------------
+        
+		for (MedStaff m : medstaffList) {
+			System.out.println(m.getId() + ";" + m.getFirstname() + ";" + m.getLastname() + ";" + m.getRole() + ";" + m.getStreet() + " " + m.getHousenumber() + ";" + m.getPostalcode() + " " + m.getCity());
+        }
+		
+		
 /**************************/
 /**** END OF TRY BLOCK ****/
 /**************************/
