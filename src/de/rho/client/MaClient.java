@@ -215,11 +215,37 @@ public class MaClient {
 /****************************/
 /** TEST - MedStaffService **/
 /****************************/
+
+	// ************************			
+	// **** create Patient ****
+	// ************************
+					
+		System.out.println("\n1. Situation: 1. Arbeitstag eines neuen Arztes.");
+		System.out.println("#A: - create new MedStaff\n");
+								
+		// -------------------------
+		// -- set MedStaff object --
+		// ------------------------- 
+		medstaff.setFirstname("Doktor");
+		medstaff.setLastname("Dolittle");
+		medstaff.setRoleid(2);
+		medstaff.setGender("m");
+		medstaff.setDayofbirth(dateFormat.parse("01.04.1960"));
+		medstaff.setStreet("Weißer Hauptstrasse");
+		medstaff.setHousenumber("8");
+		medstaff.setPostalcode("50996");
+		medstaff.setCity("Köln");
 						
+		// ---------------------------
+		// -- call: create MedStaff --
+		// ---------------------------
+		MedStaffService.createMedStaffInDB(medstaff);
+		
+		
 	// ***********************
 	// **** read MedStaff ****
 	// ***********************
-	System.out.println("\n#04 - get MedStaff with id=1\n");
+	System.out.println("\n#B: - get MedStaff with id=1\n");
 												
 		// ---------------------------------
 		// -- call: get MedStaff with id=1 --
@@ -227,7 +253,32 @@ public class MaClient {
 		medstaff = MedStaffService.readMedStaffInDB(1);
 		System.out.println(medstaff.getId() + ";" + medstaff.getFirstname() + ";" + medstaff.getLastname() + ";" + medstaff.getRole() + ";" + medstaff.getCity());
 
+		
+	// *************************
+	// **** update MedStaff ****
+	// *************************
 
+		System.out.println("\n#C: - update MedStaff\n");
+		
+		// -------------------------
+		// -- set MedStaff object --
+		// ------------------------- 
+		medstaff.setId(1);
+		medstaff.setFirstname("Brad");
+		medstaff.setLastname("Pitt");
+		medstaff.setRoleid(1);
+		medstaff.setGender("m");
+		medstaff.setDayofbirth(dateFormat.parse("01.04.1968"));
+		medstaff.setStreet("Musfeldstraße");
+		medstaff.setHousenumber("1");
+		medstaff.setPostalcode("47051");
+		medstaff.setCity("Duisburg");
+						
+		// ---------------------------
+		// -- call: update MedStaff --
+		// ---------------------------
+		MedStaffService.updateMedStaffInDB(medstaff);
+		
 		
 /**************************/
 /**** END OF TRY BLOCK ****/

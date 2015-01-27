@@ -54,7 +54,88 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************	
 	@Override	
 		public void createMedStaffInDB(MedStaff medstaff) throws RemoteException {
-			System.out.println("\nMedStaffService.createMedStaffDB");			
+			System.out.println("\nMedStaffService.createMedStaffDB");	
+			
+			// -----------------------------------
+			// -- reset variable for Address ID --
+			// -----------------------------------
+			max_id = 1;
+				
+			// -------------------------------------------------
+			// -- create SQL Statement - MAX(id) FROM ADDRESS --
+			// -------------------------------------------------
+			sql_statement = this.medstaff2db.selectMaxIdFromAddressSqlStatement();
+				
+			// ------------------------------------
+			// -- open Connection to H2 Database --  
+			// ------------------------------------
+			Connection con = null;
+			try {
+				con = this.db_service.connect();
+			} 
+			catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+			// ----------------------------------------------
+			// -- execute SQL Query - MAX(id) FROM ADDRESS --
+			// ----------------------------------------------
+			resultSet = this.db_service.executeQuery(con, sql_statement, true);
+				
+			try {
+				while(resultSet.next()) {
+					max_id = Integer.parseInt(resultSet.getString("ID"));
+					System.out.println(max_id);
+				}
+			} catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+				
+			// -------------------------------------------
+			// -- create SQL Statement - CREATE ADDRESS --
+			// -------------------------------------------
+			sql_statement = this.medstaff2db.createAddressSqlStatement(medstaff, max_id);
+
+				
+			// ----------------------------------------
+			// -- execute SQL Query - CREATE ADDRESS --
+			// ----------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+
+			
+			// --------------------------------------------
+			// -- create SQL Statement - CREATE MEDSTAFF --
+			// --------------------------------------------
+			sql_statement = this.medstaff2db.createMedStaffSqlStatement(medstaff, max_id);
+
+			
+			// -----------------------------------------
+			// -- execute SQL Query - CREATE MEDSTAFF --
+			// -----------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+						
+				
+			// ---------------------------------------
+			// -- close DB Connection and ResultSet --
+			// ---------------------------------------
+			try {
+				this.db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
@@ -88,9 +169,9 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 		}
 		
 		
-		// ----------------------------------------------
-		// -- execute SQL Query - MAX(id) FROM ADDRESS --
-		// ----------------------------------------------
+		// ---------------------------------------
+		// -- execute SQL Query - READ MEDSTAFF --
+		// ---------------------------------------
 		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 		
@@ -145,7 +226,57 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************
 	@Override	
 		public void updateMedStaffInDB(MedStaff medstaff) throws RemoteException {
-			System.out.println("\nMedStaffService.updateMedStaffDB");			
+			System.out.println("\nMedStaffService.updateMedStaffDB");	
+			
+			// ------------------------------------
+			// -- open Connection to H2 Database --  
+			// ------------------------------------
+			Connection con = null;
+			try {
+				con = this.db_service.connect();
+			}
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			// --------------------------
+			// -- create SQL Statement --
+			// --------------------------
+			sql_statement = this.medstaff2db.updateMedStaffSqlStatement(medstaff);
+			
+			
+			// ----------------------------------------
+			// -- execute SQL Query - UPDATE MEDSTAFF --
+			// ----------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);
+			
+
+			// --------------------------
+			// -- create SQL Statement --
+			// --------------------------
+			sql_statement = this.medstaff2db.updateAddressSqlStatement(medstaff);
+			
+			
+			// ----------------------------------------
+			// -- execute SQL Query - UPDATE ADDRESS --
+			// ----------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);
+
+			
+			// ----------------------------------------
+			// -- close DB Connection / no ResultSet --
+			// ----------------------------------------
+			try {
+				this.db_service.disconnect(con, null);		
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		

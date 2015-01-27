@@ -37,12 +37,12 @@ public class PatientToDB {
 	}
 		
 
-/*********************/
-/**** SQL Queries ****/
-/*********************/
+/*******************************/
+/**** SQL Queries - ADDRESS ****/
+/*******************************/
 	
 	// ******************************
-	// **** MAX(id) from Patient ****
+	// **** MAX(id) from Address ****
 	// ******************************
 	public String selectMaxIdFromAddressSqlStatement() {
 		System.out.println("PatientToDB.selectMaxIdFromAddressSqlStatement()"); //debug
@@ -76,7 +76,32 @@ public class PatientToDB {
 		System.out.println(sqlstatement); //debug
 		return sqlstatement;
 	}
+
 	
+	// ************************	
+	// **** update Address ****
+	// ************************
+	public String updateAddressSqlStatement(Patient patient) {
+		System.out.println("PatientToDB.updateAddressSqlStatement()"); //debug
+		
+		// -------------------------------------------
+		// -- create *UPDATE ADDRESS* sql statement --
+		// -------------------------------------------
+		String sqlstatement = "UPDATE address SET ";
+		sqlstatement = sqlstatement + "street=\'" + patient.getStreet() + "\', ";
+		sqlstatement = sqlstatement + "housenumber=\'" + patient.getHousenumber() + "\', ";
+		sqlstatement = sqlstatement + "postalcode=\'" + patient.getPostalcode() + "\', ";
+		sqlstatement = sqlstatement + "city=\'" + patient.getCity() + "\' ";
+		sqlstatement = sqlstatement + "WHERE id=" + patient.getAddressid() + ";";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;	
+	}
+	
+	
+/*******************************/
+/**** SQL Queries - PATIENT ****/
+/*******************************/
 	
 	// ************************
 	// **** create Patient ****
@@ -138,27 +163,6 @@ public class PatientToDB {
 		return sqlstatement;	
 	}
 
-
-	// ************************	
-	// **** update Address ****
-	// ************************
-	public String updateAddressSqlStatement(Patient patient) {
-		System.out.println("PatientToDB.updateAddressSqlStatement()"); //debug
-		
-		// -------------------------------------------
-		// -- create *UPDATE ADDRESS* sql statement --
-		// -------------------------------------------
-		String sqlstatement = "UPDATE address SET ";
-		sqlstatement = sqlstatement + "street=\'" + patient.getStreet() + "\', ";
-		sqlstatement = sqlstatement + "housenumber=\'" + patient.getHousenumber() + "\', ";
-		sqlstatement = sqlstatement + "postalcode=\'" + patient.getPostalcode() + "\', ";
-		sqlstatement = sqlstatement + "city=\'" + patient.getCity() + "\' ";
-		sqlstatement = sqlstatement + "WHERE id=" + patient.getAddressid() + ";";
-		
-		System.out.println(sqlstatement); //debug
-		return sqlstatement;	
-	}
-	
 	
 	// **************************************	
 	// **** delete Patient (and Address) ****

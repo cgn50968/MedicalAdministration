@@ -193,9 +193,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		}
 		
 		
-		// ----------------------------------------------
-		// -- execute SQL Query - MAX(id) FROM ADDRESS --
-		// ----------------------------------------------
+		// --------------------------------------
+		// -- execute SQL Query - READ PATIENT --
+		// --------------------------------------
 		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 		
