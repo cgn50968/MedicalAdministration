@@ -1,10 +1,26 @@
 package de.rho.server.patient.control;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+
+
+
+
+
+
+
 
 
 import de.rho.server.patient.entity.Patient;
@@ -109,7 +125,7 @@ public class PatientToCSV {
 // ***************************
 // **** Generate CSV File ****
 // ***************************	
-	public void generateCsvFile(ArrayList<Patient> patientList, String filelocation){
+	public void generateCSVFile(ArrayList<Patient> patientList, String filelocation){
 		System.out.println("PatientToCSV.generateCsvFile");	//debug
 
 		// ----------------------

@@ -665,7 +665,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			
 			System.out.println("-Calling File Generation-Method....");
 			
-			this.patient2csv.generateCsvFile(patientList, filelocation);	//an dieser Stelle Weiterleitung, Verarbeitung eine Ebene tiefer
+			this.patient2csv.generateCSVFile(patientList, filelocation);	//an dieser Stelle Weiterleitung, Verarbeitung eine Ebene tiefer
 		}
 		else {
 			System.out.println("*** ACHTUNG ***");
