@@ -1,4 +1,4 @@
-
+﻿
 DROP TABLE PATIENT;
 DROP TABLE MEDSTAFF;
 DROP TABLE ADDRESS;
@@ -91,6 +91,6 @@ INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID
 INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Günter', 'Pfitzmann', 'm', '2', '1962-08-12', '7');
 INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Lisa', 'Müller', 'w', '3', '1976-07-04', '8');
 
-INSERT INTO MT (PatientID, MedStaffID, Date, Treatment) VALUES ('1', '2', '2015-01-04', 'Großes Blutbild. Verdacht auf Virusgrippe. Patient hat hohes Fieber (40,2°)');
+INSERT INTO MT (PatientID, MedStaffID, Date, Treatment) VALUES ('1', '2', '2015-01-04', 'Großes Blutbild. Verdacht auf Virusgrippe. Patient hat hohes Fieber (40,2 Grad)');
 
 SELECT MAX(id)+1 AS id FROM PATIENT;
