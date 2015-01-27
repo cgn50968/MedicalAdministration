@@ -156,4 +156,21 @@ public class MedStaffToDB {
 		return sqlstatement;	
 	}
 	
+	
+	// **************************************	
+	// **** delete MedStaff (and Address) ****
+	// **************************************
+	public String deleteMedStaffSqlStatement(int id, int addressid) {
+		System.out.println("MedStaffToDB.deleteMedStaffSqlStatement()"); //debug
+		
+		// -------------------------------------------
+		// -- create *DELETE MEDSTAFF* sql statement --
+		// -------------------------------------------
+		String sqlstatement = "DELETE FROM medstaff WHERE id=" + id + ";\n";
+		sqlstatement = sqlstatement + "DELETE FROM address WHERE id=" + addressid + ";";
+		
+		System.out.println(sqlstatement); //debug
+		return sqlstatement;		
+	}
+	
 }

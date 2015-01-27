@@ -139,76 +139,76 @@ public class MaClient {
 	// ************************
 	// **** delete Patient ****
 	// ************************				
-	/*		System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+	/*	System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 						
-				// --------------------------
-				// -- call: delete Patient --
-				// --------------------------
-				PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+			// --------------------------
+			// -- call: delete Patient --
+			// --------------------------
+			PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 							
 	*/			
 	// *****************************************
 	// **** import Patient from CSV into DB ****
 	// *****************************************	
 	/*			
-			System.out.println("#0x - import PatientList from CSV");		
+		System.out.println("#0x - import PatientList from CSV");		
 			
-			//Bitte Aufrufverbund fuers testen nicht aendern
-			PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
+		//Bitte Aufrufverbund fuers testen nicht aendern
+		PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
 			
-			//TODO Leerzeichenpruefung
+		//TODO Leerzeichenpruefung
 						
-			//viel wichtiger: was ist mit der RMI- Verbindung?
-			//patientList.clear();
+		//viel wichtiger: was ist mit der RMI- Verbindung?
+		//patientList.clear();
 		
 	*/
 	// **********************************
 	// **** write PatientList to CSV ****
 	// **********************************				
 						
-			System.out.println("#0x - write PatientList to CSV");		
+		System.out.println("#0x - write PatientList to CSV");		
 															
-			//Bitte Aufrufverbund fuers testen nicht aendern
+		//Bitte Aufrufverbund fuers testen nicht aendern
 						
-			PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+		PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
 						
-			//TODO Leerzeichenpruefung
+		//TODO Leerzeichenpruefung
 												
-			//viel wichtiger: was ist mit der RMI- Verbindung?
-			//patientList.clear();
-			
+		//viel wichtiger: was ist mit der RMI- Verbindung?
+		//patientList.clear();
+		
 				
 	// *************************************
 	// **** search Patient by Last Name ****
 	// *************************************
-	/*		System.out.println("#0x - search Patient by Last-Name");		
+	/*	System.out.println("#0x - search Patient by Last-Name");		
 								
-			// ----------------------------------------------
-			// -- search Patient with Last Name = 'Lingen' --
-			// ----------------------------------------------
-			String lastname = "Lingen";
+		// ----------------------------------------------
+		// -- search Patient with Last Name = 'Lingen' --
+		// ----------------------------------------------
+		String lastname = "Lingen";
 								
-			// --------------------
-			// -- search Patient --
-			// --------------------
-			ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
+		// --------------------
+		// -- search Patient --
+		// --------------------
+		ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
 								
-			// ------------------------
-			// -- show search result --
-			// ------------------------
-			for (Patient patient01 : patientList) {
-				String output = patient01.getId() + " ";
-				output = output + patient01.getFirstname() + " ";
-				output = output + patient01.getLastname() + " ";
-				output = output + patient01.getGender() + " ";
-				output = output + patient01.getDayofbirth() + " ";
-				output = output + patient01.getLastvisit() + " ";
-				output = output + patient01.getStreet() + " ";
-				output = output + patient01.getHousenumber() + " ";
-				output = output + patient01.getPostalcode() + " ";
-				output = output + patient01.getCity();
-				System.out.println(output);
-			}
+		// ------------------------
+		// -- show search result --
+		// ------------------------
+		for (Patient patient01 : patientList) {
+			String output = patient01.getId() + " ";
+			output = output + patient01.getFirstname() + " ";
+			output = output + patient01.getLastname() + " ";
+			output = output + patient01.getGender() + " ";
+			output = output + patient01.getDayofbirth() + " ";
+			output = output + patient01.getLastvisit() + " ";
+			output = output + patient01.getStreet() + " ";
+			output = output + patient01.getHousenumber() + " ";
+			output = output + patient01.getPostalcode() + " ";
+			output = output + patient01.getCity();
+			System.out.println(output);
+		}
 
 		*/
 
@@ -279,7 +279,17 @@ public class MaClient {
 		// ---------------------------
 		MedStaffService.updateMedStaffInDB(medstaff);
 		
-		
+	// ************************
+	// **** delete Patient ****
+	// ************************				
+/*		System.out.println("\n#D - delete MedStaff with id=1");	
+							
+		// --------------------------
+		// -- call: delete Patient --
+		// --------------------------
+		MedStaffService.deleteMedStaffInDB(2, 7);		// -- (2 = id, 7 = addressid)	
+*/	
+				
 /**************************/
 /**** END OF TRY BLOCK ****/
 /**************************/

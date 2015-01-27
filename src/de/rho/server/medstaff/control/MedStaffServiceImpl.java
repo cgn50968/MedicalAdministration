@@ -285,7 +285,44 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************
 	@Override	
 		public void deleteMedStaffInDB(int id, int addressid) throws RemoteException {
-			System.out.println("\nMedStaffService.deleteMedStaffDB");		
+			System.out.println("\nMedStaffService.deleteMedStaffDB");	
+			
+			// --------------------------
+			// -- create SQL Statement --
+			// --------------------------
+			sql_statement = this.medstaff2db.deleteMedStaffSqlStatement(id, addressid);
+			
+			
+			// ------------------------------------
+			// -- open Connection to H2 Database --  
+			// ------------------------------------
+			Connection con = null;
+			try {
+				con = this.db_service.connect();
+			} 
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			// -----------------------------------------
+			// -- execute SQL Query - DELETE MEDSTAFF --
+			// -----------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);
+			
+			
+			// ----------------------------------------
+			// -- close DB Connection / no ResultSet --
+			// ----------------------------------------
+			try {
+				this.db_service.disconnect(con, null);		
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
