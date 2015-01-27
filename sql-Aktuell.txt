@@ -45,6 +45,16 @@ Role varchar(20),
 PRIMARY KEY (ID)
 );
 
+CREATE TABLE MT
+(
+ID int auto_increment,
+PatientID int,
+MedStaffID int,
+Date date,
+Treatment clob,
+PRIMARY KEY (ID)
+);
+
 ALTER TABLE Patient
 ADD FOREIGN KEY (AddressID)
 REFERENCES Address(ID);
@@ -80,5 +90,6 @@ INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID
 INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Günter', 'Pfitzmann', 'm', '2', '1962-08-12', '7');
 INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Lisa', 'Müller', 'w', '3', '1976-07-04', '8');
 
+INSERT INTO MT (PatientID, MedStaffID, Date, Treatment) VALUES ('1', '2', '2015-01-04', 'Großes Blutbild. Verdacht auf Virusgrippe. Patient hat hohes Fieber (40,2°)');
 
 SELECT MAX(id)+1 AS id FROM PATIENT;
