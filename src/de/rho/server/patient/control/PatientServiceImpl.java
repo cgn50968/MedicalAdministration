@@ -681,7 +681,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 // **** Check Date of last visit ****
 // **********************************
 	@Override
-	public int checkDateOfLastVisit(Patient patient) throws RemoteException {
+	public int checkDateOfLastVisit(Date lastvisit) throws RemoteException {
 		System.out.println("\nPatientServiceImpl.checkDateOfLastVisit");
 		
 		// ------------------------------------
@@ -698,7 +698,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- Get 'year' of last visit and today --
 		// ----------------------------------------
-		int yearOfLastVisit = Integer.parseInt(year.format(patient.getLastvisit()));
+		int yearOfLastVisit = Integer.parseInt(year.format(lastvisit));
 		System.out.println(yearOfLastVisit);
 		int yearOfToday = Integer.parseInt(year.format(today));
 		System.out.println(yearOfToday);
@@ -706,7 +706,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -----------------------------------------
 		// -- Get 'month' of last visit and today --
 		// -----------------------------------------
-		int monthOfLastVisit = Integer.parseInt(month.format(patient.getLastvisit()));
+		int monthOfLastVisit = Integer.parseInt(month.format(lastvisit));
 		System.out.println(monthOfLastVisit);
 		int monthOfToday = Integer.parseInt(month.format(today));
 		System.out.println(monthOfToday);

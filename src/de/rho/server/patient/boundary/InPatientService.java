@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.rho.server.patient.entity.Patient;
 
@@ -71,7 +72,7 @@ public interface InPatientService extends Remote {
 /****************/
 	
 	// -- For PatientServiceImpl.checkDate
-	public int checkDateOfLastVisit(Patient patient) throws RemoteException;
+	public int checkDateOfLastVisit(Date lastvisit) throws RemoteException;
 
 		
 	

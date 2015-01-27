@@ -1,6 +1,8 @@
-DROP TABLE PATIENT;
-DROP TABLE ADDRESS;
 
+DROP TABLE PATIENT;
+DROP TABLE MEDSTAFF;
+DROP TABLE ADDRESS;
+DROP Table ROLES;
 
 CREATE TABLE Patient
 (
@@ -10,6 +12,18 @@ LastName varchar(20),
 Gender char,
 DayOfBirth date,
 LastVisit date,
+AddressID int,
+PRIMARY KEY (ID)
+);
+
+CREATE TABLE MedStaff
+(
+ID int auto_increment,
+FirstName varchar(20),
+LastName varchar(20),
+RoleId int,
+Gender char,
+DayOfBirth date,
 AddressID int,
 PRIMARY KEY (ID)
 );
@@ -24,20 +38,47 @@ City varchar(20),
 PRIMARY KEY (ID)
 );
 
+CREATE TABLE Roles
+(
+ID int auto_increment,
+Role varchar(20),
+PRIMARY KEY (ID)
+);
+
 ALTER TABLE Patient
 ADD FOREIGN KEY (AddressID)
 REFERENCES Address(ID);
+
+ALTER TABLE MedStaff
+ADD FOREIGN KEY (AddressID)
+REFERENCES Address(ID);
+
+ALTER TABLE MedStaff
+ADD FOREIGN KEY (RoleID)
+REFERENCES Roles(ID);
+
+INSERT INTO Roles (ID, Role) VALUES (1, 'Chefarzt');
+INSERT INTO Roles (ID, Role) VALUES (2, 'Arzt');
+INSERT INTO Roles (ID, Role) VALUES (3, 'Arzthelfer(in)');
 
 INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (1, 'Heisenbergstrasse', '5', '50170', 'Kerpen');
 INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (2, 'Strombergallee', '44', '50129', 'Bergheim');
 INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (3, 'Spielstrasse', '12', '50129', 'Bergheim');
 INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (4, 'Horst-Schlemmer-Weg', '99', '50667', 'Köln');
 INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (5, 'AppDev-Weg', '101', '50667', 'Köln');
+INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (6, 'Hauptstrasse', '34', '50996', 'Köln');
+INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (7, 'Hubertusallee', '48', '14193', 'Berlin');
+INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (8, 'Frankstrasse', '18', '50996', 'Köln');
 
-INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (1, 'Bernd', 'Stromberg', 'm', '1960-04-25', '1960-07-26', '1');
-INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (2, 'Walter', 'White', 'm', '1954-05-15', '1973-06-16', '2');
-INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (3, 'Harald', 'Schmidt', 'm', '1952-11-01', '1959-02-21', '3');
-INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (4, 'Biene', 'Maja', 'w', '1989-10-30', '1990-12-01', '4');
-INSERT INTO Patient (ID, FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES (5, 'Berthold', 'Heisterkamp', 'm', '1975-10-30', '1979-12-06', '5');
+INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Bernd', 'Stromberg', 'm', '1960-04-25', '1960-07-26', '1');
+INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Walter', 'White', 'm', '1954-05-15', '1973-06-16', '2');
+INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Harald', 'Schmidt', 'm', '1952-11-01', '1959-02-21', '3');
+INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Biene', 'Maja', 'w', '1989-10-30', '1990-12-01', '4');
+INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Berthold', 'Heisterkamp', 'm', '1975-10-30', '1979-12-06', '5');
+
+INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Klaus', 'Brinkmann', 'm', '1', '1962-08-12', '6');
+INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Günter', 'Pfitzmann', 'm', '2', '1962-08-12', '7');
+INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Lisa', 'Müller', 'w', '3', '1976-07-04', '8');
+
 
 SELECT MAX(id)+1 AS id FROM PATIENT;

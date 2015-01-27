@@ -48,12 +48,14 @@ public class MaClient {
 			/**********************************/
 			/**** TEST CALLS ON APP SERVER ****/
 			/**********************************/
-						
+			System.out.println("#02 - Testdurchlauf des PatientService");		
 						
 				// ************************			
 				// **** create Patient ****
 				// ************************
-				/*		System.out.println("#02 - create new Patient");
+			
+				/*		System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
+						System.out.println("#a - create new Patient");
 						
 							// ------------------------
 							// -- set Patient object --
@@ -90,7 +92,7 @@ public class MaClient {
 				// **********************************
 						System.out.println("#0x - check date of last visit");		
 													
-							int registerPatientCard = PatientService.checkDateOfLastVisit(patient);
+							int registerPatientCard = PatientService.checkDateOfLastVisit(patient.getLastvisit());
 							if (registerPatientCard == 1) {
 								System.out.println(registerPatientCard);
 								System.out.println("Neues Quartal: Versicherungskarte muss eingelesen werden.");
