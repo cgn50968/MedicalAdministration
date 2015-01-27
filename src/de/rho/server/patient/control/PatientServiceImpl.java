@@ -38,13 +38,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	// ***************************
 	
 	/** Methoden-Services **/
-	private PatientToCSV patient2csv; 	 									//Deklaration fuer CSV-Methoden
-	private PatientToDB patient2db;				 							//Deklaration fuer DB-Methoden
+	private PatientToCSV patient2csv; 	// -- Deklaration fuer CSV-Methoden
+	private PatientToDB patient2db;		// -- Deklaration fuer DB-Methoden
 	
 	/** Connection-Services over Interface **/
-	private InDaoToDB db_service; 		//= FaDaoService.getDaoToDBService()
-	private InDaoToFile file_service;	//= FaDaoService.getDaoToFileService()
-			
+	private InDaoToDB db_service; 		// -- FaDaoService.getDaoToDBService()
+	private InDaoToFile file_service;	// -- FaDaoService.getDaoToFileService()
+	
+	/** Database **/
 	private ResultSet resultSet;
 	private String sql_statement;
 	private int max_id;
@@ -95,7 +96,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		Connection con = null;
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -110,7 +111,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------------
 		// -- execute SQL Query - MAX(id) FROM ADDRESS --
 		// ----------------------------------------------
-		resultSet = db_service.executeQuery(con, sql_statement, true);
+		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 			
 		try {
 			while(resultSet.next()) {
@@ -135,7 +136,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - CREATE ADDRESS --
 		// ----------------------------------------
-		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+		this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 
 		
 		// -------------------------------------------
@@ -147,14 +148,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - CREATE PATIENT --
 		// ----------------------------------------
-		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+		this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 					
 			
 		// ---------------------------------------
 		// -- close DB Connection and ResultSet --
 		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
+			this.db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -183,7 +184,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		Connection con = null;					
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -196,7 +197,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------------
 		// -- execute SQL Query - MAX(id) FROM ADDRESS --
 		// ----------------------------------------------
-		resultSet = db_service.executeQuery(con, sql_statement, true);
+		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 		
 		// ---------------------------------------
@@ -229,7 +230,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- close DB Connection and ResultSet --
 		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
+			this.db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -255,7 +256,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		Connection con = null;
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -274,7 +275,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - UPDATE PATIENT --
 		// ----------------------------------------
-		db_service.executeQuery(con, sql_statement, false);
+		this.db_service.executeQuery(con, sql_statement, false);
 		
 
 		// --------------------------
@@ -286,14 +287,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - UPDATE ADDRESS --
 		// ----------------------------------------
-		db_service.executeQuery(con, sql_statement, false);
+		this.db_service.executeQuery(con, sql_statement, false);
 
 		
 		// ----------------------------------------
 		// -- close DB Connection / no ResultSet --
 		// ----------------------------------------
 		try {
-			db_service.disconnect(con, null);		
+			this.db_service.disconnect(con, null);		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -320,7 +321,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		Connection con = null;
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -333,14 +334,14 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - DELETE PATIENT --
 		// ----------------------------------------
-		db_service.executeQuery(con, sql_statement, false);
+		this.db_service.executeQuery(con, sql_statement, false);
 		
 		
 		// ----------------------------------------
 		// -- close DB Connection / no ResultSet --
 		// ----------------------------------------
 		try {
-			db_service.disconnect(con, null);		
+			this.db_service.disconnect(con, null);		
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -370,7 +371,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// --------------------------------- 
 		Connection con = null;					
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -383,7 +384,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// --------------------------------------------
 		// -- execute SQL Query - resultSet expected --
 		// --------------------------------------------
-		resultSet = db_service.executeQuery(con, sql_statement, true);
+		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 		// -------------------------
 		// -- create Patient List --
@@ -424,7 +425,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- close DB Connection and ResultSet --
 		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
+			this.db_service.disconnect(con, resultSet);		//con und resultSet schlieﬂen
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -454,7 +455,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ---------------------------------
 		Connection con = null;
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -484,7 +485,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
     		// ----------------------------------------------
     		// -- execute SQL Query - MAX(id) FROM ADDRESS --
     		// ----------------------------------------------
-    		resultSet = db_service.executeQuery(con, sql_statement, true);
+    		resultSet = this.db_service.executeQuery(con, sql_statement, true);
     		
     		try {
     			while(resultSet.next()) {
@@ -509,7 +510,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
     		// ----------------------------------------
     		// -- execute SQL Query - CREATE ADDRESS --
     		// ----------------------------------------
-    		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+    		this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
 
     	
     		// -------------------------------------------
@@ -521,7 +522,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
     		// ----------------------------------------
     		// -- execute SQL Query - CREATE PATIENT --
     		// ----------------------------------------
-    		db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
+    		this.db_service.executeQuery(con, sql_statement, false);		// false = kein Return Wert
         }
 		
   
@@ -529,7 +530,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- close DB Connection and ResultSet --
 		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
+			this.db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -561,7 +562,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ------------------------------------
 		Connection con = null;					
 		try {
-			con = db_service.connect();
+			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -573,7 +574,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// ----------------------------------------
 		// -- execute SQL Query - SEARCH PATIENT --
 		// ----------------------------------------
-		resultSet = db_service.executeQuery(con, sql_statement, true);
+		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 				
 		// ------------------------
@@ -615,7 +616,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- close DB Connection and ResultSet --
 		// ---------------------------------------
 		try {
-			db_service.disconnect(con, resultSet);		
+			this.db_service.disconnect(con, resultSet);		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -641,7 +642,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public ArrayList<Patient> readPatientListFromCSV() throws RemoteException, ParseException {
 		System.out.println("\nPatientServiceImpl.readPatientListFromCSV()");
 		
-		String filelocation = file_service.locateFile();					//hat Rueckgabetyp pathtofile
+		String filelocation = this.file_service.locateFile();					//hat Rueckgabetyp pathtofile
 		
 		// ----------------------------------
 		// -- call & return list from CSV  --
@@ -657,9 +658,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
 		System.out.println("\nPatientServiceImpl.writePatientListToCSV()");	//debug
 		
-		String filelocation = file_service.locateFile();					//Datei ermitteln
+		String filelocation = this.file_service.locateFile();					//Datei ermitteln
 		
-		boolean permit = file_service.permitFileGeneration();				//Datei vorhanden?
+		boolean permit = this.file_service.permitFileGeneration();				//Datei vorhanden?
 								
 		if ( permit == true){												//Wenn Erlaubnis(=Datei nicht vorhanden)
 			
