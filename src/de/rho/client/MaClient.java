@@ -6,9 +6,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
+import de.rho.server.medstaff.boundary.InMedStaffService;
+import de.rho.server.medstaff.entity.MedStaff;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
 
@@ -31,7 +31,7 @@ public class MaClient {
 			System.out.println("#01 - Start MaClient\n");
 			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
-			//InPhysicianService PhysicianService = (InPhysicianService) Naming.lookup("rmi://localhost:1099/PhysicianService");
+			InMedStaffService MedStaffService = (InMedStaffService) Naming.lookup("rmi://localhost:1099/MedStaffService");
 			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
            
 			System.out.println("-----------------------");
@@ -42,173 +42,196 @@ public class MaClient {
 			// **** Variables und Objects ****
 			// *******************************
 			Patient patient = new Patient();
+			MedStaff medstaff = new MedStaff();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			
 			
-			/**********************************/
-			/**** TEST CALLS ON APP SERVER ****/
-			/**********************************/
-			System.out.println("#02 - Testdurchlauf des PatientService");		
-						
-				// ************************			
-				// **** create Patient ****
-				// ************************
-			
-				/*		System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
-						System.out.println("#a - create new Patient");
-						
-							// ------------------------
-							// -- set Patient object --
-							// ------------------------ 
-							patient.setFirstname("Theo");
-							patient.setLastname("Lingen");
-							patient.setGender("m");
-							patient.setDayofbirth(dateFormat.parse("29.05.1920"));
-							patient.setStreet("Landstrasse");
-							patient.setHousenumber("2");
-							patient.setPostalcode("50999");
-							patient.setCity("Köln");
-							
-							// --------------------------
-							// -- call: create Patient --
-							// --------------------------
-							PatientService.createPatientInDB(patient);
-						
-				*/	
-				// **********************
-				// **** read Patient ****
-				// **********************
-						System.out.println("#03 - get Patient with id=1");
-							
-							// ---------------------------------
-							// -- call: get Patient with id=1 --
-							// ---------------------------------
-							patient = PatientService.readPatientInDB(1);
-							System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
-							
+/**********************************/
+/**** TEST CALLS ON APP SERVER ****/
+/**********************************/
+	System.out.println("\n#02 - Testdurchlauf des PatientService");
+	System.out.println("--------------------------------------");
+
+/***************************/
+/** TEST - PatientService **/
+/***************************/
 				
-				// **********************************
-				// **** Check Date of last visit ****
-				// **********************************
-						System.out.println("#0x - check date of last visit");		
-													
-							int registerPatientCard = PatientService.checkDateOfLastVisit(patient.getLastvisit());
-							if (registerPatientCard == 1) {
-								System.out.println(registerPatientCard);
-								System.out.println("Neues Quartal: Versicherungskarte muss eingelesen werden.");
-							}
-							else {
-								System.out.println(registerPatientCard);
-								System.out.println("Versicherungskarte wurde in diesem Quartal bereits registriert.");
-							}
+	// ************************			
+	// **** create Patient ****
+	// ************************
+			
+	/*		System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
+			System.out.println("#a - create new Patient");
+						
+				// ------------------------
+				// -- set Patient object --
+				// ------------------------ 
+				patient.setFirstname("Theo");
+				patient.setLastname("Lingen");
+				patient.setGender("m");
+				patient.setDayofbirth(dateFormat.parse("29.05.1920"));
+				patient.setStreet("Landstrasse");
+				patient.setHousenumber("2");
+				patient.setPostalcode("50999");
+				patient.setCity("Köln");
+				
+				// --------------------------
+				// -- call: create Patient --
+				// --------------------------
+				PatientService.createPatientInDB(patient);
+						
+	*/	
+	// **********************
+	// **** read Patient ****
+	// **********************
+			System.out.println("\n#03 - get Patient with id=1\n");
+							
+				// ---------------------------------
+				// -- call: get Patient with id=1 --
+				// ---------------------------------
+				patient = PatientService.readPatientInDB(1);
+				System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
+										
+				
+	// **********************************
+	// **** Check Date of last visit ****
+	// **********************************
+			System.out.println("#0x - check date of last visit");		
+											
+				int registerPatientCard = PatientService.checkDateOfLastVisit(patient.getLastvisit());
+				if (registerPatientCard == 1) {
+					System.out.println(registerPatientCard);
+					System.out.println("Neues Quartal: Versicherungskarte muss eingelesen werden.");
+				}
+				else {
+					System.out.println(registerPatientCard);
+					System.out.println("Versicherungskarte wurde in diesem Quartal bereits registriert.");
+				}
 								
-							//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
+				//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
 																
 							
-				// ************************
-				// **** update Patient ****
-				// ************************		
-						System.out.println("#04 - update Patient with id=1");
+	// ************************
+	// **** update Patient ****
+	// ************************		
+			System.out.println("#04 - update Patient with id=1");
 						
-							// ------------------------
-							// -- set Patient object --
-							// ------------------------
-							patient.setId(1);
-							patient.setFirstname("Maria");
-							patient.setLastname("Schmitz");
-							patient.setGender("w");
-							patient.setDayofbirth(dateFormat.parse("03.10.1967"));
-							patient.setAddressid(1);
-							patient.setStreet("Hauptstrasse");
-							patient.setHousenumber("6");
-							patient.setPostalcode("53902");
-							patient.setCity("Bad Münstereifel");
+				// ------------------------
+				// -- set Patient object --
+				// ------------------------
+				patient.setId(1);
+				patient.setFirstname("Maria");
+				patient.setLastname("Schmitz");
+				patient.setGender("w");
+				patient.setDayofbirth(dateFormat.parse("03.10.1967"));
+				patient.setAddressid(1);
+				patient.setStreet("Hauptstrasse");
+				patient.setHousenumber("6");
+				patient.setPostalcode("53902");
+				patient.setCity("Bad Münstereifel");
+					
+				// --------------------------
+				// -- call: update Patient --
+				// --------------------------
+				PatientService.updatePatientInDB(patient);
+										
+						
+	// ************************
+	// **** delete Patient ****
+	// ************************				
+	/*		System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+						
+				// --------------------------
+				// -- call: delete Patient --
+				// --------------------------
+				PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 							
-							// --------------------------
-							// -- call: update Patient --
-							// --------------------------
-							PatientService.updatePatientInDB(patient);
-											
+	*/			
+	// *****************************************
+	// **** import Patient from CSV into DB ****
+	// *****************************************	
+	/*			
+			System.out.println("#0x - import PatientList from CSV");		
+			
+			//Bitte Aufrufverbund fuers testen nicht aendern
+			PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
+			
+			//TODO Leerzeichenpruefung
 						
-				// ************************
-				// **** delete Patient ****
-				// ************************				
-				/*		System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
-						
-							// --------------------------
-							// -- call: delete Patient --
-							// --------------------------
-							PatientService.deletePatientInDB(6, 6);					// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
-							
-				*/			
-				// *****************************************
-				// **** import Patient from CSV into DB ****
-				// *****************************************	
-				/*			
-						System.out.println("#0x - import PatientList from CSV");		
-						
-						//Bitte Aufrufverbund fuers testen nicht aendern
-						PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
-						
-						//TODO Leerzeichenpruefung
-						
-						//viel wichtiger: was ist mit der RMI- Verbindung?
-						//patientList.clear();
+			//viel wichtiger: was ist mit der RMI- Verbindung?
+			//patientList.clear();
 		
-				*/
-				// **********************************
-				// **** write PatientList to CSV ****
-				// **********************************				
+	*/
+	// **********************************
+	// **** write PatientList to CSV ****
+	// **********************************				
 						
-						System.out.println("#0x - write PatientList to CSV");		
+			System.out.println("#0x - write PatientList to CSV");		
 															
-						//Bitte Aufrufverbund fuers testen nicht aendern
+			//Bitte Aufrufverbund fuers testen nicht aendern
 						
-						PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
+			PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
 						
-						//TODO Leerzeichenpruefung
+			//TODO Leerzeichenpruefung
 												
-						//viel wichtiger: was ist mit der RMI- Verbindung?
-						//patientList.clear();
+			//viel wichtiger: was ist mit der RMI- Verbindung?
+			//patientList.clear();
 			
 				
-				// *************************************
-				// **** search Patient by Last Name ****
-				// *************************************
-				/*		System.out.println("#0x - search Patient by Last-Name");		
+	// *************************************
+	// **** search Patient by Last Name ****
+	// *************************************
+	/*		System.out.println("#0x - search Patient by Last-Name");		
 								
-						// ----------------------------------------------
-						// -- search Patient with Last Name = 'Lingen' --
-						// ----------------------------------------------
-						String lastname = "Lingen";
+			// ----------------------------------------------
+			// -- search Patient with Last Name = 'Lingen' --
+			// ----------------------------------------------
+			String lastname = "Lingen";
 								
-						// --------------------
-						// -- search Patient --
-						// --------------------
-						ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
+			// --------------------
+			// -- search Patient --
+			// --------------------
+			ArrayList<Patient> patientList = PatientService.searchPatientByNameInDB(lastname);
 								
-						// ------------------------
-						// -- show search result --
-						// ------------------------
-						for (Patient patient01 : patientList) {
-							String output = patient01.getId() + " ";
-							output = output + patient01.getFirstname() + " ";
-							output = output + patient01.getLastname() + " ";
-							output = output + patient01.getGender() + " ";
-							output = output + patient01.getDayofbirth() + " ";
-							output = output + patient01.getLastvisit() + " ";
-							output = output + patient01.getStreet() + " ";
-							output = output + patient01.getHousenumber() + " ";
-							output = output + patient01.getPostalcode() + " ";
-							output = output + patient01.getCity();
-							System.out.println(output);
-						}
+			// ------------------------
+			// -- show search result --
+			// ------------------------
+			for (Patient patient01 : patientList) {
+				String output = patient01.getId() + " ";
+				output = output + patient01.getFirstname() + " ";
+				output = output + patient01.getLastname() + " ";
+				output = output + patient01.getGender() + " ";
+				output = output + patient01.getDayofbirth() + " ";
+				output = output + patient01.getLastvisit() + " ";
+				output = output + patient01.getStreet() + " ";
+				output = output + patient01.getHousenumber() + " ";
+				output = output + patient01.getPostalcode() + " ";
+				output = output + patient01.getCity();
+				System.out.println(output);
+			}
 
-					*/
+		*/
+
+/****************************/
+/** TEST - MedStaffService **/
+/****************************/
 						
-		/**************************/
-		/**** END OF TRY BLOCK ****/
-		/**************************/
+	// ***********************
+	// **** read MedStaff ****
+	// ***********************
+	System.out.println("\n#04 - get MedStaff with id=1\n");
+												
+		// ---------------------------------
+		// -- call: get MedStaff with id=1 --
+		// ---------------------------------
+		medstaff = MedStaffService.readMedStaffInDB(1);
+		System.out.println(medstaff.getId() + ";" + medstaff.getFirstname() + ";" + medstaff.getLastname() + ";" + medstaff.getRole() + ";" + medstaff.getCity());
+
+
+		
+/**************************/
+/**** END OF TRY BLOCK ****/
+/**************************/
 		}
 					
 		catch (MalformedURLException e) {

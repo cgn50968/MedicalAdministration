@@ -69,7 +69,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	}
 
 	
-	
 /**************/
 /**** CRUD ****/
 /**************/
