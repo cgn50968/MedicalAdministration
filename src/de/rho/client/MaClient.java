@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.entity.MedStaff;
+import de.rho.server.mt.boundary.InMtService;
+import de.rho.server.mt.entity.MedTreatment;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.entity.Patient;
 
@@ -33,7 +35,7 @@ public class MaClient {
 			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
 			InMedStaffService MedStaffService = (InMedStaffService) Naming.lookup("rmi://localhost:1099/MedStaffService");
-			//InMTService MTService = (InMTService) Naming.lookup("rmi://localhost:1099/MTService");
+			InMtService MtService = (InMtService) Naming.lookup("rmi://localhost:1099/MtService");
            
 			System.out.println("-----------------------");
 			System.out.println("MaClient up and running");
@@ -309,6 +311,31 @@ public class MaClient {
 		for (MedStaff m : medstaffList) {
 			System.out.println(m.getId() + ";" + m.getFirstname() + ";" + m.getLastname() + ";" + m.getRole() + ";" + m.getStreet() + " " + m.getHousenumber() + ";" + m.getPostalcode() + " " + m.getCity());
         }
+
+	
+/**********************/
+/** TEST - MtService **/
+/**********************/
+
+		
+	// ****************************
+	// **** get MtList From DB ****
+	// ****************************
+		System.out.println("\n#x: - get MT List");
+														
+		// ------------------------------
+		// -- call: get MtList From DB --
+		// ------------------------------
+		ArrayList<MedTreatment> mtList = MtService.getMtListFromDB();
+			
+	   	// ---------------------------
+	   	// -- For each mt in mtList -- 
+	   	// ---------------------------
+	      
+		for (MedTreatment mt : mtList) {
+			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
+	    }
+		
 		
 		
 /**************************/

@@ -176,9 +176,9 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 		
 		
-		// ---------------------------------------
-		// -- write ResultSet to Patient object --
-		// ---------------------------------------
+		// ----------------------------------------
+		// -- write ResultSet to MedStaff object --
+		// ----------------------------------------
 		try {
 			while(resultSet.next()) {
 				medstaff.setId(Integer.parseInt(resultSet.getString("ID")));
@@ -362,9 +362,9 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 		// --------------------------------------------
 		resultSet = this.db_service.executeQuery(con, sql_statement, true);
 				
-		// -------------------------
-		// -- create Patient List --
-		// -------------------------
+		// --------------------------
+		// -- create MedStaff List --
+		// --------------------------
 		ArrayList<MedStaff> medstaffList = new ArrayList<MedStaff>();
 			
 		try {

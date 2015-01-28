@@ -8,6 +8,8 @@ import java.rmi.registry.LocateRegistry;
 
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.control.FaMedStaffService;
+import de.rho.server.mt.boundary.InMtService;
+import de.rho.server.mt.control.FaMtService;
 import de.rho.server.patient.boundary.InPatientService;
 import de.rho.server.patient.control.FaPatientService;
 
@@ -28,11 +30,11 @@ public class MaServer {
             LocateRegistry.createRegistry(1099);
             InPatientService PatientService = FaPatientService.getPatientService();			// -- create PatientService
             InMedStaffService MedStaffService = FaMedStaffService.getMedStaffService();		// -- create MedStaffService
-            //InMTService MTService = FaMTService.getMTService();
+            InMtService MtService = FaMtService.getMtService();								// -- create MtService
                         
             Naming.bind("rmi://localhost:1099/PatientService", PatientService);				// -- Bind Name of PatientService
             Naming.bind("rmi://localhost:1099/MedStaffService", MedStaffService);			// -- Bind Name of MedStaffService
-            //Naming.bind("rmi://localhost:1099/MTService", MTService);
+            Naming.bind("rmi://localhost:1099/MtService", MtService);						// -- Bind Name of MtService
  
             System.out.println("------------------------");
             System.out.println("Server is up and running");

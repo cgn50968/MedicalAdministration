@@ -95,9 +95,9 @@ public class MedStaffToDB {
 /**** SQL Queries - MEDSTAFF - CRUD ****/
 /***************************************/
 
-	// ************************
+	// *************************
 	// **** create MedStaff ****
-	// ************************
+	// *************************
 	public String createMedStaffSqlStatement(MedStaff medstaff, int id) {
 		System.out.println("MedStaffToDB.createMedStaffSqlStatement()"); //debug
 

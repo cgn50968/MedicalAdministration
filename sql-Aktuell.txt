@@ -52,7 +52,7 @@ ID int auto_increment,
 PatientID int,
 MedStaffID int,
 Date date,
-Treatment clob,
+Treatment varchar,
 PRIMARY KEY (ID)
 );
 

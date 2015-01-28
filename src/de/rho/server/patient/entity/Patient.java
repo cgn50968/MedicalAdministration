@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Heiko, Roger
  * @version 1.1 - 19.01.15
  * 
- * konkrete Klasse Patient mit den Attributen
+ * Klasse Patient mit den Attributen
  *
  */
 
@@ -28,13 +28,18 @@ public class Patient implements Serializable {
 	private String postalcode;
 	private String city;
 	
-	//Der Default-Konstruktor
+	
+	// -----------------
+	// -- Constructor --
+	// -----------------
 	public Patient()  {
 		
 	}
 		
-	/**** Getter and Setter ****/
 	
+	// ---------------------
+	// -- Getter & Setter --
+	// ---------------------	
 	public int getId() {
 		return id;
 	}

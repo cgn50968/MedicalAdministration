@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Roger
  * @version 1.0 - 27.01.15
  * 
- * konkrete Klasse MedStaff mit den Attributen
+ * Klasse MedStaff mit den Attributen
  *
  */
 
@@ -28,13 +28,18 @@ public class MedStaff implements Serializable {
 	private String postalcode;
 	private String city;
 	
+	
 	// -----------------
-	// -- Konstruktor --
+	// -- Constructor --
 	// -----------------
 	public MedStaff()  {
 		
 	}
-		
+
+	
+	// ---------------------
+	// -- Getter & Setter --
+	// ---------------------
 	public int getId() {
 		return id;
 	}
