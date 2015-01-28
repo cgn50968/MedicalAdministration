@@ -176,16 +176,16 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 	}
 			
 			
-// *************************
-// **** update MedStaff ****
-// *************************
+// *******************
+// **** update MT ****
+// *******************
 	@Override	
 	public void updateMtInDB(MedTreatment mt) throws RemoteException {
 		System.out.println("\nMtService.updateMtDB");	
 			
-		// ------------------------------------
-		// -- open Connection to H2 Database --  
-		// ------------------------------------
+		// ---------------------------------
+		// -- open Connection to Database --  
+		// ---------------------------------
 		Connection con = null;
 		try {
 			con = this.db_service.connect();

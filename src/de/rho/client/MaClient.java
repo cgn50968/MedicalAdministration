@@ -32,9 +32,9 @@ public class MaClient {
 /**** General ****/
 /*****************/
 							
-	// ******************************
-	// **** create Date of Today ****
-	// ******************************
+	// ------------------------------
+	// ---- create Date of Today ----
+	// ------------------------------
 	private static Date today = new Date();
 
 	
@@ -131,7 +131,7 @@ public class MaClient {
 	// ************************
 	// **** update Patient ****
 	// ************************		
-			System.out.println("#04 - update Patient with id=1");
+	/*		System.out.println("#04 - update Patient with id=1");
 						
 				// ------------------------
 				// -- set Patient object --
@@ -152,7 +152,7 @@ public class MaClient {
 				// --------------------------
 				PatientService.updatePatientInDB(patient);
 										
-						
+	*/					
 	// ************************
 	// **** delete Patient ****
 	// ************************				
@@ -182,7 +182,7 @@ public class MaClient {
 	// **********************************
 	// **** write PatientList to CSV ****
 	// **********************************				
-						
+	/*					
 		System.out.println("#0x - write PatientList to CSV");		
 															
 		//Bitte Aufrufverbund fuers testen nicht aendern
@@ -195,7 +195,7 @@ public class MaClient {
 		//viel wichtiger: was ist mit der RMI- Verbindung?
 		//patientList.clear();
 		
-				
+	*/			
 	// *************************************
 	// **** search Patient by Last Name ****
 	// *************************************
@@ -234,9 +234,9 @@ public class MaClient {
 /** TEST - MedStaffService **/
 /****************************/
 
-	// ************************			
-	// **** create Patient ****
-	// ************************
+	// *************************			
+	// **** create MedStaff ****
+	// *************************
 					
 		System.out.println("\n1. Situation: 1. Arbeitstag eines neuen Arztes.");
 		System.out.println("#A: - create new MedStaff\n");
@@ -331,9 +331,9 @@ public class MaClient {
 /** TEST - MtService **/
 /**********************/
 
-	// ************************			
-	// **** create Patient ****
-	// ************************
+	// *******************			
+	// **** create MT ****
+	// *******************
 		System.out.println("#x: - create new MT\n");
 									
 		// -------------------------

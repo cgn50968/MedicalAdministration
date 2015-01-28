@@ -8,7 +8,7 @@ import de.rho.server.dao.boundary.InDaoToFile;
 public class DaoToFile implements InDaoToFile{
 
 	@Override
-	public String locateFile() {			//koennte man auch ueber Client mitgeben
+	public String locateFile() {			
 		
 		String filetype = (".csv");
 		String filename = ("testw"+filetype);
