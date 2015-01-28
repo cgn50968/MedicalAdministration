@@ -224,13 +224,13 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 // **** get MtList From DB ****
 // ****************************
 	@Override	
-	public ArrayList<MedTreatment> getMtListFromDB(String idtype, int id) throws RemoteException {
+	public ArrayList<MedTreatment> getMtListFromDB(int patientid) throws RemoteException {
 		System.out.println("\nMtServiceImpl.getMtListFromDB");
 			
 		// --------------------------
 		// -- create SQL Statement --
 		// --------------------------
-		sql_statement = this.mt2db.getMtListSqlStatement(idtype, id);
+		sql_statement = this.mt2db.getMtListSqlStatement(patientid);
 					
 				
 		// ---------------------------------

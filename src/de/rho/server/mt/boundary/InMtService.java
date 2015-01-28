@@ -30,6 +30,6 @@ public interface InMtService  extends Remote {
 	/**************/
 		
 		// -- For MtServiceImpl.getMtListFromDB
-		public ArrayList<MedTreatment> getMtListFromDB(String idtype, int id) throws RemoteException;
+		public ArrayList<MedTreatment> getMtListFromDB(int patientid) throws RemoteException;
 		
 }

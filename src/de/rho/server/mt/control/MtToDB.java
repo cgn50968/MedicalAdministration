@@ -14,7 +14,9 @@ public class MtToDB {
 /*****************/
 /**** General ****/
 /*****************/
-			
+	
+	private String sqlstatement;
+	
 	// ******************************
 	// **** create Date of Today ****
 	// ******************************
@@ -44,11 +46,11 @@ public class MtToDB {
 		// --------------------------------------
 		// -- create *CREATE MT* sql statement --
 		// --------------------------------------
-		String sqlstatement = "INSERT INTO treatment (patientid, medstaffid, date, treatment) VALUES (";
+		sqlstatement = "INSERT INTO mt (patientid, medstaffid, date, treatment) VALUES (";
 		sqlstatement = sqlstatement + mt.getPatientid() + ", ";
 		sqlstatement = sqlstatement + mt.getMedstaffid() + ", \'";
 		sqlstatement = sqlstatement + this.formatDateForDB(mt.getDate()) + "\', \'";
-		sqlstatement = sqlstatement + mt.getTreatment() + "\';";
+		sqlstatement = sqlstatement + mt.getTreatment() + "\');";
 			
 		
 		System.out.println(sqlstatement); //debug
@@ -65,7 +67,7 @@ public class MtToDB {
 		// ------------------------------------		
 		// -- create *Read MT* sql statement --
 		// ------------------------------------
-		String sqlstatement = "SELECT t.id, t.patientid, p.firstname, p.lastname, p.dayofbirth, ";
+		sqlstatement = "SELECT t.id, t.patientid, p.firstname, p.lastname, p.dayofbirth, ";
 		sqlstatement = sqlstatement + "t.treatment, t.date, ";  
 		sqlstatement = sqlstatement + "t.medstaffid, r.role, m.firstname, m.lastname ";
 		sqlstatement = sqlstatement + "FROM mt AS t ";
@@ -88,7 +90,7 @@ public class MtToDB {
 		// --------------------------------------
 		// -- create *UPDATE MT* sql statement --
 		// --------------------------------------
-			String sqlstatement = "UPDATE medstaff SET ";
+			sqlstatement = "UPDATE medstaff SET ";
 			sqlstatement = sqlstatement + "patientid=\'" + mt.getPatientid() + "\', ";
 			sqlstatement = sqlstatement + "medstaffid=\'" + mt.getMedstaffid() + "\', ";
 			sqlstatement = sqlstatement + "date=\'" + this.formatDateForDB(mt.getDate()) + "\' ";
@@ -107,9 +109,10 @@ public class MtToDB {
 		// **************************	
 		// **** get Patient List ****
 		// **************************
-		public String getMtListSqlStatement(String idtype, int id) {
+		public String getMtListSqlStatement(int patientid) {
 			System.out.println("MtToDB.getMtListSqlStatement()"); //debug
-						
+				
+			
 			// ----------------------------------------
 			// -- create *GET MT LIST* sql statement --
 			// ----------------------------------------
@@ -119,26 +122,8 @@ public class MtToDB {
 			sqlstatement = sqlstatement + "FROM mt AS t ";
 			sqlstatement = sqlstatement + "INNER JOIN medstaff AS m ON m.id = t.medstaffid ";
 			sqlstatement = sqlstatement + "INNER JOIN roles AS r ON r.id = m.roleid ";
-			sqlstatement = sqlstatement + "INNER JOIN patient AS p ON p.id = t.patientid";
-			
-			// -----------------------------------------------
-			// -- all medical treatments of special patient --
-			// -----------------------------------------------
-			if (idtype=="patient") {
-				sqlstatement = sqlstatement + "WHERE t.patientid=" + id + ";";
-			}
-			// ------------------------------------------------
-			// -- all medical treatments of special medstaff --
-			// ------------------------------------------------
-			else if (idtype=="medstaff") {
-				sqlstatement = sqlstatement + " WHERE t.medstaffid=" + id + ";";
-			}
-			// ----------------------------
-			// -- all medical treatments --
-			// ----------------------------
-			else if (idtype=="empty") {
-				sqlstatement = sqlstatement + ";";
-			}
+			sqlstatement = sqlstatement + "INNER JOIN patient AS p ON p.id = t.patientid ";
+			sqlstatement = sqlstatement + "WHERE t.patientid=" + patientid + ";";
 			
 			System.out.println(sqlstatement); //debug		
 			return sqlstatement;

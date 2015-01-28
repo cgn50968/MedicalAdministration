@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.entity.MedStaff;
@@ -25,6 +26,16 @@ import de.rho.server.patient.entity.Patient;
  */
 
 public class MaClient {
+
+	
+/*****************/
+/**** General ****/
+/*****************/
+							
+	// ******************************
+	// **** create Date of Today ****
+	// ******************************
+	private static Date today = new Date();
 
 	
 	public static void main(String[] args) throws ParseException {
@@ -46,9 +57,12 @@ public class MaClient {
 			// *******************************
 			Patient patient = new Patient();
 			MedStaff medstaff = new MedStaff();
+			MedTreatment mt = new MedTreatment();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			
-			
+
+				
+				
 /**********************************/
 /**** TEST CALLS ON APP SERVER ****/
 /**********************************/
@@ -317,6 +331,24 @@ public class MaClient {
 /** TEST - MtService **/
 /**********************/
 
+	// ************************			
+	// **** create Patient ****
+	// ************************
+		System.out.println("#x: - create new MT\n");
+									
+		// -------------------------
+		// -- set MT object --
+		// ------------------------- 
+		mt.setPatientid(3);
+		mt.setMedstaffid(2);
+		mt.setDate(today);
+		mt.setTreatment("Patient ist erkältet. Ruhe verordnet");
+	
+							
+		// ---------------------------
+		// -- call: create MedStaff --
+		// ---------------------------
+		MtService.createMtInDB(mt);
 		
 	// ****************************
 	// **** get MtList From DB ****
@@ -324,42 +356,34 @@ public class MaClient {
 		System.out.println("\n#x: - get MT List");
 		
 		
-		// ------------------------------------------------------
-		// -- medstaff = get all treatments of special Patient --
-		// ------------------------------------------------------
+		// ------------------------------------------------
+		// -- medstaff = get all treatments of Patient 1 --
+		// ------------------------------------------------
 		
-		ArrayList<MedTreatment> mtList01 = MtService.getMtListFromDB("patient",1);
+		ArrayList<MedTreatment> mtList01 = MtService.getMtListFromDB(1);
 			
 	   	// ---------------------------
 	   	// -- For each mt in mtList -- 
 	   	// ---------------------------
-		for (MedTreatment mt : mtList01) {
-			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
+		System.out.println("\n1. Patient");
+		for (MedTreatment mt01 : mtList01) {
+			System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getMedstaffid() + ";" + mt01.getDate() + ";" + mt01.getTreatment());
 	    }
 		
-		// -------------------------------------------------------
-		// -- medstaff = get all treatments of special MedStaff --
-		// -------------------------------------------------------
-		ArrayList<MedTreatment> mtList02 = MtService.getMtListFromDB("medstaff",2);
+		// ------------------------------------------------
+		// -- medstaff = get all treatments of Patient 3 --
+		// ------------------------------------------------
+		ArrayList<MedTreatment> mtList02 = MtService.getMtListFromDB(3);
 		
 	   	// ---------------------------
 	   	// -- For each mt in mtList -- 
 	   	// ---------------------------
-		for (MedTreatment mt : mtList02) {
-			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
+		System.out.println("\n3. Patient");
+		for (MedTreatment mt02 : mtList02) {
+			System.out.println(mt02.getId() + ";" + mt02.getPatientid() + ";" + mt02.getMedstaffid() + ";" + mt02.getDate() + ";" + mt02.getTreatment());
 	    }
 		
-		// --------------------------------
-		// -- empty = get all treatments --
-		// --------------------------------
-		ArrayList<MedTreatment> mtList03 = MtService.getMtListFromDB("empty",2);
 		
-	   	// ---------------------------
-	   	// -- For each mt in mtList -- 
-	   	// ---------------------------
-		for (MedTreatment mt : mtList03) {
-			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
-	    }
 /**************************/
 /**** END OF TRY BLOCK ****/
 /**************************/
