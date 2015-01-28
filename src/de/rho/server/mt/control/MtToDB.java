@@ -89,11 +89,11 @@ public class MtToDB {
 		// --------------------------------------
 		// -- create *UPDATE MT* sql statement --
 		// --------------------------------------
-			String sqlstatement = "UPDATE medstaff SET ";
+			String sqlstatement = "UPDATE mt SET ";
 			sqlstatement = sqlstatement + "patientid=\'" + mt.getPatientid() + "\', ";
 			sqlstatement = sqlstatement + "medstaffid=\'" + mt.getMedstaffid() + "\', ";
-			sqlstatement = sqlstatement + "date=\'" + this.formatDateForDB(mt.getDate()) + "\' ";
-			sqlstatement = sqlstatement + "treatment=\'" + mt.getTreatment() + "\' ";
+			sqlstatement = sqlstatement + "date=\'" + this.formatDateForDB(mt.getDate()) + "\', ";
+			sqlstatement = sqlstatement + "treatment=\'" + mt.getTreatment() + "\' WHERE id=" + mt.getId() + ";";
 			
 			System.out.println(sqlstatement); //debug
 			return sqlstatement;	

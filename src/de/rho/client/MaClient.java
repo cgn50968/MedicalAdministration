@@ -354,16 +354,35 @@ public class MaClient {
 	// *****************
 	// **** read MT ****
 	// *****************
-	System.out.println("\n#B: - get MedTreatment with id=1\n");
+	System.out.println("\n#x: - get MedTreatment with id=1\n");
 													
 			// ---------------------------------
 			// -- call: get MedTreatment with id=1 --
 			// ---------------------------------
 			mt = MtService.readMtInDB(1);
 			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getPfirstname() + ";" + mt.getPlastname() + ";" + mt.getDayofbirth() + ";" + mt.getMedstaffid() + ";" + mt.getRole() + ";" + mt.getMfirstname() + ";" + mt.getMlastname() + ";" + mt.getDate() + ";" + mt.getTreatment());
+
 			
-			
-			
+	// *******************
+	// **** update MT ****
+	// *******************
+		System.out.println("\n#x: - update MT\n");
+				
+		// -------------------
+		// -- set MT object --
+		// ------------------- 		
+		mt.setId(2);
+		mt.setMedstaffid(1);
+		mt.setPatientid(3);
+		mt.setDate(today);
+		mt.setTreatment("Patient hat Bandscheibenvorfall. Überweisung an Orthopäden.");
+		
+		// ---------------------
+		// -- call: update MT --
+		// ---------------------
+		MtService.updateMtInDB(mt);
+		
+		
 	// ****************************
 	// **** get MtList From DB ****
 	// ****************************
