@@ -15,7 +15,6 @@ public class MtToDB {
 /**** General ****/
 /*****************/
 	
-	private String sqlstatement;
 	
 	// ******************************
 	// **** create Date of Today ****
@@ -46,7 +45,7 @@ public class MtToDB {
 		// --------------------------------------
 		// -- create *CREATE MT* sql statement --
 		// --------------------------------------
-		sqlstatement = "INSERT INTO mt (patientid, medstaffid, date, treatment) VALUES (";
+		String sqlstatement = "INSERT INTO mt (patientid, medstaffid, date, treatment) VALUES (";
 		sqlstatement = sqlstatement + mt.getPatientid() + ", ";
 		sqlstatement = sqlstatement + mt.getMedstaffid() + ", \'";
 		sqlstatement = sqlstatement + this.formatDateForDB(mt.getDate()) + "\', \'";
@@ -67,9 +66,9 @@ public class MtToDB {
 		// ------------------------------------		
 		// -- create *Read MT* sql statement --
 		// ------------------------------------
-		sqlstatement = "SELECT t.id, t.patientid, p.firstname, p.lastname, p.dayofbirth, ";
+		String sqlstatement = "SELECT t.id, t.patientid, p.firstname AS pfirstname, p.lastname AS plastname, p.dayofbirth, ";
 		sqlstatement = sqlstatement + "t.treatment, t.date, ";  
-		sqlstatement = sqlstatement + "t.medstaffid, r.role, m.firstname, m.lastname ";
+		sqlstatement = sqlstatement + "t.medstaffid, r.role, m.firstname AS mfirstname, m.lastname AS mlastname ";
 		sqlstatement = sqlstatement + "FROM mt AS t ";
 		sqlstatement = sqlstatement + "INNER JOIN medstaff AS m ON m.id = t.medstaffid ";
 		sqlstatement = sqlstatement + "INNER JOIN roles AS r ON r.id = m.roleid ";
@@ -90,7 +89,7 @@ public class MtToDB {
 		// --------------------------------------
 		// -- create *UPDATE MT* sql statement --
 		// --------------------------------------
-			sqlstatement = "UPDATE medstaff SET ";
+			String sqlstatement = "UPDATE medstaff SET ";
 			sqlstatement = sqlstatement + "patientid=\'" + mt.getPatientid() + "\', ";
 			sqlstatement = sqlstatement + "medstaffid=\'" + mt.getMedstaffid() + "\', ";
 			sqlstatement = sqlstatement + "date=\'" + this.formatDateForDB(mt.getDate()) + "\' ";
@@ -116,9 +115,9 @@ public class MtToDB {
 			// ----------------------------------------
 			// -- create *GET MT LIST* sql statement --
 			// ----------------------------------------
-			String sqlstatement = "SELECT t.id, t.patientid, p.firstname, p.lastname, p.dayofbirth, ";
+			String sqlstatement = "SELECT t.id, t.patientid, p.firstname AS pfirstname, p.lastname AS plastname, p.dayofbirth, ";
 			sqlstatement = sqlstatement + "t.treatment, t.date, ";  
-			sqlstatement = sqlstatement + "t.medstaffid, r.role, m.firstname, m.lastname ";
+			sqlstatement = sqlstatement + "t.medstaffid, r.role, m.firstname AS mfirstname, m.lastname AS mlastname ";
 			sqlstatement = sqlstatement + "FROM mt AS t ";
 			sqlstatement = sqlstatement + "INNER JOIN medstaff AS m ON m.id = t.medstaffid ";
 			sqlstatement = sqlstatement + "INNER JOIN roles AS r ON r.id = m.roleid ";

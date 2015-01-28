@@ -350,6 +350,20 @@ public class MaClient {
 		// ---------------------------
 		MtService.createMtInDB(mt);
 		
+		
+	// *****************
+	// **** read MT ****
+	// *****************
+	System.out.println("\n#B: - get MedTreatment with id=1\n");
+													
+			// ---------------------------------
+			// -- call: get MedTreatment with id=1 --
+			// ---------------------------------
+			mt = MtService.readMtInDB(1);
+			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getPfirstname() + ";" + mt.getPlastname() + ";" + mt.getDayofbirth() + ";" + mt.getMedstaffid() + ";" + mt.getRole() + ";" + mt.getMfirstname() + ";" + mt.getMlastname() + ";" + mt.getDate() + ";" + mt.getTreatment());
+			
+			
+			
 	// ****************************
 	// **** get MtList From DB ****
 	// ****************************
@@ -367,7 +381,7 @@ public class MaClient {
 	   	// ---------------------------
 		System.out.println("\n1. Patient");
 		for (MedTreatment mt01 : mtList01) {
-			System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getMedstaffid() + ";" + mt01.getDate() + ";" + mt01.getTreatment());
+			System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getPfirstname() + ";" + mt01.getPlastname() + ";" + mt01.getDayofbirth() + ";" + mt01.getMedstaffid() + ";" + mt01.getRole() + ";" + mt01.getMfirstname() + ";" + mt01.getMlastname() + ";" + mt01.getDate() + ";" + mt01.getTreatment());System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getMedstaffid() + ";" + mt01.getDate() + ";" + mt01.getTreatment());
 	    }
 		
 		// ------------------------------------------------
@@ -380,7 +394,7 @@ public class MaClient {
 	   	// ---------------------------
 		System.out.println("\n3. Patient");
 		for (MedTreatment mt02 : mtList02) {
-			System.out.println(mt02.getId() + ";" + mt02.getPatientid() + ";" + mt02.getMedstaffid() + ";" + mt02.getDate() + ";" + mt02.getTreatment());
+			System.out.println(mt02.getId() + ";" + mt02.getPatientid() + ";" + mt02.getPfirstname() + ";" + mt02.getPlastname() + ";" + mt02.getDayofbirth() + ";" + mt02.getMedstaffid() + ";" + mt02.getRole() + ";" + mt02.getMfirstname() + ";" + mt02.getMlastname() + ";" + mt02.getDate() + ";" + mt02.getTreatment());
 	    }
 		
 		

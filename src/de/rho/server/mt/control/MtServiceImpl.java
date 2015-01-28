@@ -142,6 +142,12 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 				mt.setMedstaffid(Integer.parseInt(resultSet.getString("MEDSTAFFID")));
 				mt.setDate(resultSet.getDate("DATE"));
 				mt.setTreatment(resultSet.getString("TREATMENT"));
+				mt.setPfirstname(resultSet.getString("PFIRSTNAME"));
+				mt.setPlastname(resultSet.getString("PLASTNAME"));
+				mt.setDayofbirth(resultSet.getDate("DAYOFBIRTH"));
+				mt.setRole(resultSet.getString("ROLE"));
+				mt.setMfirstname(resultSet.getString("MFIRSTNAME"));
+				mt.setMlastname(resultSet.getString("MLASTNAME"));
 			}
 		} 
 		catch (NumberFormatException e) {
@@ -267,8 +273,13 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 				mt.setMedstaffid(Integer.parseInt(resultSet.getString("MEDSTAFFID")));
 				mt.setDate(resultSet.getDate("DATE"));
 				mt.setTreatment(resultSet.getString("TREATMENT"));
-					
-						
+				mt.setPfirstname(resultSet.getString("PFIRSTNAME"));
+				mt.setPlastname(resultSet.getString("PLASTNAME"));
+				mt.setDayofbirth(resultSet.getDate("DAYOFBIRTH"));
+				mt.setRole(resultSet.getString("ROLE"));
+				mt.setMfirstname(resultSet.getString("MFIRSTNAME"));
+				mt.setMlastname(resultSet.getString("MLASTNAME"));
+									
 				// ----------------------------------------
 				// -- Save MedTreatment object in MtList --
 				// ----------------------------------------

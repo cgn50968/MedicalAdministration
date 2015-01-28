@@ -21,8 +21,14 @@ public class MedTreatment implements Serializable {
 	private int medstaffid;
 	private Date date;
 	private String treatment;
+	private String pfirstname;
+	private String plastname;
+	private Date dayofbirth;
+	private String role;
+	private String mfirstname;
+	private String mlastname;
 	
-	
+
 	// -----------------
 	// -- Constructor --
 	// -----------------
@@ -74,4 +80,51 @@ public class MedTreatment implements Serializable {
 		this.treatment = treatment;
 	}
 
+	public String getPfirstname() {
+		return pfirstname;
+	}
+
+	public void setPfirstname(String pfirstname) {
+		this.pfirstname = pfirstname;
+	}
+
+	public String getPlastname() {
+		return plastname;
+	}
+
+	public void setPlastname(String plastname) {
+		this.plastname = plastname;
+	}
+
+	public Date getDayofbirth() {
+		return dayofbirth;
+	}
+
+	public void setDayofbirth(Date dayofbirth) {
+		this.dayofbirth = dayofbirth;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public String getMfirstname() {
+		return mfirstname;
+	}
+
+	public void setMfirstname(String mfirstname) {
+		this.mfirstname = mfirstname;
+	}
+
+	public String getMlastname() {
+		return mlastname;
+	}
+
+	public void setMlastname(String mlastname) {
+		this.mlastname = mlastname;
+	}
 }
