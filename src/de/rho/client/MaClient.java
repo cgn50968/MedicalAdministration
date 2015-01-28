@@ -322,22 +322,44 @@ public class MaClient {
 	// **** get MtList From DB ****
 	// ****************************
 		System.out.println("\n#x: - get MT List");
-														
-		// ------------------------------
-		// -- call: get MtList From DB --
-		// ------------------------------
-		ArrayList<MedTreatment> mtList = MtService.getMtListFromDB();
+		
+		
+		// ------------------------------------------------------
+		// -- medstaff = get all treatments of special Patient --
+		// ------------------------------------------------------
+		
+		ArrayList<MedTreatment> mtList01 = MtService.getMtListFromDB("patient",1);
 			
 	   	// ---------------------------
 	   	// -- For each mt in mtList -- 
 	   	// ---------------------------
-	      
-		for (MedTreatment mt : mtList) {
+		for (MedTreatment mt : mtList01) {
 			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
 	    }
 		
+		// -------------------------------------------------------
+		// -- medstaff = get all treatments of special MedStaff --
+		// -------------------------------------------------------
+		ArrayList<MedTreatment> mtList02 = MtService.getMtListFromDB("medstaff",2);
 		
+	   	// ---------------------------
+	   	// -- For each mt in mtList -- 
+	   	// ---------------------------
+		for (MedTreatment mt : mtList02) {
+			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
+	    }
 		
+		// --------------------------------
+		// -- empty = get all treatments --
+		// --------------------------------
+		ArrayList<MedTreatment> mtList03 = MtService.getMtListFromDB("empty",2);
+		
+	   	// ---------------------------
+	   	// -- For each mt in mtList -- 
+	   	// ---------------------------
+		for (MedTreatment mt : mtList03) {
+			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getMedstaffid() + ";" + mt.getDate() + ";" + mt.getTreatment());
+	    }
 /**************************/
 /**** END OF TRY BLOCK ****/
 /**************************/

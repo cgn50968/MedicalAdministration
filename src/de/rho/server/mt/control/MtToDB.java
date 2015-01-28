@@ -107,7 +107,7 @@ public class MtToDB {
 		// **************************	
 		// **** get Patient List ****
 		// **************************
-		public String getMtListSqlStatement() {
+		public String getMtListSqlStatement(String idtype, int id) {
 			System.out.println("MtToDB.getMtListSqlStatement()"); //debug
 						
 			// ----------------------------------------
@@ -120,6 +120,25 @@ public class MtToDB {
 			sqlstatement = sqlstatement + "INNER JOIN medstaff AS m ON m.id = t.medstaffid ";
 			sqlstatement = sqlstatement + "INNER JOIN roles AS r ON r.id = m.roleid ";
 			sqlstatement = sqlstatement + "INNER JOIN patient AS p ON p.id = t.patientid";
+			
+			// -----------------------------------------------
+			// -- all medical treatments of special patient --
+			// -----------------------------------------------
+			if (idtype=="patient") {
+				sqlstatement = sqlstatement + "WHERE t.patientid=" + id + ";";
+			}
+			// ------------------------------------------------
+			// -- all medical treatments of special medstaff --
+			// ------------------------------------------------
+			else if (idtype=="medstaff") {
+				sqlstatement = sqlstatement + " WHERE t.medstaffid=" + id + ";";
+			}
+			// ----------------------------
+			// -- all medical treatments --
+			// ----------------------------
+			else if (idtype=="empty") {
+				sqlstatement = sqlstatement + ";";
+			}
 			
 			System.out.println(sqlstatement); //debug		
 			return sqlstatement;
