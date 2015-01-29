@@ -170,12 +170,10 @@ public class MaClient {
 	/*			
 		System.out.println("#0x - import PatientList from CSV");		
 			
-		//Bitte Aufrufverbund fuers testen nicht aendern
+		
 		PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
-			
-		//TODO Leerzeichenpruefung
-						
-		//viel wichtiger: was ist mit der RMI- Verbindung?
+									
+		
 		//patientList.clear();
 		
 	*/
@@ -185,14 +183,11 @@ public class MaClient {
 	/*					
 		System.out.println("#0x - write PatientList to CSV");		
 															
-		//Bitte Aufrufverbund fuers testen nicht aendern
-		
+				
 		// -- Get PatientList object > Write PatientList object to file --
 		PatientService.writePatientListToCSV(PatientService.getPatientListFromDB());
-						
-		//TODO Leerzeichenpruefung
-												
-		//viel wichtiger: was ist mit der RMI- Verbindung?
+													
+		
 		//patientList.clear();
 		
 	*/			
