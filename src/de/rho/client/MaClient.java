@@ -77,7 +77,7 @@ public class MaClient {
 	// **** create Patient ****
 	// ************************
 			
-	/*		System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
+			System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
 			System.out.println("#a - create new Patient");
 						
 				// ------------------------
@@ -97,7 +97,7 @@ public class MaClient {
 				// --------------------------
 				PatientService.createPatientInDB(patient);
 						
-	*/	
+		
 	// **********************
 	// **** read Patient ****
 	// **********************

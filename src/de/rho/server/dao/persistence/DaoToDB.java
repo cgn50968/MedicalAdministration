@@ -38,7 +38,7 @@ public class DaoToDB implements InDaoToDB {
 	// **** open Connection to DB ****
 	// *******************************
 	public Connection connect() throws IOException, FileNotFoundException  {
-		System.out.println("DaoToDB.connect"); //debug
+		System.out.println("DaoToDB.connect()"); //debug
         
 		// ---------------------------------------
 		// -- Properties object for Config file --
@@ -82,7 +82,7 @@ public class DaoToDB implements InDaoToDB {
 	// **** execute SQL Query ****
 	// ***************************
 	public ResultSet executeQuery(Connection con, String sql_statement, Boolean returnResultSet) {
-		System.out.println("DaoToDB.executeQuery"); //debug
+		System.out.println("DaoToDB.executeQuery()"); //debug
 			
 		// -------------------
 		// -- reset Objects --
@@ -129,7 +129,7 @@ public class DaoToDB implements InDaoToDB {
 	// **** close Connection ****
     // **************************
 	public void disconnect(Connection con, ResultSet resultSet) throws SQLException {
-		System.out.println("DaoToDB.disconnect"); //debug
+		System.out.println("DaoToDB.disconnect()"); //debug
 		
         try {
 			if (resultSet != null) {
