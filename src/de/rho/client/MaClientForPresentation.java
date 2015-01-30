@@ -25,7 +25,7 @@ import de.rho.server.patient.entity.Patient;
  *
  */
 
-public class MaClientPresentation {
+public class MaClientForPresentation {
 
 	
 /*****************/

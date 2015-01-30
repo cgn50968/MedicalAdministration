@@ -168,7 +168,7 @@ public class MaClient {
 	// *****************************************
 	// **** import Patient from CSV into DB ****
 	// *****************************************	
-	/*			
+				
 		System.out.println("\n2.6 - MaClient.client.PatientService.readPatientListFromCSV()");		
 			
 		
@@ -177,11 +177,11 @@ public class MaClient {
 		
 		//patientList.clear();
 		
-	*/
+	
 	// **********************************
 	// **** write PatientList to CSV ****
 	// **********************************				
-	/*					
+						
 		System.out.println("\n2.7 - MaClient.client.PatientService.writePatientListToCSV(PatientService.getPatientListFromDB())");		
 															
 				
@@ -191,7 +191,7 @@ public class MaClient {
 		
 		//patientList.clear();
 		
-	*/			
+				
 	// *************************************
 	// **** search Patient by Last Name ****
 	// *************************************
