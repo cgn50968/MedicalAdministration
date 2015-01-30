@@ -705,17 +705,17 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 		// -- Get 'year' of last visit and today --
 		// ----------------------------------------
 		int yearOfLastVisit = Integer.parseInt(year.format(lastvisit));
-		System.out.println(yearOfLastVisit);
+		System.out.println("Year of last visit: " + yearOfLastVisit);
 		int yearOfToday = Integer.parseInt(year.format(today));
-		System.out.println(yearOfToday);
+		System.out.println("This year: " + yearOfToday);
 				
 		// -----------------------------------------
 		// -- Get 'month' of last visit and today --
 		// -----------------------------------------
 		int monthOfLastVisit = Integer.parseInt(month.format(lastvisit));
-		System.out.println(monthOfLastVisit);
+		System.out.println("Month of last visit: " + monthOfLastVisit);
 		int monthOfToday = Integer.parseInt(month.format(today));
-		System.out.println(monthOfToday);
+		System.out.println("This Month: " + monthOfToday);
 		
 		
 		// ------------------------------------------------
