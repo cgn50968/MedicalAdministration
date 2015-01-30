@@ -189,7 +189,7 @@ public class MaClientForPresentation {
 		// ------------------------
 		// -- set Patient object --
 		// ------------------------
-		patient2.setId(6);
+		patient2.setId(6); // Lingen hat die id=6
 		//patient2.setFirstname("Maria");
 		//patient2.setLastname("Schmitz");
 		//patient2.setGender("w");

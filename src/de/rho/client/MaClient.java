@@ -146,7 +146,7 @@ public class MaClient {
 				patient.setStreet("Hauptstrasse");
 				patient.setHousenumber("6");
 				patient.setPostalcode("53902");
-				patient.setCity("Bad Münstereifel");
+				patient.setCity("Euskirchen");
 					
 				// --------------------------
 				// -- call: update Patient --

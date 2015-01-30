@@ -99,11 +99,9 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			con = this.db_service.connect();
 		} 
 		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -120,11 +118,11 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			while(resultSet.next()) {
 				max_id = Integer.parseInt(resultSet.getString("ID"));
 			}
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (NumberFormatException e1) {
 			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 
@@ -160,7 +158,6 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 			this.db_service.disconnect(con, resultSet);		//'con' = connection, 'resultSet' oder 'null' (wenn kein resultSet geschlossen werden muss)
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -831,7 +828,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	
 	
 	// ************************
-	// **** Delete Patient ****
+	// **** Initial for DB ****
 	// ************************
 		@Override
 		public void createTablesInDB() throws RemoteException {

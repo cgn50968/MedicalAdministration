@@ -11,7 +11,7 @@ public class DaoToFile implements InDaoToFile{
 	public String locateFile() {			
 		
 		String filetype = (".csv");
-		String filename = ("testw"+filetype);
+		String filename = ("yourdata"+filetype);
 		String pathtofile = (""+filename); // hier koennte auch ein vollstaendiger Pfad stehen c:/Users/heiko/Documents/GitHub/MedicalAdministration/
 		 
 		return pathtofile;

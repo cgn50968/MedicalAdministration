@@ -178,7 +178,7 @@ public class PatientToCSV {
                 bw.write(oneLine.toString());	// -- write line
                 bw.newLine();					// -- new line
             }
-            bw.flush();		// -- delete text in Buffer (flush = ausspuelen)
+            bw.flush();		// -- delete text in Buffer (tatsaechliches Schreiben)
             bw.close();     // -- close Buffer
         }
 		catch (UnsupportedEncodingException e) {

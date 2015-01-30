@@ -181,9 +181,9 @@ public class PatientToDB {
 	}
 
 	
-/**************************************/
-/**** SQL Queries - PATIENT - CRUD ****/
-/**************************************/
+/***********************************************/
+/**** SQL Queries - PATIENT - List & Search ****/
+/***********************************************/
 	
 	// **************************	
 	// **** get Patient List ****
@@ -217,10 +217,11 @@ public class PatientToDB {
 		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
+
 	
-	
+/**************************************/	
 	// *****************************	
-	// **** create Tables in DB **** - Nur für Präsentation
+	// **** create Tables in DB **** - Nur für Praesentation
 	// *****************************
 	public String createTablesInDBSqlStatement() {
 		System.out.println("PatientToDB.createTablesInDBSqlStatement()"); //debug
