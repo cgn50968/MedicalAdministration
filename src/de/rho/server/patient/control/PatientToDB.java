@@ -52,7 +52,7 @@ public class PatientToDB {
 		// --------------------------------------------------------
 		String sqlstatement = "SELECT MAX(id)+1 AS id FROM ADDRESS;";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -73,7 +73,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + patient.getPostalcode() + "\', \'";
 		sqlstatement = sqlstatement + patient.getCity() + "\');";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 
@@ -94,7 +94,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + "city=\'" + patient.getCity() + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + patient.getAddressid() + ";";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;	
 	}
 	
@@ -120,7 +120,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + this.formatDateForDB(today) + "\', ";							// call formatDateForDB
 		sqlstatement = sqlstatement + id + "); ";
 	
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -137,7 +137,7 @@ public class PatientToDB {
 		String sqlstatement = "SELECT p.*, a.street, a.housenumber, a.postalcode, a.city FROM patient AS p ";
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON p.addressid=a.id WHERE p.id=" + id + ";";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -159,7 +159,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + "lastvisit=\'" + this.formatDateForDB(today) + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + patient.getId();
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;	
 	}
 
@@ -176,7 +176,7 @@ public class PatientToDB {
 		String sqlstatement = "DELETE FROM patient WHERE id=" + id + ";\n";
 		sqlstatement = sqlstatement + "DELETE FROM address WHERE id=" + addressid + ";";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;		
 	}
 
@@ -197,7 +197,7 @@ public class PatientToDB {
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id";
 	
-		System.out.println("\n\t" + sqlstatement); //debug	
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -214,7 +214,7 @@ public class PatientToDB {
 		String sqlstatement = "SELECT p.*, a.STREET, a.HOUSENUMBER, a.POSTALCODE, a.CITY FROM PATIENT p ";
 		sqlstatement = sqlstatement + "INNER JOIN ADDRESS a ON p.addressid=a.id WHERE p.lastname LIKE \'%" + lastname + "%\'";
 		
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -255,7 +255,7 @@ public class PatientToDB {
 		sqlstatement = sqlstatement + "INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Lisa', 'Müller', 'w', '3', '1976-07-04', '8'); ";
 		sqlstatement = sqlstatement + "INSERT INTO MT (PatientID, MedStaffID, Date, Treatment) VALUES ('1', '2', '2015-01-04', 'Großes Blutbild. Verdacht auf Virusgrippe. Patient hat hohes Fieber (40,2 Grad)');";
 
-		System.out.println("\n\t" + sqlstatement); //debug
+		System.out.println("\t" + sqlstatement); //debug
 		return sqlstatement;
 
 	}

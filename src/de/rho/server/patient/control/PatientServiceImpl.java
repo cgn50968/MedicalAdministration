@@ -658,6 +658,7 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 	@Override
 	public void writePatientListToCSV(ArrayList<Patient> patientList) throws RemoteException {
 		System.out.println("\nMaServer.patient.control.PatientServiceImpl.writePatientListToCSV()");	//debug
+		System.out.println("-------------------------------------------------------------------");
 		
 		String filelocation = this.file_service.locateFile();					//Datei ermitteln
 		
