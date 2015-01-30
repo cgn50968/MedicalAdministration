@@ -7,8 +7,6 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.entity.MedStaff;
 import de.rho.server.mt.boundary.InMtService;
@@ -32,11 +30,6 @@ public class MaClientForPresentation {
 /**** General ****/
 /*****************/
 							
-	// ------------------------------
-	// ---- create Date of Today ----
-	// ------------------------------
-	private static Date today = new Date();
-
 	
 	public static void main(String[] args) throws ParseException {
 		
@@ -47,6 +40,7 @@ public class MaClientForPresentation {
 			System.out.println("-------------------\n");
 			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
+			// - NOT USED FOR PRESENTATION
 			InMedStaffService MedStaffService = (InMedStaffService) Naming.lookup("rmi://localhost:1099/MedStaffService");
 			InMtService MtService = (InMtService) Naming.lookup("rmi://localhost:1099/MtService");
            
@@ -57,8 +51,8 @@ public class MaClientForPresentation {
 			// *******************************
 			// **** Variables und Objects ****
 			// *******************************
-			MedStaff medstaff = new MedStaff();
-			MedTreatment mt = new MedTreatment();
+            MedStaff medstaff = new MedStaff();             // - NOT USED FOR PRESENTATION
+			MedTreatment mt = new MedTreatment();           // - NOT USED FOR PRESENTATION
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			
 

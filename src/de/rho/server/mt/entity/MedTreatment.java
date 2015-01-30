@@ -1,7 +1,6 @@
 package de.rho.server.mt.entity;
 
 import java.io.Serializable;
-import java.sql.Clob;
 import java.util.Date;
 
 public class MedTreatment implements Serializable {
