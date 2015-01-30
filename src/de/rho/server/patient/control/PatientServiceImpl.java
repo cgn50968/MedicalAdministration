@@ -827,5 +827,53 @@ public class PatientServiceImpl extends UnicastRemoteObject implements InPatient
 
 		*/
 	}
-
+	
+	
+	// ************************
+	// **** Delete Patient ****
+	// ************************
+		@Override
+		public void createTablesInDB() throws RemoteException {
+			System.out.println("\nMaServer.patient.control.PatientServiceImpl.createTablesInDB()");
+			System.out.println("---------------------------------------------------------------");		
+			
+			// --------------------------
+			// -- create SQL Statement --
+			// --------------------------
+			sql_statement = this.patient2db.createTablesInDBSqlStatement();
+			
+			
+			// ------------------------------------
+			// -- open Connection to H2 Database --  
+			// ------------------------------------
+			Connection con = null;
+			try {
+				con = this.db_service.connect();
+			} 
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			// ---------------------------------------------
+			// -- execute SQL Query - CREATE TABLES IN DB --
+			// ---------------------------------------------
+			this.db_service.executeQuery(con, sql_statement, false);
+			
+			
+			// ----------------------------------------
+			// -- close DB Connection / no ResultSet --
+			// ----------------------------------------
+			try {
+				this.db_service.disconnect(con, null);		
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 }

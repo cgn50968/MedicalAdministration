@@ -217,5 +217,47 @@ public class PatientToDB {
 		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
+	
+	
+	// *****************************	
+	// **** create Tables in DB **** - Nur für Präsentation
+	// *****************************
+	public String createTablesInDBSqlStatement() {
+		System.out.println("PatientToDB.createTablesInDBSqlStatement()"); //debug
+
+		String sqlstatement = "DROP TABLE PATIENT; DROP TABLE MEDSTAFF; DROP TABLE ADDRESS; DROP Table ROLES; DROP Table MT; ";
+		sqlstatement = sqlstatement + "CREATE TABLE Patient(ID int auto_increment,FirstName varchar(20),LastName varchar(20),Gender char,DayOfBirth date,LastVisit date,AddressID int,PRIMARY KEY (ID)); ";
+		sqlstatement = sqlstatement + "CREATE TABLE MedStaff(ID int auto_increment,FirstName varchar(20),LastName varchar(20),RoleId int,Gender char,DayOfBirth date,AddressID int,PRIMARY KEY (ID)); ";
+		sqlstatement = sqlstatement + "CREATE TABLE Address(ID int not null,Street varchar(20),HouseNumber varchar(20),PostalCode varchar(5),City varchar(20),PRIMARY KEY (ID)); ";
+		sqlstatement = sqlstatement + "CREATE TABLE Roles(ID int auto_increment,Role varchar(20),PRIMARY KEY (ID)); ";
+		sqlstatement = sqlstatement + "CREATE TABLE MT(ID int auto_increment,PatientID int,MedStaffID int,Date date,Treatment varchar,PRIMARY KEY (ID)); ";
+		sqlstatement = sqlstatement + "ALTER TABLE Patient ADD FOREIGN KEY (AddressID) REFERENCES Address(ID); ";
+		sqlstatement = sqlstatement + "ALTER TABLE MedStaff ADD FOREIGN KEY (AddressID) REFERENCES Address(ID); ";
+		sqlstatement = sqlstatement + "ALTER TABLE MedStaff ADD FOREIGN KEY (RoleID) REFERENCES Roles(ID); ";
+		sqlstatement = sqlstatement + "INSERT INTO Roles (ID, Role) VALUES (1, 'Chefarzt'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Roles (ID, Role) VALUES (2, 'Arzt'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Roles (ID, Role) VALUES (3, 'Arzthelfer(in)'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (1, 'Heisenbergstrasse', '5', '50170', 'Kerpen'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (2, 'Strombergallee', '44', '50129', 'Bergheim'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (3, 'Spielstrasse', '12', '50129', 'Bergheim'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (4, 'Horst-Schlemmer-Weg', '99', '50667', 'Köln'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (5, 'AppDev-Weg', '101', '50667', 'Köln'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (6, 'Hauptstrasse', '34', '50996', 'Köln'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (7, 'Hubertusallee', '48', '14193', 'Berlin'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Address (ID, Street, HouseNumber, Postalcode, City) VALUES (8, 'Frankstrasse', '18', '50996', 'Köln'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Bernd', 'Stromberg', 'm', '1960-04-25', '1960-07-26', '1'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Walter', 'White', 'm', '1954-05-15', '1973-06-16', '2'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Harald', 'Schmidt', 'm', '1952-11-01', '1959-02-21', '3'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Biene', 'Maja', 'w', '1989-10-30', '1990-12-01', '4'); ";
+		sqlstatement = sqlstatement + "INSERT INTO Patient (FirstName, LastName, Gender, Dayofbirth, LastVisit, AddressID) VALUES ('Berthold', 'Heisterkamp', 'm', '1975-10-30', '1979-12-06', '5'); ";
+		sqlstatement = sqlstatement + "INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Klaus', 'Brinkmann', 'm', '1', '1962-08-12', '6'); ";
+		sqlstatement = sqlstatement + "INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Günter', 'Pfitzmann', 'm', '2', '1962-08-12', '7'); ";
+		sqlstatement = sqlstatement + "INSERT INTO MedStaff (FirstName, LastName, Gender, RoleID, Dayofbirth, AddressID) VALUES ('Lisa', 'Müller', 'w', '3', '1976-07-04', '8'); ";
+		sqlstatement = sqlstatement + "INSERT INTO MT (PatientID, MedStaffID, Date, Treatment) VALUES ('1', '2', '2015-01-04', 'Großes Blutbild. Verdacht auf Virusgrippe. Patient hat hohes Fieber (40,2 Grad)');";
+
+		System.out.println("\n\t" + sqlstatement); //debug
+		return sqlstatement;
+
+	}
 		
 }

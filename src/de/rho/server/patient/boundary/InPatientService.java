@@ -74,8 +74,13 @@ public interface InPatientService extends Remote {
 	// -- For PatientServiceImpl.checkDate
 	public int checkDateOfLastVisit(Date lastvisit) throws RemoteException;
 
-		
 	
+/************/
+/**** DB ****/
+/************/
+	
+	// -- For PatientServiceImpl.createTablesInDB
+	public void createTablesInDB() throws RemoteException; 
 	
 	
 
