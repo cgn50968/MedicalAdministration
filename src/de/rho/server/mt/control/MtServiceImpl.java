@@ -53,7 +53,7 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 // *******************	
 	@Override	
 	public void createMtInDB(MedTreatment mt) throws RemoteException {
-		System.out.println("\nMtService.createMtDB");	
+		System.out.println("\nMaServer.mt.control.MtService.createMtDB");	
 			
 		// --------------------------------------
 		// -- create SQL Statement - CREATE MT --
@@ -101,7 +101,7 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 // *****************
 	@Override	
 	public MedTreatment readMtInDB(int id) throws RemoteException {
-		System.out.println("\nMtService.readMtDB");
+		System.out.println("\nMaServer.mt.control.MtService.readMtDB");
 				
 		MedTreatment mt = new MedTreatment();
 			
@@ -181,7 +181,7 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 // *******************
 	@Override	
 	public void updateMtInDB(MedTreatment mt) throws RemoteException {
-		System.out.println("\nMtService.updateMtDB");	
+		System.out.println("\nMaServer.mt.control.MtService.updateMtDB");	
 			
 		// ---------------------------------
 		// -- open Connection to Database --  
@@ -231,7 +231,7 @@ public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 // ****************************
 	@Override	
 	public ArrayList<MedTreatment> getMtListFromDB(int patientid) throws RemoteException {
-		System.out.println("\nMtServiceImpl.getMtListFromDB");
+		System.out.println("\nMaServer.mt.control.MtServiceImpl.getMtListFromDB");
 			
 		// --------------------------
 		// -- create SQL Statement --

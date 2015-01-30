@@ -55,7 +55,7 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************	
 	@Override	
 	public void createMedStaffInDB(MedStaff medstaff) throws RemoteException {
-		System.out.println("\nMedStaffService.createMedStaffDB");	
+		System.out.println("\nMaServer.medstaff.control.MedStaffService.createMedStaffDB");	
 		
 		// -----------------------------------
 		// -- reset variable for Address ID --
@@ -145,7 +145,7 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // ***********************
 	@Override	
 	public MedStaff readMedStaffInDB(int id) throws RemoteException {
-		System.out.println("\nMedStaffService.readMedStaffDB");
+		System.out.println("\nMaServer.medstaff.control.MedStaffService.readMedStaffDB");
 			
 		MedStaff medstaff = new MedStaff();
 		
@@ -226,7 +226,7 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************
 	@Override	
 	public void updateMedStaffInDB(MedStaff medstaff) throws RemoteException {
-		System.out.println("\nMedStaffService.updateMedStaffDB");	
+		System.out.println("\nMaServer.medstaff.control.MedStaffService.updateMedStaffDB");	
 			
 		// ------------------------------------
 		// -- open Connection to H2 Database --  
@@ -284,7 +284,7 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // *************************
 	@Override	
 	public void deleteMedStaffInDB(int id, int addressid) throws RemoteException {
-		System.out.println("\nMedStaffService.deleteMedStaffDB");	
+		System.out.println("\nMaServer.medstaff.control.MedStaffService.deleteMedStaffDB");	
 		
 		// --------------------------
 		// -- create SQL Statement --
@@ -334,7 +334,7 @@ public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedSta
 // ***********************************
 	@Override	
 	public ArrayList<MedStaff> getMedStaffListFromDB() throws RemoteException {
-		System.out.println("\nMedStaffServiceImpl.getMedStaffListFromDB");
+		System.out.println("\nMaServer.medstaff.control.MedStaffServiceImpl.getMedStaffListFromDB");
 			
 		// --------------------------
 		// -- create SQL Statement --

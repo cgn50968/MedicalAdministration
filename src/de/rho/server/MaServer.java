@@ -36,9 +36,9 @@ public class MaServer {
             Naming.bind("rmi://localhost:1099/MedStaffService", MedStaffService);			// -- Bind Name of MedStaffService
             Naming.bind("rmi://localhost:1099/MtService", MtService);						// -- Bind Name of MtService
  
-            System.out.println("------------------------");
-            System.out.println("Server is up and running");
-            System.out.println("------------------------");
+            System.out.println("-----------------------");
+            System.out.println("MaServer up and running");
+            System.out.println("-----------------------");
             
         } catch (RemoteException e) {
             // TODO Auto-generated catch block

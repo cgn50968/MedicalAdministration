@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
+
+
+
 import de.rho.server.mt.entity.MedTreatment;
 
 public class MtToDB {
@@ -52,7 +56,7 @@ public class MtToDB {
 		sqlstatement = sqlstatement + mt.getTreatment() + "\');";
 			
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 		
@@ -75,7 +79,7 @@ public class MtToDB {
 		sqlstatement = sqlstatement + "INNER JOIN patient AS p ON p.id = t.patientid ";
 		sqlstatement = sqlstatement + "WHERE t.id=" + id + ";";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 		
@@ -95,7 +99,7 @@ public class MtToDB {
 			sqlstatement = sqlstatement + "date=\'" + this.formatDateForDB(mt.getDate()) + "\', ";
 			sqlstatement = sqlstatement + "treatment=\'" + mt.getTreatment() + "\' WHERE id=" + mt.getId() + ";";
 			
-			System.out.println(sqlstatement); //debug
+			System.out.println("\n\t" + sqlstatement); //debug
 			return sqlstatement;	
 		}
 	
@@ -124,7 +128,7 @@ public class MtToDB {
 			sqlstatement = sqlstatement + "INNER JOIN patient AS p ON p.id = t.patientid ";
 			sqlstatement = sqlstatement + "WHERE t.patientid=" + patientid + ";";
 			
-			System.out.println(sqlstatement); //debug		
+			System.out.println("\n\t" + sqlstatement); //debug	
 			return sqlstatement;
 		}
 		

@@ -44,7 +44,7 @@ public class MedStaffToDB {
 		// --------------------------------------------------------
 		String sqlstatement = "SELECT MAX(id)+1 AS id FROM ADDRESS;";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -65,7 +65,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + medstaff.getPostalcode() + "\', \'";
 		sqlstatement = sqlstatement + medstaff.getCity() + "\');";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -86,7 +86,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + "city=\'" + medstaff.getCity() + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + medstaff.getAddressid() + ";";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;	
 	}
 	
@@ -112,7 +112,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + this.formatDateForDB(medstaff.getDayofbirth()) + "\', ";		// call formatDateForDB
 		sqlstatement = sqlstatement + id + "); ";
 	
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -130,7 +130,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON m.addressid=a.id ";
 		sqlstatement = sqlstatement + "INNER JOIN roles AS r ON m.roleid=r.id WHERE m.id=" + id + ";";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;
 	}
 	
@@ -152,7 +152,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + "dayofbirth=\'" + this.formatDateForDB(medstaff.getDayofbirth()) + "\' ";
 		sqlstatement = sqlstatement + "WHERE id=" + medstaff.getId();
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;	
 	}
 	
@@ -169,7 +169,7 @@ public class MedStaffToDB {
 		String sqlstatement = "DELETE FROM medstaff WHERE id=" + id + ";\n";
 		sqlstatement = sqlstatement + "DELETE FROM address WHERE id=" + addressid + ";";
 		
-		System.out.println(sqlstatement); //debug
+		System.out.println("\n\t" + sqlstatement); //debug
 		return sqlstatement;		
 	}
 
@@ -191,7 +191,7 @@ public class MedStaffToDB {
 		sqlstatement = sqlstatement + "INNER JOIN address AS a ON m.addressid=a.id ";
 		sqlstatement = sqlstatement + "INNER JOIN roles AS r ON m.roleid=r.id;";
 		
-		System.out.println(sqlstatement); //debug		
+		System.out.println("\n\t" + sqlstatement); //debug	
 		return sqlstatement;
 	}
 	

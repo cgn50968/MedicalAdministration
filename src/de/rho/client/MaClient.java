@@ -42,15 +42,17 @@ public class MaClient {
 		
 		try {
 
-			System.out.println("#01 - Start MaClient\n");
+			System.out.println("-------------------");
+			System.out.println("1. - Start MaClient");
+			System.out.println("-------------------\n");
 			
 			InPatientService PatientService = (InPatientService) Naming.lookup("rmi://localhost:1099/PatientService");
 			InMedStaffService MedStaffService = (InMedStaffService) Naming.lookup("rmi://localhost:1099/MedStaffService");
 			InMtService MtService = (InMtService) Naming.lookup("rmi://localhost:1099/MtService");
            
-			System.out.println("-----------------------");
-			System.out.println("MaClient up and running");
-            System.out.println("-----------------------");			
+			System.out.println("\t-----------------------");
+			System.out.println("\tMaClient up and running");
+            System.out.println("\t-----------------------");			
 			
 			// *******************************
 			// **** Variables und Objects ****
@@ -66,7 +68,8 @@ public class MaClient {
 /**********************************/
 /**** TEST CALLS ON APP SERVER ****/
 /**********************************/
-	System.out.println("\n#02 - Testdurchlauf des PatientService");
+	System.out.println("\n--------------------------------------");
+	System.out.println("2. - Testdurchlauf des PatientService");
 	System.out.println("--------------------------------------");
 
 /***************************/
@@ -76,9 +79,7 @@ public class MaClient {
 	// ************************			
 	// **** create Patient ****
 	// ************************
-			
-			System.out.println("1. Situation: Ein neuer Patient betritt die Praxis:");
-			System.out.println("#a - create new Patient");
+			System.out.println("\n2.1 - MaClient.client.PatientService.createPatientInDB()");
 						
 				// ------------------------
 				// -- set Patient object --
@@ -101,28 +102,28 @@ public class MaClient {
 	// **********************
 	// **** read Patient ****
 	// **********************
-			System.out.println("\n#03 - get Patient with id=1\n");
+			System.out.println("\n2.2 - MaClient.client.PatientService.readPatientInDB()\n");
 							
 				// ---------------------------------
 				// -- call: get Patient with id=1 --
 				// ---------------------------------
 				patient = PatientService.readPatientInDB(1);
-				System.out.println(patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getCity());
+				System.out.println("\tRückgabe: " + patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getStreet() + ";" + patient.getHousenumber() + ";" + patient.getPostalcode() + ";" + patient.getCity());
 										
 				
 	// **********************************
 	// **** Check Date of last visit ****
 	// **********************************
-			System.out.println("#0x - check date of last visit");		
+			System.out.println("\n2.3 - MaClient.client.PatientService.checkDateOfLastVisit()\n");		
 											
 				int registerPatientCard = PatientService.checkDateOfLastVisit(patient.getLastvisit());
 				if (registerPatientCard == 1) {
-					System.out.println(registerPatientCard);
-					System.out.println("Neues Quartal: Versicherungskarte muss eingelesen werden.");
+					System.out.println("\tRückgabe: " + registerPatientCard);
+					System.out.println("\tNeues Quartal: Versicherungskarte muss eingelesen werden.");
 				}
 				else {
-					System.out.println(registerPatientCard);
-					System.out.println("Versicherungskarte wurde in diesem Quartal bereits registriert.");
+					System.out.println("\tRückgabe: " + registerPatientCard);
+					System.out.println("\tVersicherungskarte wurde in diesem Quartal bereits registriert.");
 				}
 								
 				//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
@@ -131,7 +132,7 @@ public class MaClient {
 	// ************************
 	// **** update Patient ****
 	// ************************		
-	/*		System.out.println("#04 - update Patient with id=1");
+			System.out.println("\n2.4 - MaClient.client.PatientService.updatePatientInDB()");
 						
 				// ------------------------
 				// -- set Patient object --
@@ -152,11 +153,11 @@ public class MaClient {
 				// --------------------------
 				PatientService.updatePatientInDB(patient);
 										
-	*/					
+						
 	// ************************
 	// **** delete Patient ****
 	// ************************				
-	/*	System.out.println("#05 - Delete Patient with id=7");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
+	/*	System.out.println("\n2.5 - MaClient.client.PatientService.deletePatientInDB()");		// Hier muss die (Max ID + 1) eingetragen werden. Zuerst wird ein User erstellt. Dann wieder gelöscht :-)
 						
 			// --------------------------
 			// -- call: delete Patient --
@@ -168,7 +169,7 @@ public class MaClient {
 	// **** import Patient from CSV into DB ****
 	// *****************************************	
 	/*			
-		System.out.println("#0x - import PatientList from CSV");		
+		System.out.println("\n2.6 - MaClient.client.PatientService.readPatientListFromCSV()");		
 			
 		
 		PatientService.writePatientListToDB(PatientService.readPatientListFromCSV());
@@ -181,7 +182,7 @@ public class MaClient {
 	// **** write PatientList to CSV ****
 	// **********************************				
 	/*					
-		System.out.println("#0x - write PatientList to CSV");		
+		System.out.println("\n2.7 - MaClient.client.PatientService.writePatientListToCSV(PatientService.getPatientListFromDB())");		
 															
 				
 		// -- Get PatientList object > Write PatientList object to file --
@@ -194,7 +195,7 @@ public class MaClient {
 	// *************************************
 	// **** search Patient by Last Name ****
 	// *************************************
-	/*	System.out.println("#0x - search Patient by Last-Name");		
+		System.out.println("\n2.8 - MaClient.client.PatientService.searchPatientByNameInDB()\n");		
 								
 		// ----------------------------------------------
 		// -- search Patient with Last Name = 'Lingen' --
@@ -220,21 +221,23 @@ public class MaClient {
 			output = output + patient01.getHousenumber() + " ";
 			output = output + patient01.getPostalcode() + " ";
 			output = output + patient01.getCity();
-			System.out.println(output);
+			System.out.println("\t" + output);
 		}
 
-		*/
 
 /****************************/
 /** TEST - MedStaffService **/
 /****************************/
+		System.out.println("\n--------------------------------------");
+		System.out.println("3. - Testdurchlauf des MedStaffService");
+		System.out.println("--------------------------------------");
 
+		
 	// *************************			
 	// **** create MedStaff ****
-	// *************************
-					
-		System.out.println("\n1. Situation: 1. Arbeitstag eines neuen Arztes.");
-		System.out.println("#A: - create new MedStaff\n");
+	// *************************			
+		System.out.println("\n3.1 - MaClient.client.MedStaffService.createMedStaffInDB()");
+		
 								
 		// -------------------------
 		// -- set MedStaff object --
@@ -258,20 +261,19 @@ public class MaClient {
 	// ***********************
 	// **** read MedStaff ****
 	// ***********************
-	System.out.println("\n#B: - get MedStaff with id=1\n");
+		System.out.println("\n3.2 - MaClient.client.MedStaffService.readMedStaffInDB\n");
 												
 		// ---------------------------------
 		// -- call: get MedStaff with id=1 --
 		// ---------------------------------
 		medstaff = MedStaffService.readMedStaffInDB(1);
-		System.out.println(medstaff.getId() + ";" + medstaff.getFirstname() + ";" + medstaff.getLastname() + ";" + medstaff.getRole() + ";" + medstaff.getCity());
+		System.out.println("\tRückgabe: " + medstaff.getId() + " " + medstaff.getFirstname() + " " + medstaff.getLastname() + " " + medstaff.getRole() + " " + medstaff.getStreet() + " " + medstaff.getHousenumber() + " " + medstaff.getPostalcode() + " " + medstaff.getCity());
 
 		
 	// *************************
 	// **** update MedStaff ****
 	// *************************
-
-		System.out.println("\n#C: - update MedStaff\n");
+		System.out.println("\n3.3 - MaClient.client.MedStaffService.updateMedStaffInDB");
 		
 		// -------------------------
 		// -- set MedStaff object --
@@ -295,7 +297,7 @@ public class MaClient {
 	// ************************
 	// **** delete Patient ****
 	// ************************				
-/*		System.out.println("\n#D - delete MedStaff with id=1");	
+/*		System.out.println("\n3.4 - MaClient.client.MedStaffService.deleteMedStaffInDB\n");	
 							
 		// --------------------------
 		// -- call: delete Patient --
@@ -306,7 +308,7 @@ public class MaClient {
 	// **********************************
 	// **** get MedStaffList From DB ****
 	// **********************************
-		System.out.println("\n#E: - get MedStaff List");
+		System.out.println("\n3.5 - MaClient.client.MedStaffService.getMedStaffListFromDB\n");
 													
 		// ------------------------------------
 		// -- call: get MedStaffList From DB --
@@ -318,18 +320,21 @@ public class MaClient {
     	// ---------------------------------------
         
 		for (MedStaff m : medstaffList) {
-			System.out.println(m.getId() + ";" + m.getFirstname() + ";" + m.getLastname() + ";" + m.getRole() + ";" + m.getStreet() + " " + m.getHousenumber() + ";" + m.getPostalcode() + " " + m.getCity());
+			System.out.println("\t" + m.getId() + " " + m.getFirstname() + " " + m.getLastname() + " " + m.getRole() + " " + m.getStreet() + " " + m.getHousenumber() + " " + m.getPostalcode() + " " + m.getCity());
         }
 
 	
 /**********************/
 /** TEST - MtService **/
 /**********************/
-
+		System.out.println("\n--------------------------------");
+		System.out.println("4. - Testdurchlauf des MTService");
+		System.out.println("--------------------------------");
+		
 	// *******************			
 	// **** create MT ****
 	// *******************
-		System.out.println("#x: - create new MT\n");
+		System.out.println("\n4.1 - MaClient.client.MtService.createMtInDB");
 									
 		// -------------------------
 		// -- set MT object --
@@ -349,19 +354,19 @@ public class MaClient {
 	// *****************
 	// **** read MT ****
 	// *****************
-	System.out.println("\n#x: - get MedTreatment with id=1\n");
+		System.out.println("\n4.2 - MaClient.client.MtService.readMtInDB\n");
 													
 			// ---------------------------------
 			// -- call: get MedTreatment with id=1 --
 			// ---------------------------------
 			mt = MtService.readMtInDB(1);
-			System.out.println(mt.getId() + ";" + mt.getPatientid() + ";" + mt.getPfirstname() + ";" + mt.getPlastname() + ";" + mt.getDayofbirth() + ";" + mt.getMedstaffid() + ";" + mt.getRole() + ";" + mt.getMfirstname() + ";" + mt.getMlastname() + ";" + mt.getDate() + ";" + mt.getTreatment());
+			System.out.println("\tRückgabe: " + mt.getId() + " " + mt.getPatientid() + " " + mt.getPfirstname() + " " + mt.getPlastname() + " " + mt.getDayofbirth() + " " + mt.getMedstaffid() + " " + mt.getRole() + " " + mt.getMfirstname() + " " + mt.getMlastname() + " " + mt.getDate() + " " + mt.getTreatment());
 
 			
 	// *******************
 	// **** update MT ****
 	// *******************
-		System.out.println("\n#x: - update MT\n");
+			System.out.println("\n4.3 - MaClient.client.MtService.updateMtInDB");
 				
 		// -------------------
 		// -- set MT object --
@@ -381,7 +386,7 @@ public class MaClient {
 	// ****************************
 	// **** get MtList From DB ****
 	// ****************************
-		System.out.println("\n#x: - get MT List");
+		System.out.println("\n4.4 - MaClient.client.MtService.createMtInDB");
 		
 		
 		// ------------------------------------------------
@@ -393,9 +398,9 @@ public class MaClient {
 	   	// ---------------------------
 	   	// -- For each mt in mtList -- 
 	   	// ---------------------------
-		System.out.println("\n1. Patient");
+		System.out.println("\n\tAll Medical Treatments of Patient: 1");
 		for (MedTreatment mt01 : mtList01) {
-			System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getPfirstname() + ";" + mt01.getPlastname() + ";" + mt01.getDayofbirth() + ";" + mt01.getMedstaffid() + ";" + mt01.getRole() + ";" + mt01.getMfirstname() + ";" + mt01.getMlastname() + ";" + mt01.getDate() + ";" + mt01.getTreatment());System.out.println(mt01.getId() + ";" + mt01.getPatientid() + ";" + mt01.getMedstaffid() + ";" + mt01.getDate() + ";" + mt01.getTreatment());
+			System.out.println("\t" + mt01.getId() + " " + mt01.getPatientid() + " " + mt01.getPfirstname() + " " + mt01.getPlastname() + " " + mt01.getDayofbirth() + " " + mt01.getMedstaffid() + " " + mt01.getRole() + " " + mt01.getMfirstname() + " " + mt01.getMlastname() + " " + mt01.getDate() + " " + mt01.getTreatment());
 	    }
 		
 		// ------------------------------------------------
@@ -406,9 +411,9 @@ public class MaClient {
 	   	// ---------------------------
 	   	// -- For each mt in mtList -- 
 	   	// ---------------------------
-		System.out.println("\n3. Patient");
+		System.out.println("\n\tAll medical Treatments of Patient: 3");
 		for (MedTreatment mt02 : mtList02) {
-			System.out.println(mt02.getId() + ";" + mt02.getPatientid() + ";" + mt02.getPfirstname() + ";" + mt02.getPlastname() + ";" + mt02.getDayofbirth() + ";" + mt02.getMedstaffid() + ";" + mt02.getRole() + ";" + mt02.getMfirstname() + ";" + mt02.getMlastname() + ";" + mt02.getDate() + ";" + mt02.getTreatment());
+			System.out.println("\t" + mt02.getId() + " " + mt02.getPatientid() + " " + mt02.getPfirstname() + " " + mt02.getPlastname() + " " + mt02.getDayofbirth() + " " + mt02.getMedstaffid() + " " + mt02.getRole() + " " + mt02.getMfirstname() + " " + mt02.getMlastname() + " " + mt02.getDate() + " " + mt02.getTreatment());
 	    }
 		
 		
