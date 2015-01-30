@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * @author Roger
- * @version 1.0 - 27.01.15
+ * @version 1.0
  * 
  * Klasse MedStaff mit den Attributen
  *

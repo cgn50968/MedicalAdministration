@@ -4,6 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import de.rho.server.medstaff.entity.MedStaff;
 
+/**
+ * @author Heiko, Roger
+ * @version 1.1
+ * 
+ * Klasse fuer SQL Statements MedStaffService
+ *
+ */
+
 
 public class MedStaffToDB {
 

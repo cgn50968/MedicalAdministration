@@ -4,6 +4,12 @@ import java.io.File;
 
 import de.rho.server.dao.boundary.InDaoToFile;
 
+/**
+ * @author Heiko, Roger
+ * @version 1.4
+ * Dateizugriffe
+ *   
+ */
 
 public class DaoToFile implements InDaoToFile{
 

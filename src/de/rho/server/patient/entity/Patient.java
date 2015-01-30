@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @author Heiko, Roger
- * @version 1.1 - 19.01.15
+ * @version 1.1
  * 
  * Klasse Patient mit den Attributen
  *

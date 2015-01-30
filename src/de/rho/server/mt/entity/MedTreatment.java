@@ -7,7 +7,7 @@ public class MedTreatment implements Serializable {
 
 	/**
 	 * @author Roger
-	 * @version 1.0 - 27.01.15
+	 * @version 1.0
 	 * 
 	 * Klasse MedTreatment mit den Attributen
 	 *

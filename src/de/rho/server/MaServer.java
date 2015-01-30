@@ -15,7 +15,7 @@ import de.rho.server.patient.control.FaPatientService;
 
 
 /**
- * @author Andreas Röwert, Heiko Herder, Roger Ordon
+ * @author Andreas, Heiko, Roger
  * @version 1.1
  * 
  * Server zum Bereitstellen der Services einer Praxisverwaltung
@@ -40,14 +40,14 @@ public class MaServer {
             System.out.println("MaServer up and running");
             System.out.println("-----------------------");
             
-        } catch (RemoteException e) {
-            // TODO Auto-generated catch block
+        } 
+		catch (RemoteException e) {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
+        }
+		catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (AlreadyBoundException e) {
-            // TODO Auto-generated catch block
+        }
+		catch (AlreadyBoundException e) {
             e.printStackTrace();
         }
 		

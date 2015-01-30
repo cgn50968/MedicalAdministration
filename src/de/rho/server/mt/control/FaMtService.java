@@ -4,6 +4,13 @@ import java.rmi.RemoteException;
 
 import de.rho.server.mt.boundary.InMtService;
 
+/**
+ * @author Heiko, Roger
+ * @version 1.0
+ * 
+ * Factory fuer MtServicesImpl
+ *
+ */
 
 
 public class FaMtService {

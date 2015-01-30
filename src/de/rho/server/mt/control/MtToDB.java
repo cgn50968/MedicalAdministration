@@ -4,6 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import de.rho.server.mt.entity.MedTreatment;
 
+/**
+ * @author Roger
+ * @version 1.0
+ * 
+ * SQL-Statements fuer MtService
+ *
+ */
+
+
+
+
 public class MtToDB {
 	
 

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import de.rho.server.medstaff.entity.MedStaff;
 
 /**
- * @author Andreas Röwert, Heiko Herder, Roger Ordon
- * @version 1.0
+ * @author Heiko, Roger
+ * @version 1.1
  * 
  * Interface als externe Schnittstelle fuer (RMI)
  * Methodenvorlage fuer MedStaffService

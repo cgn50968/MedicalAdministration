@@ -4,6 +4,16 @@ import java.rmi.RemoteException;
 
 import de.rho.server.medstaff.boundary.InMedStaffService;
 
+/**
+ * @author Heiko, Roger
+ * @version 1.1
+ * 
+ * Factory fuer MedStaffImpl
+ *
+ */
+
+
+
 public class FaMedStaffService {
 
 	// ********************************************************************

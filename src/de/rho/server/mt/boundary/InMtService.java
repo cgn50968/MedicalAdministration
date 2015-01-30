@@ -6,7 +6,13 @@ import java.util.ArrayList;
 
 import de.rho.server.mt.entity.MedTreatment;
 
-
+/**
+ * @author Heiko, Roger
+ * @version 1.0
+ * 
+ * Methodenvorlage fuer MtService
+ *
+ */
 
 public interface InMtService  extends Remote {
 

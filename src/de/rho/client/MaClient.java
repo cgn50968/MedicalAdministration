@@ -75,7 +75,7 @@ public class MaClient {
 /***************************/
 /** TEST - PatientService **/
 /***************************/
-				
+/*				
 	// ************************			
 	// **** create Patient ****
 	// ************************
@@ -98,10 +98,11 @@ public class MaClient {
 				// --------------------------
 				PatientService.createPatientInDB(patient);
 						
-		
+	*/	
 	// **********************
 	// **** read Patient ****
 	// **********************
+	/*
 			System.out.println("\n2.2 - MaClient.client.PatientService.readPatientInDB()\n");
 							
 				// ---------------------------------
@@ -110,10 +111,11 @@ public class MaClient {
 				patient = PatientService.readPatientInDB(1);
 				System.out.println("\tRückgabe: " + patient.getId() + ";" + patient.getFirstname() + ";" + patient.getLastname() + ";" + patient.getStreet() + ";" + patient.getHousenumber() + ";" + patient.getPostalcode() + ";" + patient.getCity());
 										
-				
+	*/			
 	// **********************************
 	// **** Check Date of last visit ****
 	// **********************************
+	/*
 			System.out.println("\n2.3 - MaClient.client.PatientService.checkDateOfLastVisit()\n");		
 											
 				int registerPatientCard = PatientService.checkDateOfLastVisit(patient.getLastvisit());
@@ -126,12 +128,13 @@ public class MaClient {
 					System.out.println("\tVersicherungskarte wurde in diesem Quartal bereits registriert.");
 				}
 								
-				//TODO: wirft noch NPE, da spezifiziert werden muss, welcher Patient (id als Eingabeparamter der Methode)
+
 																
-							
+	*/						
 	// ************************
 	// **** update Patient ****
 	// ************************		
+	/*
 			System.out.println("\n2.4 - MaClient.client.PatientService.updatePatientInDB()");
 						
 				// ------------------------
@@ -153,7 +156,7 @@ public class MaClient {
 				// --------------------------
 				PatientService.updatePatientInDB(patient);
 										
-						
+	*/					
 	// ************************
 	// **** delete Patient ****
 	// ************************				
@@ -168,7 +171,7 @@ public class MaClient {
 	// *****************************************
 	// **** import Patient from CSV into DB ****
 	// *****************************************	
-				
+	/*			
 		System.out.println("\n2.6 - MaClient.client.PatientService.readPatientListFromCSV()");		
 			
 		
@@ -177,11 +180,11 @@ public class MaClient {
 		
 		//patientList.clear();
 		
-	
+	*/
 	// **********************************
 	// **** write PatientList to CSV ****
 	// **********************************				
-						
+	//TODO					
 		System.out.println("\n2.7 - MaClient.client.PatientService.writePatientListToCSV(PatientService.getPatientListFromDB())");		
 															
 				
@@ -195,6 +198,7 @@ public class MaClient {
 	// *************************************
 	// **** search Patient by Last Name ****
 	// *************************************
+	/*
 		System.out.println("\n2.8 - MaClient.client.PatientService.searchPatientByNameInDB()\n");		
 								
 		// ----------------------------------------------
@@ -224,10 +228,12 @@ public class MaClient {
 			System.out.println("\t" + output);
 		}
 
-
+	*/
 /****************************/
 /** TEST - MedStaffService **/
 /****************************/
+//TODO
+/*
 		System.out.println("\n--------------------------------------");
 		System.out.println("3. - Testdurchlauf des MedStaffService");
 		System.out.println("--------------------------------------");
@@ -297,17 +303,18 @@ public class MaClient {
 	// ************************
 	// **** delete Patient ****
 	// ************************				
-/*		System.out.println("\n3.4 - MaClient.client.MedStaffService.deleteMedStaffInDB\n");	
+		System.out.println("\n3.4 - MaClient.client.MedStaffService.deleteMedStaffInDB\n");	
 							
 		// --------------------------
 		// -- call: delete Patient --
 		// --------------------------
 		MedStaffService.deleteMedStaffInDB(2, 7);		// -- (2 = id, 7 = addressid)	
-*/	
+	
 
 	// **********************************
 	// **** get MedStaffList From DB ****
 	// **********************************
+	
 		System.out.println("\n3.5 - MaClient.client.MedStaffService.getMedStaffListFromDB\n");
 													
 		// ------------------------------------
@@ -323,10 +330,12 @@ public class MaClient {
 			System.out.println("\t" + m.getId() + " " + m.getFirstname() + " " + m.getLastname() + " " + m.getRole() + " " + m.getStreet() + " " + m.getHousenumber() + " " + m.getPostalcode() + " " + m.getCity());
         }
 
-	
+*/	
 /**********************/
 /** TEST - MtService **/
 /**********************/
+//TODO
+/*
 		System.out.println("\n--------------------------------");
 		System.out.println("4. - Testdurchlauf des MTService");
 		System.out.println("--------------------------------");
@@ -416,7 +425,7 @@ public class MaClient {
 			System.out.println("\t" + mt02.getId() + " " + mt02.getPatientid() + " " + mt02.getPfirstname() + " " + mt02.getPlastname() + " " + mt02.getDayofbirth() + " " + mt02.getMedstaffid() + " " + mt02.getRole() + " " + mt02.getMfirstname() + " " + mt02.getMlastname() + " " + mt02.getDate() + " " + mt02.getTreatment());
 	    }
 		
-		
+*/		
 /**************************/
 /**** END OF TRY BLOCK ****/
 /**************************/

@@ -15,6 +15,14 @@ import de.rho.server.mt.boundary.InMtService;
 import de.rho.server.mt.entity.MedTreatment;
 
 
+/**
+ * @author Heiko, Roger
+ * @version 1.1
+ * 
+ * Implementierung des MtServices
+ *
+ */
+
 public class MtServiceImpl extends UnicastRemoteObject implements InMtService {
 
 	private static final long serialVersionUID = 123456789;

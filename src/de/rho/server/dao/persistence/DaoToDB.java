@@ -12,15 +12,18 @@ import java.util.Properties;
 
 import de.rho.server.dao.boundary.InDaoToDB;
 
+/**
+ * @author Heiko, Roger
+ * @version 1.4
+ *Datenbankzugriffe
+ *   
+ */
+
+
 public class DaoToDB implements InDaoToDB {
 	
 			
-	/**
-	 * @author Heiko, Roger
-	 * @version 1.4
-	 * @return java.sql.Connection
-	 *   
-	 */
+	
 
 	// *****************
 	// **** Objects ****

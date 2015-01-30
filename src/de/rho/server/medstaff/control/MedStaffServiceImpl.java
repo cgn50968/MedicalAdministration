@@ -14,6 +14,14 @@ import de.rho.server.dao.control.FaDaoService;
 import de.rho.server.medstaff.boundary.InMedStaffService;
 import de.rho.server.medstaff.entity.MedStaff;
 
+/**
+ * @author Andreas, Heiko, Roger
+ * @version 1.0
+ * 
+ * Implementierung des MedStaffServices
+ *
+ */
+
 
 public class MedStaffServiceImpl extends UnicastRemoteObject implements InMedStaffService {
 

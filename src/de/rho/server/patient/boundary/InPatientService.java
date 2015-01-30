@@ -10,7 +10,7 @@ import de.rho.server.patient.entity.Patient;
 
 
 /**
- * @author Andreas Röwert, Heiko Herder, Roger Ordon
+ * @author Heiko, Roger
  * @version 1.4
  * 
  * Interface als externe Schnittstelle fuer (RMI)
