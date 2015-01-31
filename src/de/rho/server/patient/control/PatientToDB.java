@@ -226,7 +226,7 @@ public class PatientToDB {
 	public String createTablesInDBSqlStatement() {
 		System.out.println("PatientToDB.createTablesInDBSqlStatement()"); //debug
 
-		String sqlstatement = "DROP TABLE IF EXISTS PATIENT; DROP TABLE IF EXISTS MEDSTAFF; DROP TABLE IF EXISTS ADDRESS; DROP Table IF EXISTS ROLES; DROP Table IF EXISTS MT; ";
+		String sqlstatement = "DROP TABLE IF EXISTS PATIENT; DROP TABLE IF EXISTS MEDSTAFF; DROP TABLE IF EXISTS ADDRESS; DROP TABLE IF EXISTS ROLES; DROP TABLE IF EXISTS MT; ";
 		sqlstatement = sqlstatement + "CREATE TABLE Patient(ID int auto_increment,FirstName varchar(20),LastName varchar(20),Gender char,DayOfBirth date,LastVisit date,AddressID int,PRIMARY KEY (ID)); ";
 		sqlstatement = sqlstatement + "CREATE TABLE MedStaff(ID int auto_increment,FirstName varchar(20),LastName varchar(20),RoleId int,Gender char,DayOfBirth date,AddressID int,PRIMARY KEY (ID)); ";
 		sqlstatement = sqlstatement + "CREATE TABLE Address(ID int not null,Street varchar(20),HouseNumber varchar(20),PostalCode varchar(5),City varchar(20),PRIMARY KEY (ID)); ";

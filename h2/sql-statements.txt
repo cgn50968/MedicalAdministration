@@ -1,0 +1,19 @@
+CREATE TABLE patient
+(id INTEGER NOT NULL,
+firstname VARCHAR(25) NOT NULL,
+lastname VARCHAR(25) NOT NULL,
+gender CHAR(25) NOT NULL,
+addressid INTEGER NULL,
+lastvisit DATE NOT NULL,
+PRIMARY KEY (id))
+
+INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (1, 'Roger', 'Ordon', 'm', 0, '1970-05-29')
+INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES (2, 'Martha', 'Palmersheim', 'w', 0, '1924-10-29')
+INSERT INTO PATIENT (id, firstname, lastname, gender, addressid, lastvisit) VALUES ((SELECT MAX(id)+1 FROM PATIENT), 'Rene', 'Ordon', 'm', 0, '1976-12-29')
+
+
+DROP TABLE PATIENT
+
+SELECT * FROM PATIENT
+
+SELECT MAX(id)+1 AS id FROM PATIENT

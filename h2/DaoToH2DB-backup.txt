@@ -1,0 +1,37 @@
+	/**** execute SQL Query ****/
+	public void executeQuery(Connection con, String sql) {
+		System.out.println("execute SQL-Query..."); //debug
+		
+		/** reset **/
+		preStat = null;
+			
+		try {
+			preStat = con.prepareStatement(sql);
+			preStat.execute();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	/**** execute SQL Query with ResultSet expected ****/
+	
+	//public List<Map<String, Object>> executeQueryResultSet(Connection con, String sql) {
+	public ResultSet executeQueryResultSet(Connection con, String sql) {
+		System.out.println("execute SQL-Query..."); //debug
+			
+		/** reset **/
+		resultSet = null;
+		preStat = null;
+		
+		try {
+			preStat = con.prepareStatement(sql);
+			resultSet = preStat.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		return resultSet; 
+	}
