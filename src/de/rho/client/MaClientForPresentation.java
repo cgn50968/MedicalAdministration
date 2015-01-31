@@ -63,11 +63,12 @@ public class MaClientForPresentation {
 	// *****************************
 	// **** create Tables in DB ****
 	// *****************************
-		System.out.println("\n-------------------------------------------------------");
+		System.out.println("\n--------------------------");
 		System.out.println("1.1 - Create Tables in DB.");
-		System.out.println("-------------------------------------------------------\n");
+		System.out.println("--------------------------\n");
 		PatientService.createTablesInDB();
 				
+		
 /*************************************************/
 /**** TEST CALLS ON APP SERVER - PRESENTATION ****/
 /*************************************************/

@@ -62,7 +62,18 @@ public class MaClient {
 			MedTreatment mt = new MedTreatment();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			
+			
+/********/
+/** DB **/
+/********/
 
+	// *****************************
+	// **** create Tables in DB ****
+	// *****************************
+	System.out.println("\n--------------------------");
+	System.out.println("1.1 - Create Tables in DB.");
+	System.out.println("----------------------------");
+	PatientService.createTablesInDB();
 				
 				
 /**********************************/
